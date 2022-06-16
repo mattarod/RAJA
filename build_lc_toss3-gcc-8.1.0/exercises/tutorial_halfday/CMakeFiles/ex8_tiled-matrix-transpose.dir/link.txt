@@ -1,0 +1,1 @@
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0   CMakeFiles/ex8_tiled-matrix-transpose.dir/ex8_tiled-matrix-transpose.cpp.o  -o ../../bin/ex8_tiled-matrix-transpose ../../lib/libRAJA.a ../../lib/libcamp.a -ldl 

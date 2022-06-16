@@ -1,0 +1,1 @@
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0   CMakeFiles/ex5_line-of-sight_solution.dir/ex5_line-of-sight_solution.cpp.o  -o ../../bin/ex5_line-of-sight_solution ../../lib/libRAJA.a ../../lib/libcamp.a -ldl 

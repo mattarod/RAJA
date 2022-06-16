@@ -1,0 +1,297 @@
+[
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/AlignedRangeIndexSetBuilders.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/AlignedRangeIndexSetBuilders.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/AlignedRangeIndexSetBuilders.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/DepGraphNode.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/DepGraphNode.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/DepGraphNode.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/LockFreeIndexSetBuilders.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/LockFreeIndexSetBuilders.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/LockFreeIndexSetBuilders.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/MemUtils_CUDA.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/MemUtils_CUDA.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/MemUtils_CUDA.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/MemUtils_HIP.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/MemUtils_HIP.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/MemUtils_HIP.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/MemUtils_SYCL.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/MemUtils_SYCL.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/MemUtils_SYCL.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/RAJA.dir/src/PluginStrategy.cpp.o -c /g/g20/cuneo3/testraja/RAJA/src/PluginStrategy.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/src/PluginStrategy.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIC   -std=c++14 -o CMakeFiles/camp.dir/src/errors.cpp.o -c /g/g20/cuneo3/testraja/RAJA/tpl/camp/src/errors.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/tpl/camp/src/errors.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/resource-teams.dir/resource-teams.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/resource-teams.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/resource-teams.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/multiview.dir/multiview.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/multiview.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/multiview.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/wave-eqn.dir/wave-eqn.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/wave-eqn.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/wave-eqn.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/kernel-dynamic-tile.dir/kernel-dynamic-tile.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/kernel-dynamic-tile.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/kernel-dynamic-tile.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/raja-teams.dir/raja-teams.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/raja-teams.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/raja-teams.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_nested-loop-reorder.dir/tut_nested-loop-reorder.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_nested-loop-reorder.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_nested-loop-reorder.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/jacobi.dir/jacobi.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/jacobi.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/jacobi.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_dot-product.dir/tut_dot-product.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_dot-product.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_dot-product.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/resource-kernel.dir/resource-kernel.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/resource-kernel.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/resource-kernel.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_teams_basic.dir/tut_teams_basic.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_teams_basic.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_teams_basic.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_indexset-segments.dir/tut_indexset-segments.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_indexset-segments.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_indexset-segments.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_tiled-matrix-transpose.dir/tut_tiled-matrix-transpose.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_tiled-matrix-transpose.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_tiled-matrix-transpose.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/red-black-gauss-seidel.dir/red-black-gauss-seidel.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/red-black-gauss-seidel.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/red-black-gauss-seidel.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_vertexsum-coloring.dir/tut_vertexsum-coloring.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_vertexsum-coloring.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_vertexsum-coloring.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_add-vectors.dir/tut_add-vectors.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_add-vectors.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_add-vectors.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_halo-exchange.dir/tut_halo-exchange.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_halo-exchange.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_halo-exchange.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/pi-reduce_vs_atomic.dir/pi-reduce_vs_atomic.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/pi-reduce_vs_atomic.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/pi-reduce_vs_atomic.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_reductions.dir/tut_reductions.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_reductions.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_reductions.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/teams_matrix-multiply.dir/teams_matrix-multiply.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/teams_matrix-multiply.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/teams_matrix-multiply.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_daxpy.dir/tut_daxpy.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_daxpy.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_daxpy.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/resource-forall.dir/resource-forall.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/resource-forall.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/resource-forall.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_matrix-multiply.dir/tut_matrix-multiply.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-multiply.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-multiply.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/teams_flatten.dir/teams_flatten.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/teams_flatten.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/teams_flatten.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/teams_reductions.dir/teams_reductions.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/teams_reductions.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/teams_reductions.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_sort.dir/tut_sort.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_sort.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_sort.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_offset-layout.dir/tut_offset-layout.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_offset-layout.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_offset-layout.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/resource-runtime-teams.dir/resource-runtime-teams.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/resource-runtime-teams.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/resource-runtime-teams.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_scan.dir/tut_scan.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_scan.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_scan.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_atomic-histogram.dir/tut_atomic-histogram.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_atomic-histogram.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_atomic-histogram.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_batched-matrix-multiply.dir/tut_batched-matrix-multiply.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_batched-matrix-multiply.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_batched-matrix-multiply.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/tut_matrix-transpose-local-array.dir/tut_matrix-transpose-local-array.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-transpose-local-array.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-transpose-local-array.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples/plugin",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/plugin-example.dir/test-plugin.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/plugin/test-plugin.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/plugin/test-plugin.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/examples/plugin",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/plugin-example.dir/counter-plugin.cpp.o -c /g/g20/cuneo3/testraja/RAJA/examples/plugin/counter-plugin.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/examples/plugin/counter-plugin.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex5_line-of-sight_solution.dir/ex5_line-of-sight_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex4_atomic-histogram.dir/ex4_atomic-histogram.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex4_atomic-histogram_solution.dir/ex4_atomic-histogram_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex3_colored-indexset.dir/ex3_colored-indexset.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex9_matrix-transpose-local-array_solution.dir/ex9_matrix-transpose-local-array_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex3_colored-indexset_solution.dir/ex3_colored-indexset_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex2_approx-pi.dir/ex2_approx-pi.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex7_nested-loop-reorder.dir/ex7_nested-loop-reorder.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex6_stencil-offset-layout.dir/ex6_stencil-offset-layout.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex1_vector-addition_solution.dir/ex1_vector-addition_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex6_stencil-offset-layout_solution.dir/ex6_stencil-offset-layout_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex2_approx-pi_solution.dir/ex2_approx-pi_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex7_nested-loop-reorder_solution.dir/ex7_nested-loop-reorder_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex1_vector-addition.dir/ex1_vector-addition.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex8_tiled-matrix-transpose.dir/ex8_tiled-matrix-transpose.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex5_line-of-sight.dir/ex5_line-of-sight.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex8_tiled-matrix-transpose_solution.dir/ex8_tiled-matrix-transpose_solution.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose_solution.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose_solution.cpp"
+},
+{
+  "directory": "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/exercises/tutorial_halfday",
+  "command": "/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -I/g/g20/cuneo3/testraja/RAJA/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/include -I/g/g20/cuneo3/testraja/RAJA/tpl/camp/include -I/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0 -fPIE   -std=c++14 -o CMakeFiles/ex9_matrix-transpose-local-array.dir/ex9_matrix-transpose-local-array.cpp.o -c /g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array.cpp",
+  "file": "/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array.cpp"
+}
+]

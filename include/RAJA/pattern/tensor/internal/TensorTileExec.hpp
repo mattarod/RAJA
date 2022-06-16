@@ -98,8 +98,80 @@ namespace expt
       }
 
 
+      template< typename OTILE, typename TTYPE, typename BODY >
+      struct StaticLoopHalt
+      {
+          static auto const orig_begin = OTILE::begin_type::value_at(DIM0);
+          static auto const orig_size =  OTILE:: size_type::value_at(DIM0);
+          static auto const tile_begin = TTYPE::begin_type::value_at(DIM0);
+
+          static const bool value =  (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size + STORAGE::s_dim_elem(DIM0) );
+	  
+          static_assert( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size+ STORAGE::s_dim_elem(DIM0)*2), "hrm" );
+      };
+
+
+
+
+      template<
+          typename OTILE,
+          typename TTYPE,
+          typename BODY
+      >
+      RAJA_HOST_DEVICE
+      RAJA_INLINE
+      static
+      typename std::enable_if<StaticLoopHalt<OTILE,TTYPE,BODY>::value>::type
+      static_exec(
+          OTILE const &otile,
+          TTYPE const &tile,
+          BODY && body
+      ){
+
+        auto constexpr orig_begin = OTILE::begin_type::value_at(DIM0);
+        auto constexpr orig_size =  OTILE:: size_type::value_at(DIM0);
+
+        auto constexpr tile_begin = TTYPE::begin_type::value_at(DIM0);
+
+        static_assert( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size+ STORAGE::s_dim_elem(DIM0) ), "huh" );
+
+        if( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size) ){
+           inner_t::static_exec(otile, tile, body);
+           using NextType = typename expt::AdvanceStaticTensorTile<TTYPE,STORAGE,(size_t)DIM0>::Type;
+           NextType next_tile;
+           static_exec(otile, next_tile, body);
+        } else if ( tile_begin < (orig_begin + orig_size ) ) {
+           using PartType    = typename expt::RemainderStaticTensorTile<OTILE,TTYPE,STORAGE,(size_t)DIM0>::Type;
+           PartType part_tile;
+           inner_t::static_exec(otile,part_tile,body);
+        }
+
+      }
+
+
+      template<
+          typename OTILE,
+          typename TTYPE,
+          typename BODY
+      >
+      RAJA_HOST_DEVICE
+      RAJA_INLINE
+      static
+      typename std::enable_if<! StaticLoopHalt<OTILE,TTYPE,BODY>::value>::type
+      static_exec(
+          OTILE const &otile,
+          TTYPE const &tile,
+          BODY && body
+      ){
+         (void) otile;
+         (void) tile;
+         (void) body;
+         return;
+      }
+
 
     };
+
 
     /**
      * Termination of nested loop:  execute evaluation of ET
@@ -118,7 +190,19 @@ namespace expt
 
       }
 
+      template<typename OTILE, typename TTYPE, typename BODY>
+      RAJA_HOST_DEVICE
+      RAJA_INLINE
+      static
+      void static_exec(OTILE &, TTYPE const &tile, BODY && body){
+
+        // execute body, passing in the current tile
+        body(tile);
+
+      }
+
     };
+
 
 
     template<typename STORAGE, typename TILE_TYPE, typename BODY, camp::idx_t ... IDX_SEQ, camp::idx_t ... DIM_SEQ>
@@ -151,6 +235,47 @@ namespace expt
       tensor_tile_exec_t::exec(orig_tile, full_tile, body);
 
     }
+
+
+
+
+    template<typename STORAGE, typename INDEX_TYPE, TensorTileSize TENSOR_SIZE, typename BEGIN, typename SIZE, typename BODY, camp::idx_t ... IDX_SEQ, camp::idx_t ... DIM_SEQ>
+    RAJA_INLINE
+    RAJA_HOST_DEVICE
+    void tensorTileExec_expanded( StaticTensorTile<INDEX_TYPE,TENSOR_SIZE, BEGIN, SIZE>
+const &orig_tile, BODY && body, camp::idx_seq<IDX_SEQ...> const &, camp::idx_seq<DIM_SEQ...> const &)
+    {
+
+      using InputType = StaticTensorTile<
+          INDEX_TYPE,
+          TENSOR_SIZE,
+          BEGIN,
+          SIZE
+      >;
+
+      using InputBegin = typename InputType::begin_type;
+
+      using Type = StaticTensorTile<
+          INDEX_TYPE,
+          TENSOR_FULL,
+          camp::int_seq<INDEX_TYPE,InputBegin::value_at(IDX_SEQ)...>,
+          camp::int_seq<INDEX_TYPE,STORAGE::s_dim_elem(IDX_SEQ)...>
+      >;
+
+      Type full_tile;
+
+      // Do all of the tiling loops in layout order, this may improve
+      // cache performance
+      using layout_order = typename STORAGE::layout_type::seq_t;
+      using tensor_tile_exec_t =
+             TensorTileExec<STORAGE, layout_order>;
+
+
+      tensor_tile_exec_t::static_exec(orig_tile, full_tile, body);
+
+    }
+
+
 
     template<typename STORAGE, typename TILE_TYPE, typename BODY>
     RAJA_INLINE

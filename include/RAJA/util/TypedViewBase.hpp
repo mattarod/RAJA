@@ -26,6 +26,7 @@
 #include "RAJA/pattern/tensor.hpp"
 
 #include "RAJA/util/Layout.hpp"
+#include "RAJA/util/StaticLayout.hpp"
 #include "RAJA/util/OffsetLayout.hpp"
 
 namespace RAJA
@@ -104,6 +105,11 @@ namespace internal
         RAJA::sum<camp::idx_t>(
             (internal::expt::isTensorIndex<ARGS>() ? 1 : 0) ...);
   };
+  
+  template<>
+  struct count_num_tensor_args<> {
+    static constexpr camp::idx_t value = 0;
+  };
 
   /*
    * Returns which argument has a vector index
@@ -144,6 +150,29 @@ namespace internal
 
   namespace detail {
 
+
+  template<typename LEFT, typename RIGHT>
+  struct seq_cat;
+
+  template<typename LinIdx, LinIdx... LEFT, LinIdx... RIGHT>
+  struct seq_cat<camp::int_seq<LinIdx,LEFT...>,camp::int_seq<LinIdx,RIGHT...>> {
+      using Type = camp::int_seq<LinIdx,LEFT...,RIGHT...>;
+  };
+
+
+  template<typename LinIdx, LinIdx VALUE, size_t SIZE>
+  struct seq_fill {
+      using Tail = typename seq_fill<LinIdx, VALUE, SIZE-1>::Type;
+      using Type = typename seq_cat<camp::int_seq<LinIdx,VALUE>,Tail>::Type;
+  };
+
+
+  template<typename LinIdx, LinIdx VALUE>
+  struct seq_fill<LinIdx,VALUE,0> {
+      using Type = camp::int_seq<LinIdx>;
+  };
+
+
   /*!
    * Provides conversion of view data to a return type.
    *
@@ -152,19 +181,18 @@ namespace internal
    * In the future development, this may return SIMD vectors or matrices using
    * class specializations.
    */
-  template<typename VecSeq, typename Args, typename ElementType, typename PointerType, typename LinIdx, camp::idx_t StrideOneDim>
+  template<typename VecSeq, typename Args, typename ElementType, typename PointerType, typename LinIdx, typename LayoutType>
   struct ViewReturnHelper;
 
 
   /*
    * Specialization for Scalar return types
    */
-  template<typename ... Args, typename ElementType, typename PointerType, typename LinIdx, camp::idx_t StrideOneDim>
-  struct ViewReturnHelper<camp::idx_seq<>, camp::list<Args...>, ElementType, PointerType, LinIdx, StrideOneDim>
+  template<typename ... Args, typename ElementType, typename PointerType, typename LinIdx, typename LayoutType>
+  struct ViewReturnHelper<camp::idx_seq<>, camp::list<Args...>, ElementType, PointerType, LinIdx, LayoutType>
   {
       using return_type = ElementType &;
 
-      template<typename LayoutType>
       RAJA_INLINE
       RAJA_HOST_DEVICE
       static
@@ -178,10 +206,11 @@ namespace internal
   /*
    * Specialization for Tensor return types
    */
-  template<camp::idx_t ... VecSeq, typename ... Args, typename ElementType, typename PointerType, typename LinIdx, camp::idx_t StrideOneDim>
-  struct ViewReturnHelper<camp::idx_seq<VecSeq...>, camp::list<Args...>, ElementType, PointerType, LinIdx, StrideOneDim>
+  template<camp::idx_t VecHead, camp::idx_t ... VecSeq, typename ... Args, typename ElementType, typename PointerType, typename LinIdx, typename LayoutType>
+  struct ViewReturnHelper<camp::idx_seq<VecHead,VecSeq...>, camp::list<Args...>, ElementType, PointerType, LinIdx, LayoutType>
   {
-      static constexpr camp::idx_t s_num_dims = sizeof...(VecSeq);
+
+      static constexpr camp::idx_t s_num_dims = sizeof...(VecSeq) + 1;
 
       // This is the stride-one dimensions w.r.t. the tensor not the View
       // For example:
@@ -191,15 +220,16 @@ namespace internal
       //                 0 rows are stride-one
       //                 1 columns are stride-one
       static constexpr camp::idx_t s_stride_one_dim =
-          RAJA::max<camp::idx_t>((GetTesorArgIdx<VecSeq, Args...>::value == StrideOneDim ?
-                    VecSeq : -1)...);
+          RAJA::max<camp::idx_t>(
+                  (GetTesorArgIdx<VecHead,Args...>::value == LayoutType::stride_one_dim ? VecHead : -1 ),
+                  (GetTesorArgIdx<VecSeq, Args...>::value == LayoutType::stride_one_dim ? VecSeq  : -1 )...
+          );
 
 
       using tensor_reg_type = typename camp::at_v<camp::list<Args...>, GetTesorArgIdx<0, Args...>::value>::tensor_type;
       using ref_type = internal::expt::TensorRef<ElementType*, LinIdx, internal::expt::TENSOR_MULTIPLE, s_num_dims, s_stride_one_dim>;
       using return_type = internal::expt::ET::TensorLoadStore<tensor_reg_type, ref_type>;
 
-      template<typename LayoutType>
       RAJA_INLINE
       RAJA_HOST_DEVICE
       static
@@ -210,19 +240,84 @@ namespace internal
           // data pointer
           &data[0] + layout(internal::expt::isTensorIndex<Args>() ? LinIdx{0} : (LinIdx)stripIndexType(internal::expt::stripTensorIndex(args))...),
           // strides
-          {(LinIdx)layout.template get_dim_stride<GetTesorArgIdx<VecSeq, Args...>::value>()...},
+          {
+              (LinIdx)layout.template get_dim_stride<GetTesorArgIdx<VecHead,Args...>::value>(),
+              (LinIdx)layout.template get_dim_stride<GetTesorArgIdx<VecSeq, Args...>::value>()...
+          },
           // tile
           {
               // begin
-              {(LinIdx)(get_tensor_args_begin<VecSeq>(layout, args...))...},
+              {
+                  (LinIdx)(get_tensor_args_begin<VecHead>(layout, args...)),
+                  (LinIdx)(get_tensor_args_begin<VecSeq> (layout, args...))...
+              },
 
               // size
-              {(LinIdx)get_tensor_args_size<VecSeq>(layout, args...)...}
+              {
+                  (LinIdx)get_tensor_args_size<VecHead>(layout, args...),
+                  (LinIdx)get_tensor_args_size<VecSeq> (layout, args...)...
+              }
           }
         });
       }
   };
 
+
+
+  /*
+   * Specialization for Tensor return types and static layout types
+   */
+  template<camp::idx_t VecHead, camp::idx_t ... VecSeq, typename ... Args, typename ElementType, typename PointerType, typename LinIdx, LinIdx... RangeInts, LinIdx... SizeInts, LinIdx... StrideInts>
+  struct ViewReturnHelper<camp::idx_seq<VecHead,VecSeq...>, camp::list<Args...>, ElementType, PointerType, LinIdx, RAJA::detail::StaticLayoutBase_impl<LinIdx,camp::int_seq<LinIdx,RangeInts...>,camp::int_seq<LinIdx,SizeInts...>,camp::int_seq<LinIdx,StrideInts...>>>
+  {
+      static constexpr camp::idx_t s_num_dims = sizeof...(VecSeq) + 1;
+
+      using range_seq  = camp::int_seq<LinIdx,RangeInts... >;
+      using size_seq   = camp::int_seq<LinIdx,SizeInts...  >;
+      using stride_seq = camp::int_seq<LinIdx,StrideInts...>;
+      using begin_seq  = typename seq_fill<LinIdx,0,sizeof...(RangeInts)>::Type;
+      using LayoutType = RAJA::detail::StaticLayoutBase_impl<LinIdx,range_seq,size_seq,stride_seq>;
+
+      // This is the stride-one dimensions w.r.t. the tensor not the View
+      // For example:
+      //  For a vector, s_stride_one_dim is either 0 (packed) or -1 (strided)
+      //  For a matrix, s_stride_one_dim is either:
+      //                 -1 neither row nor column are packed
+      //                 0 rows are stride-one
+      //                 1 columns are stride-one
+      static constexpr camp::idx_t s_stride_one_dim =
+          RAJA::max<camp::idx_t>(
+                  (GetTesorArgIdx<VecHead,Args...>::value == LayoutType::stride_one_dim ? VecHead : -1 ),
+                  (GetTesorArgIdx<VecSeq, Args...>::value == LayoutType::stride_one_dim ? VecSeq  : -1 )...
+          );
+
+
+      using tensor_reg_type = typename camp::at_v<camp::list<Args...>, GetTesorArgIdx<0, Args...>::value>::tensor_type;
+      using ref_type = internal::expt::StaticTensorRef<ElementType*, LinIdx, internal::expt::TENSOR_MULTIPLE,stride_seq,begin_seq,size_seq, s_stride_one_dim>;
+      using return_type = internal::expt::ET::TensorLoadStore<tensor_reg_type, ref_type>;
+
+      RAJA_INLINE
+      RAJA_HOST_DEVICE
+      static
+      constexpr
+      return_type make_return(LayoutType const &layout, PointerType const &data, Args const &... args){
+
+        return return_type(ref_type{
+          // data pointer
+          &data[0] + layout(internal::expt::isTensorIndex<Args>() ? LinIdx{0} : (LinIdx)stripIndexType(internal::expt::stripTensorIndex(args))...),
+          // strides
+          typename ref_type::stride_type(),
+          // tile
+          {
+              // begin
+              typename ref_type::tile_type::begin_type(),
+
+              // size
+              typename ref_type::tile_type::size_type(),
+          }
+        });
+      }
+  };
 
   } // namespace detail
 
@@ -243,7 +338,7 @@ namespace internal
         ElementType,
         PointerType,
         LinIdx,
-        LayoutType::stride_one_dim>::return_type;
+        LayoutType>::return_type;
 
   /*
    * Creates the return value for a View
@@ -265,11 +360,25 @@ namespace internal
         ElementType,
         PointerType,
         LinIdx,
-        LayoutType::stride_one_dim>::make_return(layout, data, args...);
+        LayoutType>::make_return(layout, data, args...);
   }
 
-
-
+/*
+  template<typename ElementType, typename LinIdx, typename PointerType, LinIdx... RangeInts, LinIdx... SizeInts, LinIdx... StrideInts, typename... Args>
+  RAJA_INLINE
+  RAJA_HOST_DEVICE
+  constexpr
+  view_return_type_t<ElementType, PointerType, LinIdx, RAJA::detail::StaticLayoutBase_impl<LinIdx,camp::int_seq<LinIdx,RangeInts...>,camp::int_seq<LinIdx,SizeInts...>,camp::int_seq<LinIdx,StrideInts...>>>
+  view_make_return_value(RAJA::detail::StaticLayoutBase_impl<LinIdx,camp::int_seq<LinIdx,RangeInts...>,camp::int_seq<LinIdx,SizeInts...>,camp::int_seq<LinIdx,StrideInts...>> const &layout, PointerType const &data, Args const &... args){
+    return detail::ViewReturnHelper<
+        camp::make_idx_seq_t<count_num_tensor_args<Args...>::value>,
+        camp::list<Args...>,
+        ElementType,
+        PointerType,
+        LinIdx,
+        RAJA::detail::StaticLayoutBase_impl<LinIdx,camp::int_seq<LinIdx,RangeInts...>,camp::int_seq<LinIdx,SizeInts...>,camp::int_seq<LinIdx,StrideInts...>>>::make_return(layout, data, args...);
+  }
+*/
   namespace detail
   {
 

@@ -1,0 +1,1 @@
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0   CMakeFiles/tut_atomic-histogram.dir/tut_atomic-histogram.cpp.o  -o ../bin/tut_atomic-histogram ../lib/libRAJA.a ../lib/libcamp.a -ldl 

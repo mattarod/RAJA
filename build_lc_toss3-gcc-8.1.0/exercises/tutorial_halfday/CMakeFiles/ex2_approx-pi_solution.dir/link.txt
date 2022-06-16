@@ -1,0 +1,1 @@
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0   CMakeFiles/ex2_approx-pi_solution.dir/ex2_approx-pi_solution.cpp.o  -o ../../bin/ex2_approx-pi_solution ../../lib/libRAJA.a ../../lib/libcamp.a -ldl 

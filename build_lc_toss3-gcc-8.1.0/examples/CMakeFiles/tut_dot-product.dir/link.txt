@@ -1,0 +1,1 @@
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0   CMakeFiles/tut_dot-product.dir/tut_dot-product.cpp.o  -o ../bin/tut_dot-product ../lib/libRAJA.a ../lib/libcamp.a -ldl 

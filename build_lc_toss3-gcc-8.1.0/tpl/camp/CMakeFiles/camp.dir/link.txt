@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../lib/libcamp.a  CMakeFiles/camp.dir/src/errors.cpp.o
+/usr/bin/ranlib ../../lib/libcamp.a

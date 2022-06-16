@@ -1,0 +1,1 @@
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++   -Wall -Wextra      -Ofast -march=native -finline-functions -finline-limit=20000 -ftemplate-backtrace-limit=0   CMakeFiles/plugin-example.dir/test-plugin.cpp.o CMakeFiles/plugin-example.dir/counter-plugin.cpp.o  -o ../../bin/plugin-example ../../lib/libRAJA.a ../../lib/libcamp.a -ldl 
