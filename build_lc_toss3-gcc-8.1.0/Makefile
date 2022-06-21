@@ -68,6 +68,17 @@ install/local/fast: preinstall/fast
 	/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/tce/packages/cmake/cmake-3.14.5/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -78,6 +89,18 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
 
 # Special rule for the target edit_cache
 edit_cache:
@@ -111,18 +134,6 @@ list_install_components:
 list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
-
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -235,6 +246,409 @@ style/fast:
 .PHONY : style/fast
 
 #=============================================================================
+# Target rules for targets named ContinuousSubmit
+
+# Build rule for target.
+ContinuousSubmit: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousSubmit
+.PHONY : ContinuousSubmit
+
+# fast build rule for target.
+ContinuousSubmit/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousSubmit.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousSubmit.dir/build
+.PHONY : ContinuousSubmit/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousCoverage
+
+# Build rule for target.
+ContinuousCoverage: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousCoverage
+.PHONY : ContinuousCoverage
+
+# fast build rule for target.
+ContinuousCoverage/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousCoverage.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousCoverage.dir/build
+.PHONY : ContinuousCoverage/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousTest
+
+# Build rule for target.
+ContinuousTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousTest
+.PHONY : ContinuousTest
+
+# fast build rule for target.
+ContinuousTest/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousTest.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousTest.dir/build
+.PHONY : ContinuousTest/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousBuild
+
+# Build rule for target.
+ContinuousBuild: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousBuild
+.PHONY : ContinuousBuild
+
+# fast build rule for target.
+ContinuousBuild/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousBuild.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousBuild.dir/build
+.PHONY : ContinuousBuild/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousMemCheck
+
+# Build rule for target.
+ContinuousMemCheck: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousMemCheck
+.PHONY : ContinuousMemCheck
+
+# fast build rule for target.
+ContinuousMemCheck/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousMemCheck.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousMemCheck.dir/build
+.PHONY : ContinuousMemCheck/fast
+
+#=============================================================================
+# Target rules for targets named Nightly
+
+# Build rule for target.
+Nightly: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Nightly
+.PHONY : Nightly
+
+# fast build rule for target.
+Nightly/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/Nightly.dir/build.make blt/thirdparty_builtin/CMakeFiles/Nightly.dir/build
+.PHONY : Nightly/fast
+
+#=============================================================================
+# Target rules for targets named NightlyTest
+
+# Build rule for target.
+NightlyTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyTest
+.PHONY : NightlyTest
+
+# fast build rule for target.
+NightlyTest/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyTest.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyTest.dir/build
+.PHONY : NightlyTest/fast
+
+#=============================================================================
+# Target rules for targets named NightlyUpdate
+
+# Build rule for target.
+NightlyUpdate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyUpdate
+.PHONY : NightlyUpdate
+
+# fast build rule for target.
+NightlyUpdate/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyUpdate.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyUpdate.dir/build
+.PHONY : NightlyUpdate/fast
+
+#=============================================================================
+# Target rules for targets named NightlyBuild
+
+# Build rule for target.
+NightlyBuild: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyBuild
+.PHONY : NightlyBuild
+
+# fast build rule for target.
+NightlyBuild/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyBuild.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyBuild.dir/build
+.PHONY : NightlyBuild/fast
+
+#=============================================================================
+# Target rules for targets named Continuous
+
+# Build rule for target.
+Continuous: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Continuous
+.PHONY : Continuous
+
+# fast build rule for target.
+Continuous/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/Continuous.dir/build.make blt/thirdparty_builtin/CMakeFiles/Continuous.dir/build
+.PHONY : Continuous/fast
+
+#=============================================================================
+# Target rules for targets named NightlyStart
+
+# Build rule for target.
+NightlyStart: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyStart
+.PHONY : NightlyStart
+
+# fast build rule for target.
+NightlyStart/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyStart.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyStart.dir/build
+.PHONY : NightlyStart/fast
+
+#=============================================================================
+# Target rules for targets named NightlyMemoryCheck
+
+# Build rule for target.
+NightlyMemoryCheck: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyMemoryCheck
+.PHONY : NightlyMemoryCheck
+
+# fast build rule for target.
+NightlyMemoryCheck/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyMemoryCheck.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyMemoryCheck.dir/build
+.PHONY : NightlyMemoryCheck/fast
+
+#=============================================================================
+# Target rules for targets named NightlyMemCheck
+
+# Build rule for target.
+NightlyMemCheck: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyMemCheck
+.PHONY : NightlyMemCheck
+
+# fast build rule for target.
+NightlyMemCheck/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyMemCheck.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyMemCheck.dir/build
+.PHONY : NightlyMemCheck/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalStart
+
+# Build rule for target.
+ExperimentalStart: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalStart
+.PHONY : ExperimentalStart
+
+# fast build rule for target.
+ExperimentalStart/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalStart.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalStart.dir/build
+.PHONY : ExperimentalStart/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousConfigure
+
+# Build rule for target.
+ContinuousConfigure: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousConfigure
+.PHONY : ContinuousConfigure
+
+# fast build rule for target.
+ContinuousConfigure/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousConfigure.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousConfigure.dir/build
+.PHONY : ContinuousConfigure/fast
+
+#=============================================================================
+# Target rules for targets named NightlyCoverage
+
+# Build rule for target.
+NightlyCoverage: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyCoverage
+.PHONY : NightlyCoverage
+
+# fast build rule for target.
+NightlyCoverage/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyCoverage.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyCoverage.dir/build
+.PHONY : NightlyCoverage/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalUpdate
+
+# Build rule for target.
+ExperimentalUpdate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalUpdate
+.PHONY : ExperimentalUpdate
+
+# fast build rule for target.
+ExperimentalUpdate/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalUpdate.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalUpdate.dir/build
+.PHONY : ExperimentalUpdate/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalConfigure
+
+# Build rule for target.
+ExperimentalConfigure: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalConfigure
+.PHONY : ExperimentalConfigure
+
+# fast build rule for target.
+ExperimentalConfigure/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalConfigure.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalConfigure.dir/build
+.PHONY : ExperimentalConfigure/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalCoverage
+
+# Build rule for target.
+ExperimentalCoverage: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalCoverage
+.PHONY : ExperimentalCoverage
+
+# fast build rule for target.
+ExperimentalCoverage/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalCoverage.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalCoverage.dir/build
+.PHONY : ExperimentalCoverage/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalBuild
+
+# Build rule for target.
+ExperimentalBuild: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalBuild
+.PHONY : ExperimentalBuild
+
+# fast build rule for target.
+ExperimentalBuild/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalBuild.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalBuild.dir/build
+.PHONY : ExperimentalBuild/fast
+
+#=============================================================================
+# Target rules for targets named NightlyConfigure
+
+# Build rule for target.
+NightlyConfigure: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlyConfigure
+.PHONY : NightlyConfigure
+
+# fast build rule for target.
+NightlyConfigure/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlyConfigure.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlyConfigure.dir/build
+.PHONY : NightlyConfigure/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalTest
+
+# Build rule for target.
+ExperimentalTest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalTest
+.PHONY : ExperimentalTest
+
+# fast build rule for target.
+ExperimentalTest/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalTest.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalTest.dir/build
+.PHONY : ExperimentalTest/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalMemCheck
+
+# Build rule for target.
+ExperimentalMemCheck: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalMemCheck
+.PHONY : ExperimentalMemCheck
+
+# fast build rule for target.
+ExperimentalMemCheck/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalMemCheck.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalMemCheck.dir/build
+.PHONY : ExperimentalMemCheck/fast
+
+#=============================================================================
+# Target rules for targets named Experimental
+
+# Build rule for target.
+Experimental: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 Experimental
+.PHONY : Experimental
+
+# fast build rule for target.
+Experimental/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/Experimental.dir/build.make blt/thirdparty_builtin/CMakeFiles/Experimental.dir/build
+.PHONY : Experimental/fast
+
+#=============================================================================
+# Target rules for targets named NightlySubmit
+
+# Build rule for target.
+NightlySubmit: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 NightlySubmit
+.PHONY : NightlySubmit
+
+# fast build rule for target.
+NightlySubmit/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/NightlySubmit.dir/build.make blt/thirdparty_builtin/CMakeFiles/NightlySubmit.dir/build
+.PHONY : NightlySubmit/fast
+
+#=============================================================================
+# Target rules for targets named ExperimentalSubmit
+
+# Build rule for target.
+ExperimentalSubmit: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ExperimentalSubmit
+.PHONY : ExperimentalSubmit
+
+# fast build rule for target.
+ExperimentalSubmit/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ExperimentalSubmit.dir/build.make blt/thirdparty_builtin/CMakeFiles/ExperimentalSubmit.dir/build
+.PHONY : ExperimentalSubmit/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousStart
+
+# Build rule for target.
+ContinuousStart: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousStart
+.PHONY : ContinuousStart
+
+# fast build rule for target.
+ContinuousStart/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousStart.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousStart.dir/build
+.PHONY : ContinuousStart/fast
+
+#=============================================================================
+# Target rules for targets named ContinuousUpdate
+
+# Build rule for target.
+ContinuousUpdate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ContinuousUpdate
+.PHONY : ContinuousUpdate
+
+# fast build rule for target.
+ContinuousUpdate/fast:
+	$(MAKE) -f blt/thirdparty_builtin/CMakeFiles/ContinuousUpdate.dir/build.make blt/thirdparty_builtin/CMakeFiles/ContinuousUpdate.dir/build
+.PHONY : ContinuousUpdate/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/CMakeFiles/gtest_main.dir/build.make blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/CMakeFiles/gtest.dir/build.make blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named blt_gtest_smoke
+
+# Build rule for target.
+blt_gtest_smoke: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 blt_gtest_smoke
+.PHONY : blt_gtest_smoke
+
+# fast build rule for target.
+blt_gtest_smoke/fast:
+	$(MAKE) -f blt/tests/smoke/CMakeFiles/blt_gtest_smoke.dir/build.make blt/tests/smoke/CMakeFiles/blt_gtest_smoke.dir/build
+.PHONY : blt_gtest_smoke/fast
+
+#=============================================================================
 # Target rules for targets named camp
 
 # Build rule for target.
@@ -246,6 +660,4491 @@ camp: cmake_check_build_system
 camp/fast:
 	$(MAKE) -f tpl/camp/CMakeFiles/camp.dir/build.make tpl/camp/CMakeFiles/camp.dir/build
 .PHONY : camp/fast
+
+#=============================================================================
+# Target rules for targets named accumulate
+
+# Build rule for target.
+accumulate: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 accumulate
+.PHONY : accumulate
+
+# fast build rule for target.
+accumulate/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/accumulate.dir/build.make tpl/camp/test/CMakeFiles/accumulate.dir/build
+.PHONY : accumulate/fast
+
+#=============================================================================
+# Target rules for targets named transform
+
+# Build rule for target.
+transform: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 transform
+.PHONY : transform
+
+# fast build rule for target.
+transform/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/transform.dir/build.make tpl/camp/test/CMakeFiles/transform.dir/build
+.PHONY : transform/fast
+
+#=============================================================================
+# Target rules for targets named at_key
+
+# Build rule for target.
+at_key: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 at_key
+.PHONY : at_key
+
+# fast build rule for target.
+at_key/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/at_key.dir/build.make tpl/camp/test/CMakeFiles/at_key.dir/build
+.PHONY : at_key/fast
+
+#=============================================================================
+# Target rules for targets named find_if
+
+# Build rule for target.
+find_if: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 find_if
+.PHONY : find_if
+
+# fast build rule for target.
+find_if/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/find_if.dir/build.make tpl/camp/test/CMakeFiles/find_if.dir/build
+.PHONY : find_if/fast
+
+#=============================================================================
+# Target rules for targets named flatten
+
+# Build rule for target.
+flatten: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 flatten
+.PHONY : flatten
+
+# fast build rule for target.
+flatten/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/flatten.dir/build.make tpl/camp/test/CMakeFiles/flatten.dir/build
+.PHONY : flatten/fast
+
+#=============================================================================
+# Target rules for targets named index_of
+
+# Build rule for target.
+index_of: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 index_of
+.PHONY : index_of
+
+# fast build rule for target.
+index_of/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/index_of.dir/build.make tpl/camp/test/CMakeFiles/index_of.dir/build
+.PHONY : index_of/fast
+
+#=============================================================================
+# Target rules for targets named filter
+
+# Build rule for target.
+filter: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 filter
+.PHONY : filter
+
+# fast build rule for target.
+filter/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/filter.dir/build.make tpl/camp/test/CMakeFiles/filter.dir/build
+.PHONY : filter/fast
+
+#=============================================================================
+# Target rules for targets named lambda
+
+# Build rule for target.
+lambda: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 lambda
+.PHONY : lambda
+
+# fast build rule for target.
+lambda/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/lambda.dir/build.make tpl/camp/test/CMakeFiles/lambda.dir/build
+.PHONY : lambda/fast
+
+#=============================================================================
+# Target rules for targets named size
+
+# Build rule for target.
+size: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 size
+.PHONY : size
+
+# fast build rule for target.
+size/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/size.dir/build.make tpl/camp/test/CMakeFiles/size.dir/build
+.PHONY : size/fast
+
+#=============================================================================
+# Target rules for targets named resource.offload
+
+# Build rule for target.
+resource.offload: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 resource.offload
+.PHONY : resource.offload
+
+# fast build rule for target.
+resource.offload/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/resource.offload.dir/build.make tpl/camp/test/CMakeFiles/resource.offload.dir/build
+.PHONY : resource.offload/fast
+
+#=============================================================================
+# Target rules for targets named tuple
+
+# Build rule for target.
+tuple: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 tuple
+.PHONY : tuple
+
+# fast build rule for target.
+tuple/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/tuple.dir/build.make tpl/camp/test/CMakeFiles/tuple.dir/build
+.PHONY : tuple/fast
+
+#=============================================================================
+# Target rules for targets named number
+
+# Build rule for target.
+number: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 number
+.PHONY : number
+
+# fast build rule for target.
+number/fast:
+	$(MAKE) -f tpl/camp/test/CMakeFiles/number.dir/build.make tpl/camp/test/CMakeFiles/number.dir/build
+.PHONY : number/fast
+
+#=============================================================================
+# Target rules for targets named test-plugin-workgroup-Sequential.exe
+
+# Build rule for target.
+test-plugin-workgroup-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-plugin-workgroup-Sequential.exe
+.PHONY : test-plugin-workgroup-Sequential.exe
+
+# fast build rule for target.
+test-plugin-workgroup-Sequential.exe/fast:
+	$(MAKE) -f test/integration/plugin/CMakeFiles/test-plugin-workgroup-Sequential.exe.dir/build.make test/integration/plugin/CMakeFiles/test-plugin-workgroup-Sequential.exe.dir/build
+.PHONY : test-plugin-workgroup-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-plugin-kernel-Sequential.exe
+
+# Build rule for target.
+test-plugin-kernel-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-plugin-kernel-Sequential.exe
+.PHONY : test-plugin-kernel-Sequential.exe
+
+# fast build rule for target.
+test-plugin-kernel-Sequential.exe/fast:
+	$(MAKE) -f test/integration/plugin/CMakeFiles/test-plugin-kernel-Sequential.exe.dir/build.make test/integration/plugin/CMakeFiles/test-plugin-kernel-Sequential.exe.dir/build
+.PHONY : test-plugin-kernel-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-plugin-forall-Sequential.exe
+
+# Build rule for target.
+test-plugin-forall-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-plugin-forall-Sequential.exe
+.PHONY : test-plugin-forall-Sequential.exe
+
+# fast build rule for target.
+test-plugin-forall-Sequential.exe/fast:
+	$(MAKE) -f test/integration/plugin/CMakeFiles/test-plugin-forall-Sequential.exe.dir/build.make test/integration/plugin/CMakeFiles/test-plugin-forall-Sequential.exe.dir/build
+.PHONY : test-plugin-forall-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-IcountIndexSet-Sequential.exe
+
+# Build rule for target.
+test-forall-IcountIndexSet-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-IcountIndexSet-Sequential.exe
+.PHONY : test-forall-IcountIndexSet-Sequential.exe
+
+# fast build rule for target.
+test-forall-IcountIndexSet-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/indexset/CMakeFiles/test-forall-IcountIndexSet-Sequential.exe.dir/build.make test/functional/forall/indexset/CMakeFiles/test-forall-IcountIndexSet-Sequential.exe.dir/build
+.PHONY : test-forall-IcountIndexSet-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-IndexSet-Sequential.exe
+
+# Build rule for target.
+test-forall-IndexSet-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-IndexSet-Sequential.exe
+.PHONY : test-forall-IndexSet-Sequential.exe
+
+# fast build rule for target.
+test-forall-IndexSet-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/indexset/CMakeFiles/test-forall-IndexSet-Sequential.exe.dir/build.make test/functional/forall/indexset/CMakeFiles/test-forall-IndexSet-Sequential.exe.dir/build
+.PHONY : test-forall-IndexSet-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-IcountIndexSetView-Sequential.exe
+
+# Build rule for target.
+test-forall-IcountIndexSetView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-IcountIndexSetView-Sequential.exe
+.PHONY : test-forall-IcountIndexSetView-Sequential.exe
+
+# fast build rule for target.
+test-forall-IcountIndexSetView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/indexset-view/CMakeFiles/test-forall-IcountIndexSetView-Sequential.exe.dir/build.make test/functional/forall/indexset-view/CMakeFiles/test-forall-IcountIndexSetView-Sequential.exe.dir/build
+.PHONY : test-forall-IcountIndexSetView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-IndexSetView-Sequential.exe
+
+# Build rule for target.
+test-forall-IndexSetView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-IndexSetView-Sequential.exe
+.PHONY : test-forall-IndexSetView-Sequential.exe
+
+# fast build rule for target.
+test-forall-IndexSetView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/indexset-view/CMakeFiles/test-forall-IndexSetView-Sequential.exe.dir/build.make test/functional/forall/indexset-view/CMakeFiles/test-forall-IndexSetView-Sequential.exe.dir/build
+.PHONY : test-forall-IndexSetView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-RangeStrideSegment-Sequential.exe
+
+# Build rule for target.
+test-forall-RangeStrideSegment-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-RangeStrideSegment-Sequential.exe
+.PHONY : test-forall-RangeStrideSegment-Sequential.exe
+
+# fast build rule for target.
+test-forall-RangeStrideSegment-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment/CMakeFiles/test-forall-RangeStrideSegment-Sequential.exe.dir/build.make test/functional/forall/segment/CMakeFiles/test-forall-RangeStrideSegment-Sequential.exe.dir/build
+.PHONY : test-forall-RangeStrideSegment-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-RangeSegment-Sequential.exe
+
+# Build rule for target.
+test-forall-RangeSegment-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-RangeSegment-Sequential.exe
+.PHONY : test-forall-RangeSegment-Sequential.exe
+
+# fast build rule for target.
+test-forall-RangeSegment-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment/CMakeFiles/test-forall-RangeSegment-Sequential.exe.dir/build.make test/functional/forall/segment/CMakeFiles/test-forall-RangeSegment-Sequential.exe.dir/build
+.PHONY : test-forall-RangeSegment-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-ListSegment-Sequential.exe
+
+# Build rule for target.
+test-forall-ListSegment-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-ListSegment-Sequential.exe
+.PHONY : test-forall-ListSegment-Sequential.exe
+
+# fast build rule for target.
+test-forall-ListSegment-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment/CMakeFiles/test-forall-ListSegment-Sequential.exe.dir/build.make test/functional/forall/segment/CMakeFiles/test-forall-ListSegment-Sequential.exe.dir/build
+.PHONY : test-forall-ListSegment-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-ListSegmentView-Sequential.exe
+
+# Build rule for target.
+test-forall-ListSegmentView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-ListSegmentView-Sequential.exe
+.PHONY : test-forall-ListSegmentView-Sequential.exe
+
+# fast build rule for target.
+test-forall-ListSegmentView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment-view/CMakeFiles/test-forall-ListSegmentView-Sequential.exe.dir/build.make test/functional/forall/segment-view/CMakeFiles/test-forall-ListSegmentView-Sequential.exe.dir/build
+.PHONY : test-forall-ListSegmentView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-RangeSegment2DView-Sequential.exe
+
+# Build rule for target.
+test-forall-RangeSegment2DView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-RangeSegment2DView-Sequential.exe
+.PHONY : test-forall-RangeSegment2DView-Sequential.exe
+
+# fast build rule for target.
+test-forall-RangeSegment2DView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment-view/CMakeFiles/test-forall-RangeSegment2DView-Sequential.exe.dir/build.make test/functional/forall/segment-view/CMakeFiles/test-forall-RangeSegment2DView-Sequential.exe.dir/build
+.PHONY : test-forall-RangeSegment2DView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-RangeStrideSegmentView-Sequential.exe
+
+# Build rule for target.
+test-forall-RangeStrideSegmentView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-RangeStrideSegmentView-Sequential.exe
+.PHONY : test-forall-RangeStrideSegmentView-Sequential.exe
+
+# fast build rule for target.
+test-forall-RangeStrideSegmentView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment-view/CMakeFiles/test-forall-RangeStrideSegmentView-Sequential.exe.dir/build.make test/functional/forall/segment-view/CMakeFiles/test-forall-RangeStrideSegmentView-Sequential.exe.dir/build
+.PHONY : test-forall-RangeStrideSegmentView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-RangeSegmentView-Sequential.exe
+
+# Build rule for target.
+test-forall-RangeSegmentView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-RangeSegmentView-Sequential.exe
+.PHONY : test-forall-RangeSegmentView-Sequential.exe
+
+# fast build rule for target.
+test-forall-RangeSegmentView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/segment-view/CMakeFiles/test-forall-RangeSegmentView-Sequential.exe.dir/build.make test/functional/forall/segment-view/CMakeFiles/test-forall-RangeSegmentView-Sequential.exe.dir/build
+.PHONY : test-forall-RangeSegmentView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceSum-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceSum-Sequential.exe
+.PHONY : test-forall-basic-ReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceSum-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceSum-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceMax-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceMax-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceMax-Sequential.exe
+.PHONY : test-forall-basic-ReduceMax-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceMax-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMax-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMax-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceMax-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceMinLoc-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceMinLoc-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceMinLoc-Sequential.exe
+.PHONY : test-forall-basic-ReduceMinLoc-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceMinLoc-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMinLoc-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMinLoc-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceMinLoc-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceMaxLoc-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceMaxLoc-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceMaxLoc-Sequential.exe
+.PHONY : test-forall-basic-ReduceMaxLoc-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceMaxLoc-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMaxLoc-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMaxLoc-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceMaxLoc-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceMin-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceMin-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceMin-Sequential.exe
+.PHONY : test-forall-basic-ReduceMin-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceMin-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMin-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceMin-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceMin-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceBitAnd-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceBitAnd-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceBitAnd-Sequential.exe
+.PHONY : test-forall-basic-ReduceBitAnd-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceBitAnd-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceBitAnd-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceBitAnd-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceBitAnd-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-basic-ReduceBitOr-Sequential.exe
+
+# Build rule for target.
+test-forall-basic-ReduceBitOr-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-basic-ReduceBitOr-Sequential.exe
+.PHONY : test-forall-basic-ReduceBitOr-Sequential.exe
+
+# fast build rule for target.
+test-forall-basic-ReduceBitOr-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceBitOr-Sequential.exe.dir/build.make test/functional/forall/reduce-basic/CMakeFiles/test-forall-basic-ReduceBitOr-Sequential.exe.dir/build
+.PHONY : test-forall-basic-ReduceBitOr-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-segment-multiple-ReduceSum-Sequential.exe
+
+# Build rule for target.
+test-forall-segment-multiple-ReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-segment-multiple-ReduceSum-Sequential.exe
+.PHONY : test-forall-segment-multiple-ReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-forall-segment-multiple-ReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceSum-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceSum-Sequential.exe.dir/build
+.PHONY : test-forall-segment-multiple-ReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-segment-multiple-ReduceMinLoc-Sequential.exe
+
+# Build rule for target.
+test-forall-segment-multiple-ReduceMinLoc-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-segment-multiple-ReduceMinLoc-Sequential.exe
+.PHONY : test-forall-segment-multiple-ReduceMinLoc-Sequential.exe
+
+# fast build rule for target.
+test-forall-segment-multiple-ReduceMinLoc-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMinLoc-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMinLoc-Sequential.exe.dir/build
+.PHONY : test-forall-segment-multiple-ReduceMinLoc-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe
+
+# Build rule for target.
+test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe
+.PHONY : test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe
+
+# fast build rule for target.
+test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe.dir/build
+.PHONY : test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-segment-multiple-ReduceMin-Sequential.exe
+
+# Build rule for target.
+test-forall-segment-multiple-ReduceMin-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-segment-multiple-ReduceMin-Sequential.exe
+.PHONY : test-forall-segment-multiple-ReduceMin-Sequential.exe
+
+# fast build rule for target.
+test-forall-segment-multiple-ReduceMin-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMin-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMin-Sequential.exe.dir/build
+.PHONY : test-forall-segment-multiple-ReduceMin-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-segment-multiple-ReduceMax-Sequential.exe
+
+# Build rule for target.
+test-forall-segment-multiple-ReduceMax-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-segment-multiple-ReduceMax-Sequential.exe
+.PHONY : test-forall-segment-multiple-ReduceMax-Sequential.exe
+
+# fast build rule for target.
+test-forall-segment-multiple-ReduceMax-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMax-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-segment/CMakeFiles/test-forall-segment-multiple-ReduceMax-Sequential.exe.dir/build
+.PHONY : test-forall-segment-multiple-ReduceMax-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-indexset-multiple-ReduceSum-Sequential.exe
+
+# Build rule for target.
+test-forall-indexset-multiple-ReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-indexset-multiple-ReduceSum-Sequential.exe
+.PHONY : test-forall-indexset-multiple-ReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-forall-indexset-multiple-ReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceSum-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceSum-Sequential.exe.dir/build
+.PHONY : test-forall-indexset-multiple-ReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-indexset-multiple-ReduceMax-Sequential.exe
+
+# Build rule for target.
+test-forall-indexset-multiple-ReduceMax-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-indexset-multiple-ReduceMax-Sequential.exe
+.PHONY : test-forall-indexset-multiple-ReduceMax-Sequential.exe
+
+# fast build rule for target.
+test-forall-indexset-multiple-ReduceMax-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMax-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMax-Sequential.exe.dir/build
+.PHONY : test-forall-indexset-multiple-ReduceMax-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe
+
+# Build rule for target.
+test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe
+.PHONY : test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe
+
+# fast build rule for target.
+test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe.dir/build
+.PHONY : test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe
+
+# Build rule for target.
+test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe
+.PHONY : test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe
+
+# fast build rule for target.
+test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe.dir/build
+.PHONY : test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-indexset-multiple-ReduceMin-Sequential.exe
+
+# Build rule for target.
+test-forall-indexset-multiple-ReduceMin-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-indexset-multiple-ReduceMin-Sequential.exe
+.PHONY : test-forall-indexset-multiple-ReduceMin-Sequential.exe
+
+# fast build rule for target.
+test-forall-indexset-multiple-ReduceMin-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMin-Sequential.exe.dir/build.make test/functional/forall/reduce-multiple-indexset/CMakeFiles/test-forall-indexset-multiple-ReduceMin-Sequential.exe.dir/build
+.PHONY : test-forall-indexset-multiple-ReduceMin-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-ResourceIcountIndexSet-Sequential.exe
+
+# Build rule for target.
+test-forall-ResourceIcountIndexSet-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-ResourceIcountIndexSet-Sequential.exe
+.PHONY : test-forall-ResourceIcountIndexSet-Sequential.exe
+
+# fast build rule for target.
+test-forall-ResourceIcountIndexSet-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/resource-indexset/CMakeFiles/test-forall-ResourceIcountIndexSet-Sequential.exe.dir/build.make test/functional/forall/resource-indexset/CMakeFiles/test-forall-ResourceIcountIndexSet-Sequential.exe.dir/build
+.PHONY : test-forall-ResourceIcountIndexSet-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-ResourceIndexSet-Sequential.exe
+
+# Build rule for target.
+test-forall-ResourceIndexSet-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-ResourceIndexSet-Sequential.exe
+.PHONY : test-forall-ResourceIndexSet-Sequential.exe
+
+# fast build rule for target.
+test-forall-ResourceIndexSet-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/resource-indexset/CMakeFiles/test-forall-ResourceIndexSet-Sequential.exe.dir/build.make test/functional/forall/resource-indexset/CMakeFiles/test-forall-ResourceIndexSet-Sequential.exe.dir/build
+.PHONY : test-forall-ResourceIndexSet-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-resource-RangeStrideSegment-Sequential.exe
+
+# Build rule for target.
+test-forall-resource-RangeStrideSegment-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-resource-RangeStrideSegment-Sequential.exe
+.PHONY : test-forall-resource-RangeStrideSegment-Sequential.exe
+
+# fast build rule for target.
+test-forall-resource-RangeStrideSegment-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/resource-segment/CMakeFiles/test-forall-resource-RangeStrideSegment-Sequential.exe.dir/build.make test/functional/forall/resource-segment/CMakeFiles/test-forall-resource-RangeStrideSegment-Sequential.exe.dir/build
+.PHONY : test-forall-resource-RangeStrideSegment-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-resource-RangeSegment-Sequential.exe
+
+# Build rule for target.
+test-forall-resource-RangeSegment-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-resource-RangeSegment-Sequential.exe
+.PHONY : test-forall-resource-RangeSegment-Sequential.exe
+
+# fast build rule for target.
+test-forall-resource-RangeSegment-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/resource-segment/CMakeFiles/test-forall-resource-RangeSegment-Sequential.exe.dir/build.make test/functional/forall/resource-segment/CMakeFiles/test-forall-resource-RangeSegment-Sequential.exe.dir/build
+.PHONY : test-forall-resource-RangeSegment-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-resource-ListSegment-Sequential.exe
+
+# Build rule for target.
+test-forall-resource-ListSegment-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-resource-ListSegment-Sequential.exe
+.PHONY : test-forall-resource-ListSegment-Sequential.exe
+
+# fast build rule for target.
+test-forall-resource-ListSegment-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/resource-segment/CMakeFiles/test-forall-resource-ListSegment-Sequential.exe.dir/build.make test/functional/forall/resource-segment/CMakeFiles/test-forall-resource-ListSegment-Sequential.exe.dir/build
+.PHONY : test-forall-resource-ListSegment-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-CombiningAdapter-3D-Sequential.exe
+
+# Build rule for target.
+test-forall-CombiningAdapter-3D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-CombiningAdapter-3D-Sequential.exe
+.PHONY : test-forall-CombiningAdapter-3D-Sequential.exe
+
+# fast build rule for target.
+test-forall-CombiningAdapter-3D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/CombiningAdapter/CMakeFiles/test-forall-CombiningAdapter-3D-Sequential.exe.dir/build.make test/functional/forall/CombiningAdapter/CMakeFiles/test-forall-CombiningAdapter-3D-Sequential.exe.dir/build
+.PHONY : test-forall-CombiningAdapter-3D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-CombiningAdapter-2D-Sequential.exe
+
+# Build rule for target.
+test-forall-CombiningAdapter-2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-CombiningAdapter-2D-Sequential.exe
+.PHONY : test-forall-CombiningAdapter-2D-Sequential.exe
+
+# fast build rule for target.
+test-forall-CombiningAdapter-2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/CombiningAdapter/CMakeFiles/test-forall-CombiningAdapter-2D-Sequential.exe.dir/build.make test/functional/forall/CombiningAdapter/CMakeFiles/test-forall-CombiningAdapter-2D-Sequential.exe.dir/build
+.PHONY : test-forall-CombiningAdapter-2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-CombiningAdapter-1D-Sequential.exe
+
+# Build rule for target.
+test-forall-CombiningAdapter-1D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-CombiningAdapter-1D-Sequential.exe
+.PHONY : test-forall-CombiningAdapter-1D-Sequential.exe
+
+# fast build rule for target.
+test-forall-CombiningAdapter-1D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/CombiningAdapter/CMakeFiles/test-forall-CombiningAdapter-1D-Sequential.exe.dir/build.make test/functional/forall/CombiningAdapter/CMakeFiles/test-forall-CombiningAdapter-1D-Sequential.exe.dir/build
+.PHONY : test-forall-CombiningAdapter-1D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-atomic-basic-unsigned-Sequential.exe
+
+# Build rule for target.
+test-forall-atomic-basic-unsigned-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-atomic-basic-unsigned-Sequential.exe
+.PHONY : test-forall-atomic-basic-unsigned-Sequential.exe
+
+# fast build rule for target.
+test-forall-atomic-basic-unsigned-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-basic/CMakeFiles/test-forall-atomic-basic-unsigned-Sequential.exe.dir/build.make test/functional/forall/atomic-basic/CMakeFiles/test-forall-atomic-basic-unsigned-Sequential.exe.dir/build
+.PHONY : test-forall-atomic-basic-unsigned-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-atomic-basic-Sequential.exe
+
+# Build rule for target.
+test-forall-atomic-basic-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-atomic-basic-Sequential.exe
+.PHONY : test-forall-atomic-basic-Sequential.exe
+
+# fast build rule for target.
+test-forall-atomic-basic-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-basic/CMakeFiles/test-forall-atomic-basic-Sequential.exe.dir/build.make test/functional/forall/atomic-basic/CMakeFiles/test-forall-atomic-basic-Sequential.exe.dir/build
+.PHONY : test-forall-atomic-basic-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicOutOfBoundsMultiView-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicOutOfBoundsMultiView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicOutOfBoundsMultiView-Sequential.exe
+.PHONY : test-forall-AtomicOutOfBoundsMultiView-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicOutOfBoundsMultiView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-view/CMakeFiles/test-forall-AtomicOutOfBoundsMultiView-Sequential.exe.dir/build.make test/functional/forall/atomic-view/CMakeFiles/test-forall-AtomicOutOfBoundsMultiView-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicOutOfBoundsMultiView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicMultiView-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicMultiView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicMultiView-Sequential.exe
+.PHONY : test-forall-AtomicMultiView-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicMultiView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-view/CMakeFiles/test-forall-AtomicMultiView-Sequential.exe.dir/build.make test/functional/forall/atomic-view/CMakeFiles/test-forall-AtomicMultiView-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicMultiView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicView-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicView-Sequential.exe
+.PHONY : test-forall-AtomicView-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-view/CMakeFiles/test-forall-AtomicView-Sequential.exe.dir/build.make test/functional/forall/atomic-view/CMakeFiles/test-forall-AtomicView-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicRefAdd-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicRefAdd-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicRefAdd-Sequential.exe
+.PHONY : test-forall-AtomicRefAdd-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicRefAdd-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefAdd-Sequential.exe.dir/build.make test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefAdd-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicRefAdd-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicRefCAS-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicRefCAS-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicRefCAS-Sequential.exe
+.PHONY : test-forall-AtomicRefCAS-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicRefCAS-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefCAS-Sequential.exe.dir/build.make test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefCAS-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicRefCAS-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicRefLoadStore-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicRefLoadStore-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicRefLoadStore-Sequential.exe
+.PHONY : test-forall-AtomicRefLoadStore-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicRefLoadStore-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefLoadStore-Sequential.exe.dir/build.make test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefLoadStore-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicRefLoadStore-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicRefSub-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicRefSub-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicRefSub-Sequential.exe
+.PHONY : test-forall-AtomicRefSub-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicRefSub-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefSub-Sequential.exe.dir/build.make test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefSub-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicRefSub-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicRefMinMax-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicRefMinMax-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicRefMinMax-Sequential.exe
+.PHONY : test-forall-AtomicRefMinMax-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicRefMinMax-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefMinMax-Sequential.exe.dir/build.make test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefMinMax-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicRefMinMax-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-AtomicRefLogical-Sequential.exe
+
+# Build rule for target.
+test-forall-AtomicRefLogical-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-AtomicRefLogical-Sequential.exe
+.PHONY : test-forall-AtomicRefLogical-Sequential.exe
+
+# fast build rule for target.
+test-forall-AtomicRefLogical-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefLogical-Sequential.exe.dir/build.make test/functional/forall/atomic-ref/CMakeFiles/test-forall-AtomicRefLogical-Sequential.exe.dir/build
+.PHONY : test-forall-AtomicRefLogical-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-forall-region-Sequential.exe
+
+# Build rule for target.
+test-forall-region-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-forall-region-Sequential.exe
+.PHONY : test-forall-region-Sequential.exe
+
+# fast build rule for target.
+test-forall-region-Sequential.exe/fast:
+	$(MAKE) -f test/functional/forall/region/CMakeFiles/test-forall-region-Sequential.exe.dir/build.make test/functional/forall/region/CMakeFiles/test-forall-region-Sequential.exe.dir/build
+.PHONY : test-forall-region-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-aligned-indexset.exe
+
+# Build rule for target.
+test-aligned-indexset.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-aligned-indexset.exe
+.PHONY : test-aligned-indexset.exe
+
+# fast build rule for target.
+test-aligned-indexset.exe/fast:
+	$(MAKE) -f test/functional/indexset-build/CMakeFiles/test-aligned-indexset.exe.dir/build.make test/functional/indexset-build/CMakeFiles/test-aligned-indexset.exe.dir/build
+.PHONY : test-aligned-indexset.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-basic-single-loop-Segments-Sequential.exe
+
+# Build rule for target.
+test-kernel-basic-single-loop-Segments-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-basic-single-loop-Segments-Sequential.exe
+.PHONY : test-kernel-basic-single-loop-Segments-Sequential.exe
+
+# fast build rule for target.
+test-kernel-basic-single-loop-Segments-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/basic-single-loop/CMakeFiles/test-kernel-basic-single-loop-Segments-Sequential.exe.dir/build.make test/functional/kernel/basic-single-loop/CMakeFiles/test-kernel-basic-single-loop-Segments-Sequential.exe.dir/build
+.PHONY : test-kernel-basic-single-loop-Segments-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-resource-basic-single-loop-Segments-Sequential.exe
+
+# Build rule for target.
+test-kernel-resource-basic-single-loop-Segments-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-resource-basic-single-loop-Segments-Sequential.exe
+.PHONY : test-kernel-resource-basic-single-loop-Segments-Sequential.exe
+
+# fast build rule for target.
+test-kernel-resource-basic-single-loop-Segments-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/basic-single-loop/CMakeFiles/test-kernel-resource-basic-single-loop-Segments-Sequential.exe.dir/build.make test/functional/kernel/basic-single-loop/CMakeFiles/test-kernel-resource-basic-single-loop-Segments-Sequential.exe.dir/build
+.PHONY : test-kernel-resource-basic-single-loop-Segments-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-basic-single-icount-loop-Sequential.exe
+
+# Build rule for target.
+test-kernel-basic-single-icount-loop-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-basic-single-icount-loop-Sequential.exe
+.PHONY : test-kernel-basic-single-icount-loop-Sequential.exe
+
+# fast build rule for target.
+test-kernel-basic-single-icount-loop-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/basic-single-icount-loop/CMakeFiles/test-kernel-basic-single-icount-loop-Sequential.exe.dir/build.make test/functional/kernel/basic-single-icount-loop/CMakeFiles/test-kernel-basic-single-icount-loop-Sequential.exe.dir/build
+.PHONY : test-kernel-basic-single-icount-loop-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-basic-fission-fusion-loop-Sequential.exe
+
+# Build rule for target.
+test-kernel-basic-fission-fusion-loop-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-basic-fission-fusion-loop-Sequential.exe
+.PHONY : test-kernel-basic-fission-fusion-loop-Sequential.exe
+
+# fast build rule for target.
+test-kernel-basic-fission-fusion-loop-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/basic-fission-fusion-loop/CMakeFiles/test-kernel-basic-fission-fusion-loop-Sequential.exe.dir/build.make test/functional/kernel/basic-fission-fusion-loop/CMakeFiles/test-kernel-basic-fission-fusion-loop-Sequential.exe.dir/build
+.PHONY : test-kernel-basic-fission-fusion-loop-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-conditional-fission-fusion-loop-Sequential.exe
+
+# Build rule for target.
+test-kernel-conditional-fission-fusion-loop-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-conditional-fission-fusion-loop-Sequential.exe
+.PHONY : test-kernel-conditional-fission-fusion-loop-Sequential.exe
+
+# fast build rule for target.
+test-kernel-conditional-fission-fusion-loop-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/conditional-fission-fusion-loop/CMakeFiles/test-kernel-conditional-fission-fusion-loop-Sequential.exe.dir/build.make test/functional/kernel/conditional-fission-fusion-loop/CMakeFiles/test-kernel-conditional-fission-fusion-loop-Sequential.exe.dir/build
+.PHONY : test-kernel-conditional-fission-fusion-loop-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-resource-nested-loop-Basic-Sequential.exe
+
+# Build rule for target.
+test-kernel-resource-nested-loop-Basic-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-resource-nested-loop-Basic-Sequential.exe
+.PHONY : test-kernel-resource-nested-loop-Basic-Sequential.exe
+
+# fast build rule for target.
+test-kernel-resource-nested-loop-Basic-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop/CMakeFiles/test-kernel-resource-nested-loop-Basic-Sequential.exe.dir/build.make test/functional/kernel/nested-loop/CMakeFiles/test-kernel-resource-nested-loop-Basic-Sequential.exe.dir/build
+.PHONY : test-kernel-resource-nested-loop-Basic-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-Basic-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-Basic-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-Basic-Sequential.exe
+.PHONY : test-kernel-nested-loop-Basic-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-Basic-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop/CMakeFiles/test-kernel-nested-loop-Basic-Sequential.exe.dir/build.make test/functional/kernel/nested-loop/CMakeFiles/test-kernel-nested-loop-Basic-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-Basic-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-resource-nested-loop-MultiLambda-Sequential.exe
+
+# Build rule for target.
+test-kernel-resource-nested-loop-MultiLambda-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-resource-nested-loop-MultiLambda-Sequential.exe
+.PHONY : test-kernel-resource-nested-loop-MultiLambda-Sequential.exe
+
+# fast build rule for target.
+test-kernel-resource-nested-loop-MultiLambda-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop/CMakeFiles/test-kernel-resource-nested-loop-MultiLambda-Sequential.exe.dir/build.make test/functional/kernel/nested-loop/CMakeFiles/test-kernel-resource-nested-loop-MultiLambda-Sequential.exe.dir/build
+.PHONY : test-kernel-resource-nested-loop-MultiLambda-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe
+
+# Build rule for target.
+test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe
+.PHONY : test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe
+
+# fast build rule for target.
+test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop/CMakeFiles/test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe.dir/build.make test/functional/kernel/nested-loop/CMakeFiles/test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe.dir/build
+.PHONY : test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-MultiLambda-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-MultiLambda-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-MultiLambda-Sequential.exe
+.PHONY : test-kernel-nested-loop-MultiLambda-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-MultiLambda-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop/CMakeFiles/test-kernel-nested-loop-MultiLambda-Sequential.exe.dir/build.make test/functional/kernel/nested-loop/CMakeFiles/test-kernel-nested-loop-MultiLambda-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-MultiLambda-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-MultiLambdaParam-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-MultiLambdaParam-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-MultiLambdaParam-Sequential.exe
+.PHONY : test-kernel-nested-loop-MultiLambdaParam-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-MultiLambdaParam-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop/CMakeFiles/test-kernel-nested-loop-MultiLambdaParam-Sequential.exe.dir/build.make test/functional/kernel/nested-loop/CMakeFiles/test-kernel-nested-loop-MultiLambdaParam-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-MultiLambdaParam-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-resource-nested-loop-ReduceSum-Sequential.exe
+
+# Build rule for target.
+test-kernel-resource-nested-loop-ReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-resource-nested-loop-ReduceSum-Sequential.exe
+.PHONY : test-kernel-resource-nested-loop-ReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-kernel-resource-nested-loop-ReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-resource-nested-loop-ReduceSum-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-resource-nested-loop-ReduceSum-Sequential.exe.dir/build
+.PHONY : test-kernel-resource-nested-loop-ReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe
+
+# Build rule for target.
+test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe
+.PHONY : test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe.dir/build
+.PHONY : test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-ReduceSum-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-ReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-ReduceSum-Sequential.exe
+.PHONY : test-kernel-nested-loop-ReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-ReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-nested-loop-ReduceSum-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-nested-loop-ReduceSum-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-ReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-BlockReduceSum-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-BlockReduceSum-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-BlockReduceSum-Sequential.exe
+.PHONY : test-kernel-nested-loop-BlockReduceSum-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-BlockReduceSum-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-nested-loop-BlockReduceSum-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-reducesum/CMakeFiles/test-kernel-nested-loop-BlockReduceSum-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-BlockReduceSum-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-segments-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-segments-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-segments-Sequential.exe
+.PHONY : test-kernel-nested-loop-segments-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-segments-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-segment-types/CMakeFiles/test-kernel-nested-loop-segments-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-segment-types/CMakeFiles/test-kernel-nested-loop-segments-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-segments-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-PermutedView2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-PermutedView2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-PermutedView2D-Sequential.exe
+.PHONY : test-kernel-nested-loop-PermutedView2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-PermutedView2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedView2D-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedView2D-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-PermutedView2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-OffsetView2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-OffsetView2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-OffsetView2D-Sequential.exe
+.PHONY : test-kernel-nested-loop-OffsetView2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-OffsetView2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-OffsetView2D-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-OffsetView2D-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-OffsetView2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-PermutedView3D-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-PermutedView3D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-PermutedView3D-Sequential.exe
+.PHONY : test-kernel-nested-loop-PermutedView3D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-PermutedView3D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedView3D-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedView3D-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-PermutedView3D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe
+.PHONY : test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-OffsetView3D-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-OffsetView3D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-OffsetView3D-Sequential.exe
+.PHONY : test-kernel-nested-loop-OffsetView3D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-OffsetView3D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-OffsetView3D-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-OffsetView3D-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-OffsetView3D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe
+.PHONY : test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe.dir/build.make test/functional/kernel/nested-loop-view-types/CMakeFiles/test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe.dir/build
+.PHONY : test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-reduceloc-Min2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-reduceloc-Min2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-reduceloc-Min2D-Sequential.exe
+.PHONY : test-kernel-reduceloc-Min2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-reduceloc-Min2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Min2D-Sequential.exe.dir/build.make test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Min2D-Sequential.exe.dir/build
+.PHONY : test-kernel-reduceloc-Min2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-reduceloc-Max2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-reduceloc-Max2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-reduceloc-Max2D-Sequential.exe
+.PHONY : test-kernel-reduceloc-Max2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-reduceloc-Max2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Max2D-Sequential.exe.dir/build.make test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Max2D-Sequential.exe.dir/build
+.PHONY : test-kernel-reduceloc-Max2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-reduceloc-Max2DViewTuple-Sequential.exe
+
+# Build rule for target.
+test-kernel-reduceloc-Max2DViewTuple-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-reduceloc-Max2DViewTuple-Sequential.exe
+.PHONY : test-kernel-reduceloc-Max2DViewTuple-Sequential.exe
+
+# fast build rule for target.
+test-kernel-reduceloc-Max2DViewTuple-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Max2DViewTuple-Sequential.exe.dir/build.make test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Max2DViewTuple-Sequential.exe.dir/build
+.PHONY : test-kernel-reduceloc-Max2DViewTuple-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-reduceloc-Min2DView-Sequential.exe
+
+# Build rule for target.
+test-kernel-reduceloc-Min2DView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-reduceloc-Min2DView-Sequential.exe
+.PHONY : test-kernel-reduceloc-Min2DView-Sequential.exe
+
+# fast build rule for target.
+test-kernel-reduceloc-Min2DView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Min2DView-Sequential.exe.dir/build.make test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Min2DView-Sequential.exe.dir/build
+.PHONY : test-kernel-reduceloc-Min2DView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-reduceloc-Max2DView-Sequential.exe
+
+# Build rule for target.
+test-kernel-reduceloc-Max2DView-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-reduceloc-Max2DView-Sequential.exe
+.PHONY : test-kernel-reduceloc-Max2DView-Sequential.exe
+
+# fast build rule for target.
+test-kernel-reduceloc-Max2DView-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Max2DView-Sequential.exe.dir/build.make test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Max2DView-Sequential.exe.dir/build
+.PHONY : test-kernel-reduceloc-Max2DView-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-reduceloc-Min2DViewTuple-Sequential.exe
+
+# Build rule for target.
+test-kernel-reduceloc-Min2DViewTuple-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-reduceloc-Min2DViewTuple-Sequential.exe
+.PHONY : test-kernel-reduceloc-Min2DViewTuple-Sequential.exe
+
+# fast build rule for target.
+test-kernel-reduceloc-Min2DViewTuple-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Min2DViewTuple-Sequential.exe.dir/build.make test/functional/kernel/reduce-loc/CMakeFiles/test-kernel-reduceloc-Min2DViewTuple-Sequential.exe.dir/build
+.PHONY : test-kernel-reduceloc-Min2DViewTuple-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-single-loop-ForICount-32-Sequential.exe
+
+# Build rule for target.
+test-kernel-single-loop-ForICount-32-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-single-loop-ForICount-32-Sequential.exe
+.PHONY : test-kernel-single-loop-ForICount-32-Sequential.exe
+
+# fast build rule for target.
+test-kernel-single-loop-ForICount-32-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-ForICount-32-Sequential.exe.dir/build.make test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-ForICount-32-Sequential.exe.dir/build
+.PHONY : test-kernel-single-loop-ForICount-32-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-single-loop-ForICount-8-Sequential.exe
+
+# Build rule for target.
+test-kernel-single-loop-ForICount-8-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-single-loop-ForICount-8-Sequential.exe
+.PHONY : test-kernel-single-loop-ForICount-8-Sequential.exe
+
+# fast build rule for target.
+test-kernel-single-loop-ForICount-8-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-ForICount-8-Sequential.exe.dir/build.make test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-ForICount-8-Sequential.exe.dir/build
+.PHONY : test-kernel-single-loop-ForICount-8-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-single-loop-TileTCount-32-Sequential.exe
+
+# Build rule for target.
+test-kernel-single-loop-TileTCount-32-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-single-loop-TileTCount-32-Sequential.exe
+.PHONY : test-kernel-single-loop-TileTCount-32-Sequential.exe
+
+# fast build rule for target.
+test-kernel-single-loop-TileTCount-32-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-TileTCount-32-Sequential.exe.dir/build.make test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-TileTCount-32-Sequential.exe.dir/build
+.PHONY : test-kernel-single-loop-TileTCount-32-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-single-loop-TileTCount-8-Sequential.exe
+
+# Build rule for target.
+test-kernel-single-loop-TileTCount-8-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-single-loop-TileTCount-8-Sequential.exe
+.PHONY : test-kernel-single-loop-TileTCount-8-Sequential.exe
+
+# fast build rule for target.
+test-kernel-single-loop-TileTCount-8-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-TileTCount-8-Sequential.exe.dir/build.make test/functional/kernel/single-loop-tile-icount-tcount/CMakeFiles/test-kernel-single-loop-TileTCount-8-Sequential.exe.dir/build
+.PHONY : test-kernel-single-loop-TileTCount-8-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-tile-LocalArray2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-tile-LocalArray2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-tile-LocalArray2D-Sequential.exe
+.PHONY : test-kernel-tile-LocalArray2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-tile-LocalArray2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/tile-variants/CMakeFiles/test-kernel-tile-LocalArray2D-Sequential.exe.dir/build.make test/functional/kernel/tile-variants/CMakeFiles/test-kernel-tile-LocalArray2D-Sequential.exe.dir/build
+.PHONY : test-kernel-tile-LocalArray2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-tile-Dynamic2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-tile-Dynamic2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-tile-Dynamic2D-Sequential.exe
+.PHONY : test-kernel-tile-Dynamic2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-tile-Dynamic2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/tile-variants/CMakeFiles/test-kernel-tile-Dynamic2D-Sequential.exe.dir/build.make test/functional/kernel/tile-variants/CMakeFiles/test-kernel-tile-Dynamic2D-Sequential.exe.dir/build
+.PHONY : test-kernel-tile-Dynamic2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-tile-Fixed2D-Sequential.exe
+
+# Build rule for target.
+test-kernel-tile-Fixed2D-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-tile-Fixed2D-Sequential.exe
+.PHONY : test-kernel-tile-Fixed2D-Sequential.exe
+
+# fast build rule for target.
+test-kernel-tile-Fixed2D-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/tile-variants/CMakeFiles/test-kernel-tile-Fixed2D-Sequential.exe.dir/build.make test/functional/kernel/tile-variants/CMakeFiles/test-kernel-tile-Fixed2D-Sequential.exe.dir/build
+.PHONY : test-kernel-tile-Fixed2D-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel-region-Sequential.exe
+
+# Build rule for target.
+test-kernel-region-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel-region-Sequential.exe
+.PHONY : test-kernel-region-Sequential.exe
+
+# fast build rule for target.
+test-kernel-region-Sequential.exe/fast:
+	$(MAKE) -f test/functional/kernel/region/CMakeFiles/test-kernel-region-Sequential.exe.dir/build.make test/functional/kernel/region/CMakeFiles/test-kernel-region-Sequential.exe.dir/build
+.PHONY : test-kernel-region-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-Exclusive-scan-Sequential.exe
+
+# Build rule for target.
+test-Exclusive-scan-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-Exclusive-scan-Sequential.exe
+.PHONY : test-Exclusive-scan-Sequential.exe
+
+# fast build rule for target.
+test-Exclusive-scan-Sequential.exe/fast:
+	$(MAKE) -f test/functional/scan/CMakeFiles/test-Exclusive-scan-Sequential.exe.dir/build.make test/functional/scan/CMakeFiles/test-Exclusive-scan-Sequential.exe.dir/build
+.PHONY : test-Exclusive-scan-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-ExclusiveInplace-scan-Sequential.exe
+
+# Build rule for target.
+test-ExclusiveInplace-scan-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-ExclusiveInplace-scan-Sequential.exe
+.PHONY : test-ExclusiveInplace-scan-Sequential.exe
+
+# fast build rule for target.
+test-ExclusiveInplace-scan-Sequential.exe/fast:
+	$(MAKE) -f test/functional/scan/CMakeFiles/test-ExclusiveInplace-scan-Sequential.exe.dir/build.make test/functional/scan/CMakeFiles/test-ExclusiveInplace-scan-Sequential.exe.dir/build
+.PHONY : test-ExclusiveInplace-scan-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-Inclusive-scan-Sequential.exe
+
+# Build rule for target.
+test-Inclusive-scan-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-Inclusive-scan-Sequential.exe
+.PHONY : test-Inclusive-scan-Sequential.exe
+
+# fast build rule for target.
+test-Inclusive-scan-Sequential.exe/fast:
+	$(MAKE) -f test/functional/scan/CMakeFiles/test-Inclusive-scan-Sequential.exe.dir/build.make test/functional/scan/CMakeFiles/test-Inclusive-scan-Sequential.exe.dir/build
+.PHONY : test-Inclusive-scan-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-InclusiveInplace-scan-Sequential.exe
+
+# Build rule for target.
+test-InclusiveInplace-scan-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-InclusiveInplace-scan-Sequential.exe
+.PHONY : test-InclusiveInplace-scan-Sequential.exe
+
+# fast build rule for target.
+test-InclusiveInplace-scan-Sequential.exe/fast:
+	$(MAKE) -f test/functional/scan/CMakeFiles/test-InclusiveInplace-scan-Sequential.exe.dir/build.make test/functional/scan/CMakeFiles/test-InclusiveInplace-scan-Sequential.exe.dir/build
+.PHONY : test-InclusiveInplace-scan-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-teams-BasicShared-Sequential.exe
+
+# Build rule for target.
+test-teams-BasicShared-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-teams-BasicShared-Sequential.exe
+.PHONY : test-teams-BasicShared-Sequential.exe
+
+# fast build rule for target.
+test-teams-BasicShared-Sequential.exe/fast:
+	$(MAKE) -f test/functional/teams/CMakeFiles/test-teams-BasicShared-Sequential.exe.dir/build.make test/functional/teams/CMakeFiles/test-teams-BasicShared-Sequential.exe.dir/build
+.PHONY : test-teams-BasicShared-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-SegmentedSumOuter.exe
+
+# Build rule for target.
+test-tensor-register-double-SegmentedSumOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-SegmentedSumOuter.exe
+.PHONY : test-tensor-register-double-SegmentedSumOuter.exe
+
+# fast build rule for target.
+test-tensor-register-double-SegmentedSumOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedSumOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedSumOuter.exe.dir/build
+.PHONY : test-tensor-register-double-SegmentedSumOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-SegmentedBroadcastInner.exe
+
+# Build rule for target.
+test-tensor-register-double-SegmentedBroadcastInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-SegmentedBroadcastInner.exe
+.PHONY : test-tensor-register-double-SegmentedBroadcastInner.exe
+
+# fast build rule for target.
+test-tensor-register-double-SegmentedBroadcastInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedBroadcastInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedBroadcastInner.exe.dir/build
+.PHONY : test-tensor-register-double-SegmentedBroadcastInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-SegmentedDotProduct.exe
+
+# Build rule for target.
+test-tensor-register-double-SegmentedDotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-SegmentedDotProduct.exe
+.PHONY : test-tensor-register-double-SegmentedDotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-double-SegmentedDotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedDotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedDotProduct.exe.dir/build
+.PHONY : test-tensor-register-double-SegmentedDotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-FMS.exe
+
+# Build rule for target.
+test-tensor-register-double-FMS.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-FMS.exe
+.PHONY : test-tensor-register-double-FMS.exe
+
+# fast build rule for target.
+test-tensor-register-double-FMS.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-FMS.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-FMS.exe.dir/build
+.PHONY : test-tensor-register-double-FMS.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Divide.exe
+
+# Build rule for target.
+test-tensor-register-double-Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Divide.exe
+.PHONY : test-tensor-register-double-Divide.exe
+
+# fast build rule for target.
+test-tensor-register-double-Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Divide.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Divide.exe.dir/build
+.PHONY : test-tensor-register-double-Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Scatter.exe
+
+# Build rule for target.
+test-tensor-register-double-Scatter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Scatter.exe
+.PHONY : test-tensor-register-double-Scatter.exe
+
+# fast build rule for target.
+test-tensor-register-double-Scatter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Scatter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Scatter.exe.dir/build
+.PHONY : test-tensor-register-double-Scatter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Max.exe
+
+# Build rule for target.
+test-tensor-register-double-Max.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Max.exe
+.PHONY : test-tensor-register-double-Max.exe
+
+# fast build rule for target.
+test-tensor-register-double-Max.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Max.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Max.exe.dir/build
+.PHONY : test-tensor-register-double-Max.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Load.exe
+
+# Build rule for target.
+test-tensor-register-double-Load.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Load.exe
+.PHONY : test-tensor-register-double-Load.exe
+
+# fast build rule for target.
+test-tensor-register-double-Load.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Load.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Load.exe.dir/build
+.PHONY : test-tensor-register-double-Load.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-SegmentedSumOuter.exe
+
+# Build rule for target.
+test-tensor-register-float-SegmentedSumOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-SegmentedSumOuter.exe
+.PHONY : test-tensor-register-float-SegmentedSumOuter.exe
+
+# fast build rule for target.
+test-tensor-register-float-SegmentedSumOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedSumOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedSumOuter.exe.dir/build
+.PHONY : test-tensor-register-float-SegmentedSumOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-SegmentedDotProduct.exe
+
+# Build rule for target.
+test-tensor-register-float-SegmentedDotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-SegmentedDotProduct.exe
+.PHONY : test-tensor-register-float-SegmentedDotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-float-SegmentedDotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedDotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedDotProduct.exe.dir/build
+.PHONY : test-tensor-register-float-SegmentedDotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Max.exe
+
+# Build rule for target.
+test-tensor-register-float-Max.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Max.exe
+.PHONY : test-tensor-register-float-Max.exe
+
+# fast build rule for target.
+test-tensor-register-float-Max.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Max.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Max.exe.dir/build
+.PHONY : test-tensor-register-float-Max.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-DotProduct.exe
+
+# Build rule for target.
+test-tensor-register-float-DotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-DotProduct.exe
+.PHONY : test-tensor-register-float-DotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-float-DotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-DotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-DotProduct.exe.dir/build
+.PHONY : test-tensor-register-float-DotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Load.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Load.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Load.exe
+.PHONY : test-tensor-register-int64_t-Load.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Load.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Load.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Load.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Load.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-FMS.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-FMS.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-FMS.exe
+.PHONY : test-tensor-register-int32_t-FMS.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-FMS.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-FMS.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-FMS.exe.dir/build
+.PHONY : test-tensor-register-int32_t-FMS.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Divide.exe
+
+# Build rule for target.
+test-tensor-register-float-Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Divide.exe
+.PHONY : test-tensor-register-float-Divide.exe
+
+# fast build rule for target.
+test-tensor-register-float-Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Divide.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Divide.exe.dir/build
+.PHONY : test-tensor-register-float-Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-SegmentedDotProduct.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-SegmentedDotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-SegmentedDotProduct.exe
+.PHONY : test-tensor-register-int32_t-SegmentedDotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-SegmentedDotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedDotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedDotProduct.exe.dir/build
+.PHONY : test-tensor-register-int32_t-SegmentedDotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-DotProduct.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-DotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-DotProduct.exe
+.PHONY : test-tensor-register-int32_t-DotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-DotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-DotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-DotProduct.exe.dir/build
+.PHONY : test-tensor-register-int32_t-DotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-FMA.exe
+
+# Build rule for target.
+test-tensor-register-double-FMA.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-FMA.exe
+.PHONY : test-tensor-register-double-FMA.exe
+
+# fast build rule for target.
+test-tensor-register-double-FMA.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-FMA.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-FMA.exe.dir/build
+.PHONY : test-tensor-register-double-FMA.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Load.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Load.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Load.exe
+.PHONY : test-tensor-register-int32_t-Load.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Load.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Load.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Load.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Load.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Add.exe
+
+# Build rule for target.
+test-tensor-register-double-Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Add.exe
+.PHONY : test-tensor-register-double-Add.exe
+
+# fast build rule for target.
+test-tensor-register-double-Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Add.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Add.exe.dir/build
+.PHONY : test-tensor-register-double-Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-SegmentedBroadcastInner.exe
+
+# Build rule for target.
+test-tensor-register-float-SegmentedBroadcastInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-SegmentedBroadcastInner.exe
+.PHONY : test-tensor-register-float-SegmentedBroadcastInner.exe
+
+# fast build rule for target.
+test-tensor-register-float-SegmentedBroadcastInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedBroadcastInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedBroadcastInner.exe.dir/build
+.PHONY : test-tensor-register-float-SegmentedBroadcastInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Max.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Max.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Max.exe
+.PHONY : test-tensor-register-int32_t-Max.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Max.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Max.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Max.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Max.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-GetSet.exe
+
+# Build rule for target.
+test-tensor-register-double-GetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-GetSet.exe
+.PHONY : test-tensor-register-double-GetSet.exe
+
+# fast build rule for target.
+test-tensor-register-double-GetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-GetSet.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-GetSet.exe.dir/build
+.PHONY : test-tensor-register-double-GetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-GetSet.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-GetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-GetSet.exe
+.PHONY : test-tensor-register-int32_t-GetSet.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-GetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-GetSet.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-GetSet.exe.dir/build
+.PHONY : test-tensor-register-int32_t-GetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-SegmentedDotProduct.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-SegmentedDotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-SegmentedDotProduct.exe
+.PHONY : test-tensor-register-int64_t-SegmentedDotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-SegmentedDotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedDotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedDotProduct.exe.dir/build
+.PHONY : test-tensor-register-int64_t-SegmentedDotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Store.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Store.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Store.exe
+.PHONY : test-tensor-register-int32_t-Store.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Store.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Store.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Store.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Store.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Store.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Store.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Store.exe
+.PHONY : test-tensor-register-int64_t-Store.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Store.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Store.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Store.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Store.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Add.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Add.exe
+.PHONY : test-tensor-register-int32_t-Add.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Add.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Add.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Scatter.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Scatter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Scatter.exe
+.PHONY : test-tensor-register-int32_t-Scatter.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Scatter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Scatter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Scatter.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Scatter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Min.exe
+
+# Build rule for target.
+test-tensor-register-float-Min.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Min.exe
+.PHONY : test-tensor-register-float-Min.exe
+
+# fast build rule for target.
+test-tensor-register-float-Min.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Min.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Min.exe.dir/build
+.PHONY : test-tensor-register-float-Min.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-SegmentedSumOuter.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-SegmentedSumOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-SegmentedSumOuter.exe
+.PHONY : test-tensor-register-int64_t-SegmentedSumOuter.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-SegmentedSumOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedSumOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedSumOuter.exe.dir/build
+.PHONY : test-tensor-register-int64_t-SegmentedSumOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-DotProduct.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-DotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-DotProduct.exe
+.PHONY : test-tensor-register-int64_t-DotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-DotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-DotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-DotProduct.exe.dir/build
+.PHONY : test-tensor-register-int64_t-DotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Subtract.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Subtract.exe
+.PHONY : test-tensor-register-int32_t-Subtract.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Subtract.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Subtract.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-SegmentedSumOuter.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-SegmentedSumOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-SegmentedSumOuter.exe
+.PHONY : test-tensor-register-int32_t-SegmentedSumOuter.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-SegmentedSumOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedSumOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedSumOuter.exe.dir/build
+.PHONY : test-tensor-register-int32_t-SegmentedSumOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-SegmentedSumInner.exe
+
+# Build rule for target.
+test-tensor-register-double-SegmentedSumInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-SegmentedSumInner.exe
+.PHONY : test-tensor-register-double-SegmentedSumInner.exe
+
+# fast build rule for target.
+test-tensor-register-double-SegmentedSumInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedSumInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedSumInner.exe.dir/build
+.PHONY : test-tensor-register-double-SegmentedSumInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Store.exe
+
+# Build rule for target.
+test-tensor-register-float-Store.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Store.exe
+.PHONY : test-tensor-register-float-Store.exe
+
+# fast build rule for target.
+test-tensor-register-float-Store.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Store.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Store.exe.dir/build
+.PHONY : test-tensor-register-float-Store.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Multiply.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Multiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Multiply.exe
+.PHONY : test-tensor-register-int32_t-Multiply.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Multiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Multiply.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Multiply.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Multiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-SegmentedSumInner.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-SegmentedSumInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-SegmentedSumInner.exe
+.PHONY : test-tensor-register-int32_t-SegmentedSumInner.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-SegmentedSumInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedSumInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedSumInner.exe.dir/build
+.PHONY : test-tensor-register-int32_t-SegmentedSumInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-FMA.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-FMA.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-FMA.exe
+.PHONY : test-tensor-register-int32_t-FMA.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-FMA.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-FMA.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-FMA.exe.dir/build
+.PHONY : test-tensor-register-int32_t-FMA.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Gather.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Gather.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Gather.exe
+.PHONY : test-tensor-register-int32_t-Gather.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Gather.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Gather.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Gather.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Gather.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-SegmentedBroadcastOuter.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-SegmentedBroadcastOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-SegmentedBroadcastOuter.exe
+.PHONY : test-tensor-register-int32_t-SegmentedBroadcastOuter.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-SegmentedBroadcastOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedBroadcastOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedBroadcastOuter.exe.dir/build
+.PHONY : test-tensor-register-int32_t-SegmentedBroadcastOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Gather.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Gather.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Gather.exe
+.PHONY : test-tensor-register-int64_t-Gather.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Gather.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Gather.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Gather.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Gather.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-GetSet.exe
+
+# Build rule for target.
+test-tensor-register-float-GetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-GetSet.exe
+.PHONY : test-tensor-register-float-GetSet.exe
+
+# fast build rule for target.
+test-tensor-register-float-GetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-GetSet.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-GetSet.exe.dir/build
+.PHONY : test-tensor-register-float-GetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-SegmentedSumInner.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-SegmentedSumInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-SegmentedSumInner.exe
+.PHONY : test-tensor-register-int64_t-SegmentedSumInner.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-SegmentedSumInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedSumInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedSumInner.exe.dir/build
+.PHONY : test-tensor-register-int64_t-SegmentedSumInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Min.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Min.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Min.exe
+.PHONY : test-tensor-register-int32_t-Min.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Min.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Min.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Min.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Min.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-SegmentedBroadcastInner.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-SegmentedBroadcastInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-SegmentedBroadcastInner.exe
+.PHONY : test-tensor-register-int64_t-SegmentedBroadcastInner.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-SegmentedBroadcastInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedBroadcastInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedBroadcastInner.exe.dir/build
+.PHONY : test-tensor-register-int64_t-SegmentedBroadcastInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Subtract.exe
+
+# Build rule for target.
+test-tensor-register-double-Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Subtract.exe
+.PHONY : test-tensor-register-double-Subtract.exe
+
+# fast build rule for target.
+test-tensor-register-double-Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Subtract.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Subtract.exe.dir/build
+.PHONY : test-tensor-register-double-Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-Divide.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-Divide.exe
+.PHONY : test-tensor-register-int32_t-Divide.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Divide.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-Divide.exe.dir/build
+.PHONY : test-tensor-register-int32_t-Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Multiply.exe
+
+# Build rule for target.
+test-tensor-register-double-Multiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Multiply.exe
+.PHONY : test-tensor-register-double-Multiply.exe
+
+# fast build rule for target.
+test-tensor-register-double-Multiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Multiply.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Multiply.exe.dir/build
+.PHONY : test-tensor-register-double-Multiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-FMA.exe
+
+# Build rule for target.
+test-tensor-register-float-FMA.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-FMA.exe
+.PHONY : test-tensor-register-float-FMA.exe
+
+# fast build rule for target.
+test-tensor-register-float-FMA.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-FMA.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-FMA.exe.dir/build
+.PHONY : test-tensor-register-float-FMA.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Scatter.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Scatter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Scatter.exe
+.PHONY : test-tensor-register-int64_t-Scatter.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Scatter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Scatter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Scatter.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Scatter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-FMS.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-FMS.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-FMS.exe
+.PHONY : test-tensor-register-int64_t-FMS.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-FMS.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-FMS.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-FMS.exe.dir/build
+.PHONY : test-tensor-register-int64_t-FMS.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-SegmentedSumInner.exe
+
+# Build rule for target.
+test-tensor-register-float-SegmentedSumInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-SegmentedSumInner.exe
+.PHONY : test-tensor-register-float-SegmentedSumInner.exe
+
+# fast build rule for target.
+test-tensor-register-float-SegmentedSumInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedSumInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedSumInner.exe.dir/build
+.PHONY : test-tensor-register-float-SegmentedSumInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Add.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Add.exe
+.PHONY : test-tensor-register-int64_t-Add.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Add.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Add.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-SegmentedBroadcastOuter.exe
+
+# Build rule for target.
+test-tensor-register-double-SegmentedBroadcastOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-SegmentedBroadcastOuter.exe
+.PHONY : test-tensor-register-double-SegmentedBroadcastOuter.exe
+
+# fast build rule for target.
+test-tensor-register-double-SegmentedBroadcastOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedBroadcastOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-SegmentedBroadcastOuter.exe.dir/build
+.PHONY : test-tensor-register-double-SegmentedBroadcastOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-SegmentedBroadcastOuter.exe
+
+# Build rule for target.
+test-tensor-register-float-SegmentedBroadcastOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-SegmentedBroadcastOuter.exe
+.PHONY : test-tensor-register-float-SegmentedBroadcastOuter.exe
+
+# fast build rule for target.
+test-tensor-register-float-SegmentedBroadcastOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedBroadcastOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-SegmentedBroadcastOuter.exe.dir/build
+.PHONY : test-tensor-register-float-SegmentedBroadcastOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Load.exe
+
+# Build rule for target.
+test-tensor-register-float-Load.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Load.exe
+.PHONY : test-tensor-register-float-Load.exe
+
+# fast build rule for target.
+test-tensor-register-float-Load.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Load.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Load.exe.dir/build
+.PHONY : test-tensor-register-float-Load.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int32_t-SegmentedBroadcastInner.exe
+
+# Build rule for target.
+test-tensor-register-int32_t-SegmentedBroadcastInner.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int32_t-SegmentedBroadcastInner.exe
+.PHONY : test-tensor-register-int32_t-SegmentedBroadcastInner.exe
+
+# fast build rule for target.
+test-tensor-register-int32_t-SegmentedBroadcastInner.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedBroadcastInner.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int32_t-SegmentedBroadcastInner.exe.dir/build
+.PHONY : test-tensor-register-int32_t-SegmentedBroadcastInner.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Multiply.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Multiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Multiply.exe
+.PHONY : test-tensor-register-int64_t-Multiply.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Multiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Multiply.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Multiply.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Multiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-FMS.exe
+
+# Build rule for target.
+test-tensor-register-float-FMS.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-FMS.exe
+.PHONY : test-tensor-register-float-FMS.exe
+
+# fast build rule for target.
+test-tensor-register-float-FMS.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-FMS.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-FMS.exe.dir/build
+.PHONY : test-tensor-register-float-FMS.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Subtract.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Subtract.exe
+.PHONY : test-tensor-register-int64_t-Subtract.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Subtract.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Subtract.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Max.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Max.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Max.exe
+.PHONY : test-tensor-register-int64_t-Max.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Max.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Max.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Max.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Max.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-GetSet.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-GetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-GetSet.exe
+.PHONY : test-tensor-register-int64_t-GetSet.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-GetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-GetSet.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-GetSet.exe.dir/build
+.PHONY : test-tensor-register-int64_t-GetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Divide.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Divide.exe
+.PHONY : test-tensor-register-int64_t-Divide.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Divide.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Divide.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-FMA.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-FMA.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-FMA.exe
+.PHONY : test-tensor-register-int64_t-FMA.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-FMA.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-FMA.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-FMA.exe.dir/build
+.PHONY : test-tensor-register-int64_t-FMA.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Gather.exe
+
+# Build rule for target.
+test-tensor-register-float-Gather.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Gather.exe
+.PHONY : test-tensor-register-float-Gather.exe
+
+# fast build rule for target.
+test-tensor-register-float-Gather.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Gather.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Gather.exe.dir/build
+.PHONY : test-tensor-register-float-Gather.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-Min.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-Min.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-Min.exe
+.PHONY : test-tensor-register-int64_t-Min.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-Min.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Min.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-Min.exe.dir/build
+.PHONY : test-tensor-register-int64_t-Min.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-int64_t-SegmentedBroadcastOuter.exe
+
+# Build rule for target.
+test-tensor-register-int64_t-SegmentedBroadcastOuter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-int64_t-SegmentedBroadcastOuter.exe
+.PHONY : test-tensor-register-int64_t-SegmentedBroadcastOuter.exe
+
+# fast build rule for target.
+test-tensor-register-int64_t-SegmentedBroadcastOuter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedBroadcastOuter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-int64_t-SegmentedBroadcastOuter.exe.dir/build
+.PHONY : test-tensor-register-int64_t-SegmentedBroadcastOuter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-DotProduct.exe
+
+# Build rule for target.
+test-tensor-register-double-DotProduct.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-DotProduct.exe
+.PHONY : test-tensor-register-double-DotProduct.exe
+
+# fast build rule for target.
+test-tensor-register-double-DotProduct.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-DotProduct.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-DotProduct.exe.dir/build
+.PHONY : test-tensor-register-double-DotProduct.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Store.exe
+
+# Build rule for target.
+test-tensor-register-double-Store.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Store.exe
+.PHONY : test-tensor-register-double-Store.exe
+
+# fast build rule for target.
+test-tensor-register-double-Store.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Store.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Store.exe.dir/build
+.PHONY : test-tensor-register-double-Store.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Scatter.exe
+
+# Build rule for target.
+test-tensor-register-float-Scatter.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Scatter.exe
+.PHONY : test-tensor-register-float-Scatter.exe
+
+# fast build rule for target.
+test-tensor-register-float-Scatter.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Scatter.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Scatter.exe.dir/build
+.PHONY : test-tensor-register-float-Scatter.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Add.exe
+
+# Build rule for target.
+test-tensor-register-float-Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Add.exe
+.PHONY : test-tensor-register-float-Add.exe
+
+# fast build rule for target.
+test-tensor-register-float-Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Add.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Add.exe.dir/build
+.PHONY : test-tensor-register-float-Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Gather.exe
+
+# Build rule for target.
+test-tensor-register-double-Gather.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Gather.exe
+.PHONY : test-tensor-register-double-Gather.exe
+
+# fast build rule for target.
+test-tensor-register-double-Gather.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Gather.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Gather.exe.dir/build
+.PHONY : test-tensor-register-double-Gather.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Subtract.exe
+
+# Build rule for target.
+test-tensor-register-float-Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Subtract.exe
+.PHONY : test-tensor-register-float-Subtract.exe
+
+# fast build rule for target.
+test-tensor-register-float-Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Subtract.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Subtract.exe.dir/build
+.PHONY : test-tensor-register-float-Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-double-Min.exe
+
+# Build rule for target.
+test-tensor-register-double-Min.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-double-Min.exe
+.PHONY : test-tensor-register-double-Min.exe
+
+# fast build rule for target.
+test-tensor-register-double-Min.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Min.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-double-Min.exe.dir/build
+.PHONY : test-tensor-register-double-Min.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-register-float-Multiply.exe
+
+# Build rule for target.
+test-tensor-register-float-Multiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-register-float-Multiply.exe
+.PHONY : test-tensor-register-float-Multiply.exe
+
+# fast build rule for target.
+test-tensor-register-float-Multiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Multiply.exe.dir/build.make test/functional/tensor/register/CMakeFiles/test-tensor-register-float-Multiply.exe.dir/build
+.PHONY : test-tensor-register-float-Multiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-double-RowMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-double-RowMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-double-ColMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-double-ColMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-float-ColMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-double-RowMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-float-ColMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-float-RowMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-Load_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-Load_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-Load_RowMajor.exe
+.PHONY : test-tensor-matrix-float-RowMajor-Load_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-Load_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Load_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Load_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-Load_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-CtorGetSet.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-CtorGetSet.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-CtorGetSet.exe
+.PHONY : test-tensor-matrix-float-ColMajor-CtorGetSet.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-CtorGetSet.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-CtorGetSet.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-CtorGetSet.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-CtorGetSet.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-float-RowMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-float-RowMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-float-RowMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-double-ColMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-float-ColMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-double-RowMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-double-RowMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-ColMajor-Store_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-float-ColMajor-Store_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-ColMajor-Store_ColMajor.exe
+.PHONY : test-tensor-matrix-float-ColMajor-Store_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-ColMajor-Store_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Store_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-ColMajor-Store_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-float-ColMajor-Store_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_LoadStore.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_LoadStore.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_LoadStore.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_LoadStore.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_LoadStore.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_LoadStore.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_LoadStore.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_LoadStore.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_Add.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Add.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_Add.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Add.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Add.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Add.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Add.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Add.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_Subtract.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Subtract.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_Subtract.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Subtract.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Subtract.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Subtract.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Subtract.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Subtract.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-double-ColMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe.dir/build
+.PHONY : test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# Build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe
+
+# fast build rule for target.
+test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe.dir/build
+.PHONY : test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-ColMajor-Load_ColMajor.exe
+
+# Build rule for target.
+test-tensor-matrix-double-ColMajor-Load_ColMajor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-ColMajor-Load_ColMajor.exe
+.PHONY : test-tensor-matrix-double-ColMajor-Load_ColMajor.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-ColMajor-Load_ColMajor.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Load_ColMajor.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-ColMajor-Load_ColMajor.exe.dir/build
+.PHONY : test-tensor-matrix-double-ColMajor-Load_ColMajor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-tensor-matrix-double-RowMajor-ET_Negate.exe
+
+# Build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Negate.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-tensor-matrix-double-RowMajor-ET_Negate.exe
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Negate.exe
+
+# fast build rule for target.
+test-tensor-matrix-double-RowMajor-ET_Negate.exe/fast:
+	$(MAKE) -f test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Negate.exe.dir/build.make test/functional/tensor/matrix/CMakeFiles/test-tensor-matrix-double-RowMajor-ET_Negate.exe.dir/build
+.PHONY : test-tensor-matrix-double-RowMajor-ET_Negate.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-CombiningAdapter-1D.exe
+
+# Build rule for target.
+test-CombiningAdapter-1D.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-CombiningAdapter-1D.exe
+.PHONY : test-CombiningAdapter-1D.exe
+
+# fast build rule for target.
+test-CombiningAdapter-1D.exe/fast:
+	$(MAKE) -f test/functional/util/CMakeFiles/test-CombiningAdapter-1D.exe.dir/build.make test/functional/util/CMakeFiles/test-CombiningAdapter-1D.exe.dir/build
+.PHONY : test-CombiningAdapter-1D.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-CombiningAdapter-2D.exe
+
+# Build rule for target.
+test-CombiningAdapter-2D.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-CombiningAdapter-2D.exe
+.PHONY : test-CombiningAdapter-2D.exe
+
+# fast build rule for target.
+test-CombiningAdapter-2D.exe/fast:
+	$(MAKE) -f test/functional/util/CMakeFiles/test-CombiningAdapter-2D.exe.dir/build.make test/functional/util/CMakeFiles/test-CombiningAdapter-2D.exe.dir/build
+.PHONY : test-CombiningAdapter-2D.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-PermutedCombiningAdapter-1D.exe
+
+# Build rule for target.
+test-PermutedCombiningAdapter-1D.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-PermutedCombiningAdapter-1D.exe
+.PHONY : test-PermutedCombiningAdapter-1D.exe
+
+# fast build rule for target.
+test-PermutedCombiningAdapter-1D.exe/fast:
+	$(MAKE) -f test/functional/util/CMakeFiles/test-PermutedCombiningAdapter-1D.exe.dir/build.make test/functional/util/CMakeFiles/test-PermutedCombiningAdapter-1D.exe.dir/build
+.PHONY : test-PermutedCombiningAdapter-1D.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-CombiningAdapter-3D.exe
+
+# Build rule for target.
+test-CombiningAdapter-3D.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-CombiningAdapter-3D.exe
+.PHONY : test-CombiningAdapter-3D.exe
+
+# fast build rule for target.
+test-CombiningAdapter-3D.exe/fast:
+	$(MAKE) -f test/functional/util/CMakeFiles/test-CombiningAdapter-3D.exe.dir/build.make test/functional/util/CMakeFiles/test-CombiningAdapter-3D.exe.dir/build
+.PHONY : test-CombiningAdapter-3D.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-PermutedCombiningAdapter-2D.exe
+
+# Build rule for target.
+test-PermutedCombiningAdapter-2D.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-PermutedCombiningAdapter-2D.exe
+.PHONY : test-PermutedCombiningAdapter-2D.exe
+
+# fast build rule for target.
+test-PermutedCombiningAdapter-2D.exe/fast:
+	$(MAKE) -f test/functional/util/CMakeFiles/test-PermutedCombiningAdapter-2D.exe.dir/build.make test/functional/util/CMakeFiles/test-PermutedCombiningAdapter-2D.exe.dir/build
+.PHONY : test-PermutedCombiningAdapter-2D.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-PermutedCombiningAdapter-3D.exe
+
+# Build rule for target.
+test-PermutedCombiningAdapter-3D.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-PermutedCombiningAdapter-3D.exe
+.PHONY : test-PermutedCombiningAdapter-3D.exe
+
+# fast build rule for target.
+test-PermutedCombiningAdapter-3D.exe/fast:
+	$(MAKE) -f test/functional/util/CMakeFiles/test-PermutedCombiningAdapter-3D.exe.dir/build.make test/functional/util/CMakeFiles/test-PermutedCombiningAdapter-3D.exe.dir/build
+.PHONY : test-PermutedCombiningAdapter-3D.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-indexvalue.exe
+
+# Build rule for target.
+test-indexvalue.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-indexvalue.exe
+.PHONY : test-indexvalue.exe
+
+# fast build rule for target.
+test-indexvalue.exe/fast:
+	$(MAKE) -f test/unit/index/CMakeFiles/test-indexvalue.exe.dir/build.make test/unit/index/CMakeFiles/test-indexvalue.exe.dir/build
+.PHONY : test-indexvalue.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-indexset.exe
+
+# Build rule for target.
+test-indexset.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-indexset.exe
+.PHONY : test-indexset.exe
+
+# fast build rule for target.
+test-indexset.exe/fast:
+	$(MAKE) -f test/unit/index/CMakeFiles/test-indexset.exe.dir/build.make test/unit/index/CMakeFiles/test-indexset.exe.dir/build
+.PHONY : test-indexset.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-listsegment.exe
+
+# Build rule for target.
+test-listsegment.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-listsegment.exe
+.PHONY : test-listsegment.exe
+
+# fast build rule for target.
+test-listsegment.exe/fast:
+	$(MAKE) -f test/unit/index/CMakeFiles/test-listsegment.exe.dir/build.make test/unit/index/CMakeFiles/test-listsegment.exe.dir/build
+.PHONY : test-listsegment.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-rangestridesegment.exe
+
+# Build rule for target.
+test-rangestridesegment.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-rangestridesegment.exe
+.PHONY : test-rangestridesegment.exe
+
+# fast build rule for target.
+test-rangestridesegment.exe/fast:
+	$(MAKE) -f test/unit/index/CMakeFiles/test-rangestridesegment.exe.dir/build.make test/unit/index/CMakeFiles/test-rangestridesegment.exe.dir/build
+.PHONY : test-rangestridesegment.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-rangesegment.exe
+
+# Build rule for target.
+test-rangesegment.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-rangesegment.exe
+.PHONY : test-rangesegment.exe
+
+# fast build rule for target.
+test-rangesegment.exe/fast:
+	$(MAKE) -f test/unit/index/CMakeFiles/test-rangesegment.exe.dir/build.make test/unit/index/CMakeFiles/test-rangesegment.exe.dir/build
+.PHONY : test-rangesegment.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-rajavec.exe
+
+# Build rule for target.
+test-rajavec.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-rajavec.exe
+.PHONY : test-rajavec.exe
+
+# fast build rule for target.
+test-rajavec.exe/fast:
+	$(MAKE) -f test/unit/internal/CMakeFiles/test-rajavec.exe.dir/build.make test/unit/internal/CMakeFiles/test-rajavec.exe.dir/build
+.PHONY : test-rajavec.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-iterators.exe
+
+# Build rule for target.
+test-iterators.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-iterators.exe
+.PHONY : test-iterators.exe
+
+# fast build rule for target.
+test-iterators.exe/fast:
+	$(MAKE) -f test/unit/internal/CMakeFiles/test-iterators.exe.dir/build.make test/unit/internal/CMakeFiles/test-iterators.exe.dir/build
+.PHONY : test-iterators.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-float-limits.exe
+
+# Build rule for target.
+test-float-limits.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-float-limits.exe
+.PHONY : test-float-limits.exe
+
+# fast build rule for target.
+test-float-limits.exe/fast:
+	$(MAKE) -f test/unit/util/CMakeFiles/test-float-limits.exe.dir/build.make test/unit/util/CMakeFiles/test-float-limits.exe.dir/build
+.PHONY : test-float-limits.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-integral-limits.exe
+
+# Build rule for target.
+test-integral-limits.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-integral-limits.exe
+.PHONY : test-integral-limits.exe
+
+# fast build rule for target.
+test-integral-limits.exe/fast:
+	$(MAKE) -f test/unit/util/CMakeFiles/test-integral-limits.exe.dir/build.make test/unit/util/CMakeFiles/test-integral-limits.exe.dir/build
+.PHONY : test-integral-limits.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-timer.exe
+
+# Build rule for target.
+test-timer.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-timer.exe
+.PHONY : test-timer.exe
+
+# fast build rule for target.
+test-timer.exe/fast:
+	$(MAKE) -f test/unit/util/CMakeFiles/test-timer.exe.dir/build.make test/unit/util/CMakeFiles/test-timer.exe.dir/build
+.PHONY : test-timer.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-span.exe
+
+# Build rule for target.
+test-span.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-span.exe
+.PHONY : test-span.exe
+
+# fast build rule for target.
+test-span.exe/fast:
+	$(MAKE) -f test/unit/util/CMakeFiles/test-span.exe.dir/build.make test/unit/util/CMakeFiles/test-span.exe.dir/build
+.PHONY : test-span.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-operators-logical.exe
+
+# Build rule for target.
+test-operators-logical.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-operators-logical.exe
+.PHONY : test-operators-logical.exe
+
+# fast build rule for target.
+test-operators-logical.exe/fast:
+	$(MAKE) -f test/unit/util/operator/CMakeFiles/test-operators-logical.exe.dir/build.make test/unit/util/operator/CMakeFiles/test-operators-logical.exe.dir/build
+.PHONY : test-operators-logical.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-operators-math.exe
+
+# Build rule for target.
+test-operators-math.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-operators-math.exe
+.PHONY : test-operators-math.exe
+
+# fast build rule for target.
+test-operators-math.exe/fast:
+	$(MAKE) -f test/unit/util/operator/CMakeFiles/test-operators-math.exe.dir/build.make test/unit/util/operator/CMakeFiles/test-operators-math.exe.dir/build
+.PHONY : test-operators-math.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-operators-equivalence.exe
+
+# Build rule for target.
+test-operators-equivalence.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-operators-equivalence.exe
+.PHONY : test-operators-equivalence.exe
+
+# fast build rule for target.
+test-operators-equivalence.exe/fast:
+	$(MAKE) -f test/unit/util/operator/CMakeFiles/test-operators-equivalence.exe.dir/build.make test/unit/util/operator/CMakeFiles/test-operators-equivalence.exe.dir/build
+.PHONY : test-operators-equivalence.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-operators-bitwise-modulus.exe
+
+# Build rule for target.
+test-operators-bitwise-modulus.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-operators-bitwise-modulus.exe
+.PHONY : test-operators-bitwise-modulus.exe
+
+# fast build rule for target.
+test-operators-bitwise-modulus.exe/fast:
+	$(MAKE) -f test/unit/util/operator/CMakeFiles/test-operators-bitwise-modulus.exe.dir/build.make test/unit/util/operator/CMakeFiles/test-operators-bitwise-modulus.exe.dir/build
+.PHONY : test-operators-bitwise-modulus.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-operators-identity.exe
+
+# Build rule for target.
+test-operators-identity.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-operators-identity.exe
+.PHONY : test-operators-identity.exe
+
+# fast build rule for target.
+test-operators-identity.exe/fast:
+	$(MAKE) -f test/unit/util/operator/CMakeFiles/test-operators-identity.exe.dir/build.make test/unit/util/operator/CMakeFiles/test-operators-identity.exe.dir/build
+.PHONY : test-operators-identity.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-reducer-reset-seq.exe
+
+# Build rule for target.
+test-reducer-reset-seq.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-reducer-reset-seq.exe
+.PHONY : test-reducer-reset-seq.exe
+
+# fast build rule for target.
+test-reducer-reset-seq.exe/fast:
+	$(MAKE) -f test/unit/reducer/CMakeFiles/test-reducer-reset-seq.exe.dir/build.make test/unit/reducer/CMakeFiles/test-reducer-reset-seq.exe.dir/build
+.PHONY : test-reducer-reset-seq.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-reducer-constructors-seq.exe
+
+# Build rule for target.
+test-reducer-constructors-seq.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-reducer-constructors-seq.exe
+.PHONY : test-reducer-constructors-seq.exe
+
+# fast build rule for target.
+test-reducer-constructors-seq.exe/fast:
+	$(MAKE) -f test/unit/reducer/CMakeFiles/test-reducer-constructors-seq.exe.dir/build.make test/unit/reducer/CMakeFiles/test-reducer-constructors-seq.exe.dir/build
+.PHONY : test-reducer-constructors-seq.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-resource-AsyncTime-Sequential.exe
+
+# Build rule for target.
+test-resource-AsyncTime-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-resource-AsyncTime-Sequential.exe
+.PHONY : test-resource-AsyncTime-Sequential.exe
+
+# fast build rule for target.
+test-resource-AsyncTime-Sequential.exe/fast:
+	$(MAKE) -f test/unit/resource/CMakeFiles/test-resource-AsyncTime-Sequential.exe.dir/build.make test/unit/resource/CMakeFiles/test-resource-AsyncTime-Sequential.exe.dir/build
+.PHONY : test-resource-AsyncTime-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-resource-BasicAsyncSemantics-Sequential.exe
+
+# Build rule for target.
+test-resource-BasicAsyncSemantics-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-resource-BasicAsyncSemantics-Sequential.exe
+.PHONY : test-resource-BasicAsyncSemantics-Sequential.exe
+
+# fast build rule for target.
+test-resource-BasicAsyncSemantics-Sequential.exe/fast:
+	$(MAKE) -f test/unit/resource/CMakeFiles/test-resource-BasicAsyncSemantics-Sequential.exe.dir/build.make test/unit/resource/CMakeFiles/test-resource-BasicAsyncSemantics-Sequential.exe.dir/build
+.PHONY : test-resource-BasicAsyncSemantics-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-resource-JoinAsyncSemantics-Sequential.exe
+
+# Build rule for target.
+test-resource-JoinAsyncSemantics-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-resource-JoinAsyncSemantics-Sequential.exe
+.PHONY : test-resource-JoinAsyncSemantics-Sequential.exe
+
+# fast build rule for target.
+test-resource-JoinAsyncSemantics-Sequential.exe/fast:
+	$(MAKE) -f test/unit/resource/CMakeFiles/test-resource-JoinAsyncSemantics-Sequential.exe.dir/build.make test/unit/resource/CMakeFiles/test-resource-JoinAsyncSemantics-Sequential.exe.dir/build
+.PHONY : test-resource-JoinAsyncSemantics-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-resource-Depends-Sequential.exe
+
+# Build rule for target.
+test-resource-Depends-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-resource-Depends-Sequential.exe
+.PHONY : test-resource-Depends-Sequential.exe
+
+# fast build rule for target.
+test-resource-Depends-Sequential.exe/fast:
+	$(MAKE) -f test/unit/resource/CMakeFiles/test-resource-Depends-Sequential.exe.dir/build.make test/unit/resource/CMakeFiles/test-resource-Depends-Sequential.exe.dir/build
+.PHONY : test-resource-Depends-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-resource-MultiStream-Sequential.exe
+
+# Build rule for target.
+test-resource-MultiStream-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-resource-MultiStream-Sequential.exe
+.PHONY : test-resource-MultiStream-Sequential.exe
+
+# fast build rule for target.
+test-resource-MultiStream-Sequential.exe/fast:
+	$(MAKE) -f test/unit/resource/CMakeFiles/test-resource-MultiStream-Sequential.exe.dir/build.make test/unit/resource/CMakeFiles/test-resource-MultiStream-Sequential.exe.dir/build
+.PHONY : test-resource-MultiStream-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-incdec.exe
+
+# Build rule for target.
+test-atomic-incdec.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-incdec.exe
+.PHONY : test-atomic-incdec.exe
+
+# fast build rule for target.
+test-atomic-incdec.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-incdec.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-incdec.exe.dir/build
+.PHONY : test-atomic-incdec.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-ref-accessors.exe
+
+# Build rule for target.
+test-atomic-ref-accessors.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-ref-accessors.exe
+.PHONY : test-atomic-ref-accessors.exe
+
+# fast build rule for target.
+test-atomic-ref-accessors.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-ref-accessors.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-ref-accessors.exe.dir/build
+.PHONY : test-atomic-ref-accessors.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-ref-exchanges.exe
+
+# Build rule for target.
+test-atomic-ref-exchanges.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-ref-exchanges.exe
+.PHONY : test-atomic-ref-exchanges.exe
+
+# fast build rule for target.
+test-atomic-ref-exchanges.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-ref-exchanges.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-ref-exchanges.exe.dir/build
+.PHONY : test-atomic-ref-exchanges.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-ref-constructor.exe
+
+# Build rule for target.
+test-atomic-ref-constructor.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-ref-constructor.exe
+.PHONY : test-atomic-ref-constructor.exe
+
+# fast build rule for target.
+test-atomic-ref-constructor.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-ref-constructor.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-ref-constructor.exe.dir/build
+.PHONY : test-atomic-ref-constructor.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-ref-minmax.exe
+
+# Build rule for target.
+test-atomic-ref-minmax.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-ref-minmax.exe
+.PHONY : test-atomic-ref-minmax.exe
+
+# fast build rule for target.
+test-atomic-ref-minmax.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-ref-minmax.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-ref-minmax.exe.dir/build
+.PHONY : test-atomic-ref-minmax.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-ref-bitwise.exe
+
+# Build rule for target.
+test-atomic-ref-bitwise.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-ref-bitwise.exe
+.PHONY : test-atomic-ref-bitwise.exe
+
+# fast build rule for target.
+test-atomic-ref-bitwise.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-ref-bitwise.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-ref-bitwise.exe.dir/build
+.PHONY : test-atomic-ref-bitwise.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-atomic-ref-addsub.exe
+
+# Build rule for target.
+test-atomic-ref-addsub.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-atomic-ref-addsub.exe
+.PHONY : test-atomic-ref-addsub.exe
+
+# fast build rule for target.
+test-atomic-ref-addsub.exe/fast:
+	$(MAKE) -f test/unit/atomic/CMakeFiles/test-atomic-ref-addsub.exe.dir/build.make test/unit/atomic/CMakeFiles/test-atomic-ref-addsub.exe.dir/build
+.PHONY : test-atomic-ref-addsub.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-standard-layout.exe
+
+# Build rule for target.
+test-standard-layout.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-standard-layout.exe
+.PHONY : test-standard-layout.exe
+
+# fast build rule for target.
+test-standard-layout.exe/fast:
+	$(MAKE) -f test/unit/view-layout/CMakeFiles/test-standard-layout.exe.dir/build.make test/unit/view-layout/CMakeFiles/test-standard-layout.exe.dir/build
+.PHONY : test-standard-layout.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-typedlayout.exe
+
+# Build rule for target.
+test-typedlayout.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-typedlayout.exe
+.PHONY : test-typedlayout.exe
+
+# fast build rule for target.
+test-typedlayout.exe/fast:
+	$(MAKE) -f test/unit/view-layout/CMakeFiles/test-typedlayout.exe.dir/build.make test/unit/view-layout/CMakeFiles/test-typedlayout.exe.dir/build
+.PHONY : test-typedlayout.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-typedview.exe
+
+# Build rule for target.
+test-typedview.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-typedview.exe
+.PHONY : test-typedview.exe
+
+# fast build rule for target.
+test-typedview.exe/fast:
+	$(MAKE) -f test/unit/view-layout/CMakeFiles/test-typedview.exe.dir/build.make test/unit/view-layout/CMakeFiles/test-typedview.exe.dir/build
+.PHONY : test-typedview.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-makelayout.exe
+
+# Build rule for target.
+test-makelayout.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-makelayout.exe
+.PHONY : test-makelayout.exe
+
+# fast build rule for target.
+test-makelayout.exe/fast:
+	$(MAKE) -f test/unit/view-layout/CMakeFiles/test-makelayout.exe.dir/build.make test/unit/view-layout/CMakeFiles/test-makelayout.exe.dir/build
+.PHONY : test-makelayout.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-multiview.exe
+
+# Build rule for target.
+test-multiview.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-multiview.exe
+.PHONY : test-multiview.exe
+
+# fast build rule for target.
+test-multiview.exe/fast:
+	$(MAKE) -f test/unit/view-layout/CMakeFiles/test-multiview.exe.dir/build.make test/unit/view-layout/CMakeFiles/test-multiview.exe.dir/build
+.PHONY : test-multiview.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-sort-Sequential.exe
+
+# Build rule for target.
+test-algorithm-sort-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-sort-Sequential.exe
+.PHONY : test-algorithm-sort-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-sort-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-sort-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-sort-Sequential.exe.dir/build
+.PHONY : test-algorithm-sort-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-stable-sort-Sequential.exe
+
+# Build rule for target.
+test-algorithm-stable-sort-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-stable-sort-Sequential.exe
+.PHONY : test-algorithm-stable-sort-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-stable-sort-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-stable-sort-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-stable-sort-Sequential.exe.dir/build
+.PHONY : test-algorithm-stable-sort-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-util-sort-Shell-Sequential.exe
+
+# Build rule for target.
+test-algorithm-util-sort-Shell-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-util-sort-Shell-Sequential.exe
+.PHONY : test-algorithm-util-sort-Shell-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-util-sort-Shell-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Shell-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Shell-Sequential.exe.dir/build
+.PHONY : test-algorithm-util-sort-Shell-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-util-sort-Intro-Sequential.exe
+
+# Build rule for target.
+test-algorithm-util-sort-Intro-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-util-sort-Intro-Sequential.exe
+.PHONY : test-algorithm-util-sort-Intro-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-util-sort-Intro-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Intro-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Intro-Sequential.exe.dir/build
+.PHONY : test-algorithm-util-sort-Intro-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-util-sort-Heap-Sequential.exe
+
+# Build rule for target.
+test-algorithm-util-sort-Heap-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-util-sort-Heap-Sequential.exe
+.PHONY : test-algorithm-util-sort-Heap-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-util-sort-Heap-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Heap-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Heap-Sequential.exe.dir/build
+.PHONY : test-algorithm-util-sort-Heap-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-util-sort-Merge-Sequential.exe
+
+# Build rule for target.
+test-algorithm-util-sort-Merge-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-util-sort-Merge-Sequential.exe
+.PHONY : test-algorithm-util-sort-Merge-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-util-sort-Merge-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Merge-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Merge-Sequential.exe.dir/build
+.PHONY : test-algorithm-util-sort-Merge-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-algorithm-util-sort-Insertion-Sequential.exe
+
+# Build rule for target.
+test-algorithm-util-sort-Insertion-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-algorithm-util-sort-Insertion-Sequential.exe
+.PHONY : test-algorithm-util-sort-Insertion-Sequential.exe
+
+# fast build rule for target.
+test-algorithm-util-sort-Insertion-Sequential.exe/fast:
+	$(MAKE) -f test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Insertion-Sequential.exe.dir/build.make test/unit/algorithm/CMakeFiles/test-algorithm-util-sort-Insertion-Sequential.exe.dir/build
+.PHONY : test-algorithm-util-sort-Insertion-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-Constructor-Single-Sequential.exe
+
+# Build rule for target.
+test-workgroup-Constructor-Single-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-Constructor-Single-Sequential.exe
+.PHONY : test-workgroup-Constructor-Single-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-Constructor-Single-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-Constructor-Single-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-Constructor-Single-Sequential.exe.dir/build
+.PHONY : test-workgroup-Constructor-Single-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-Enqueue-Single-Sequential.exe
+
+# Build rule for target.
+test-workgroup-Enqueue-Single-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-Enqueue-Single-Sequential.exe
+.PHONY : test-workgroup-Enqueue-Single-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-Enqueue-Single-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-Enqueue-Single-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-Enqueue-Single-Sequential.exe.dir/build
+.PHONY : test-workgroup-Enqueue-Single-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-WorkStorage-Iterator-Sequential.exe
+
+# Build rule for target.
+test-workgroup-WorkStorage-Iterator-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-WorkStorage-Iterator-Sequential.exe
+.PHONY : test-workgroup-WorkStorage-Iterator-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-WorkStorage-Iterator-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-Iterator-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-Iterator-Sequential.exe.dir/build
+.PHONY : test-workgroup-WorkStorage-Iterator-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-Enqueue-Multiple-Sequential.exe
+
+# Build rule for target.
+test-workgroup-Enqueue-Multiple-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-Enqueue-Multiple-Sequential.exe
+.PHONY : test-workgroup-Enqueue-Multiple-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-Enqueue-Multiple-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-Enqueue-Multiple-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-Enqueue-Multiple-Sequential.exe.dir/build
+.PHONY : test-workgroup-Enqueue-Multiple-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-WorkStorage-InsertCall-Sequential.exe
+
+# Build rule for target.
+test-workgroup-WorkStorage-InsertCall-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-WorkStorage-InsertCall-Sequential.exe
+.PHONY : test-workgroup-WorkStorage-InsertCall-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-WorkStorage-InsertCall-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-InsertCall-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-InsertCall-Sequential.exe.dir/build
+.PHONY : test-workgroup-WorkStorage-InsertCall-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-Vtable-Single-Sequential.exe
+
+# Build rule for target.
+test-workgroup-Vtable-Single-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-Vtable-Single-Sequential.exe
+.PHONY : test-workgroup-Vtable-Single-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-Vtable-Single-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-Vtable-Single-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-Vtable-Single-Sequential.exe.dir/build
+.PHONY : test-workgroup-Vtable-Single-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-WorkStorage-Constructor-Sequential.exe
+
+# Build rule for target.
+test-workgroup-WorkStorage-Constructor-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-WorkStorage-Constructor-Sequential.exe
+.PHONY : test-workgroup-WorkStorage-Constructor-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-WorkStorage-Constructor-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-Constructor-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-Constructor-Sequential.exe.dir/build
+.PHONY : test-workgroup-WorkStorage-Constructor-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-workgroup-WorkStorage-Multiple-Sequential.exe
+
+# Build rule for target.
+test-workgroup-WorkStorage-Multiple-Sequential.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-workgroup-WorkStorage-Multiple-Sequential.exe
+.PHONY : test-workgroup-WorkStorage-Multiple-Sequential.exe
+
+# fast build rule for target.
+test-workgroup-WorkStorage-Multiple-Sequential.exe/fast:
+	$(MAKE) -f test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-Multiple-Sequential.exe.dir/build.make test/unit/workgroup/CMakeFiles/test-workgroup-WorkStorage-Multiple-Sequential.exe.dir/build
+.PHONY : test-workgroup-WorkStorage-Multiple-Sequential.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-simd.exe
+
+# Build rule for target.
+test-simd.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-simd.exe
+.PHONY : test-simd.exe
+
+# fast build rule for target.
+test-simd.exe/fast:
+	$(MAKE) -f test/old-tests/unit/CMakeFiles/test-simd.exe.dir/build.make test/old-tests/unit/CMakeFiles/test-simd.exe.dir/build
+.PHONY : test-simd.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-sharedmem.exe
+
+# Build rule for target.
+test-sharedmem.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-sharedmem.exe
+.PHONY : test-sharedmem.exe
+
+# fast build rule for target.
+test-sharedmem.exe/fast:
+	$(MAKE) -f test/old-tests/unit/CMakeFiles/test-sharedmem.exe.dir/build.make test/old-tests/unit/CMakeFiles/test-sharedmem.exe.dir/build
+.PHONY : test-sharedmem.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-kernel.exe
+
+# Build rule for target.
+test-kernel.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-kernel.exe
+.PHONY : test-kernel.exe
+
+# fast build rule for target.
+test-kernel.exe/fast:
+	$(MAKE) -f test/old-tests/unit/CMakeFiles/test-kernel.exe.dir/build.make test/old-tests/unit/CMakeFiles/test-kernel.exe.dir/build
+.PHONY : test-kernel.exe/fast
+
+#=============================================================================
+# Target rules for targets named test-synchronize.exe
+
+# Build rule for target.
+test-synchronize.exe: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test-synchronize.exe
+.PHONY : test-synchronize.exe
+
+# fast build rule for target.
+test-synchronize.exe/fast:
+	$(MAKE) -f test/old-tests/unit/cpu/CMakeFiles/test-synchronize.exe.dir/build.make test/old-tests/unit/cpu/CMakeFiles/test-synchronize.exe.dir/build
+.PHONY : test-synchronize.exe/fast
 
 #=============================================================================
 # Target rules for targets named resource-teams
@@ -1096,15 +5995,392 @@ help:
 	@echo "... docs"
 	@echo "... check"
 	@echo "... RAJA"
+	@echo "... test"
 	@echo "... doxygen_docs"
 	@echo "... sphinx_docs"
 	@echo "... rebuild_cache"
+	@echo "... install"
+	@echo "... style"
 	@echo "... edit_cache"
 	@echo "... install/strip"
 	@echo "... list_install_components"
-	@echo "... style"
-	@echo "... install"
+	@echo "... ContinuousSubmit"
+	@echo "... ContinuousCoverage"
+	@echo "... ContinuousTest"
+	@echo "... ContinuousBuild"
+	@echo "... ContinuousMemCheck"
+	@echo "... Nightly"
+	@echo "... NightlyTest"
+	@echo "... NightlyUpdate"
+	@echo "... NightlyBuild"
+	@echo "... Continuous"
+	@echo "... NightlyStart"
+	@echo "... NightlyMemoryCheck"
+	@echo "... NightlyMemCheck"
+	@echo "... ExperimentalStart"
+	@echo "... ContinuousConfigure"
+	@echo "... NightlyCoverage"
+	@echo "... ExperimentalUpdate"
+	@echo "... ExperimentalConfigure"
+	@echo "... ExperimentalCoverage"
+	@echo "... ExperimentalBuild"
+	@echo "... NightlyConfigure"
+	@echo "... ExperimentalTest"
+	@echo "... ExperimentalMemCheck"
+	@echo "... Experimental"
+	@echo "... NightlySubmit"
+	@echo "... ExperimentalSubmit"
+	@echo "... ContinuousStart"
+	@echo "... ContinuousUpdate"
+	@echo "... gtest_main"
+	@echo "... gtest"
+	@echo "... blt_gtest_smoke"
 	@echo "... camp"
+	@echo "... accumulate"
+	@echo "... transform"
+	@echo "... at_key"
+	@echo "... find_if"
+	@echo "... flatten"
+	@echo "... index_of"
+	@echo "... filter"
+	@echo "... lambda"
+	@echo "... size"
+	@echo "... resource.offload"
+	@echo "... tuple"
+	@echo "... number"
+	@echo "... test-plugin-workgroup-Sequential.exe"
+	@echo "... test-plugin-kernel-Sequential.exe"
+	@echo "... test-plugin-forall-Sequential.exe"
+	@echo "... test-forall-IcountIndexSet-Sequential.exe"
+	@echo "... test-forall-IndexSet-Sequential.exe"
+	@echo "... test-forall-IcountIndexSetView-Sequential.exe"
+	@echo "... test-forall-IndexSetView-Sequential.exe"
+	@echo "... test-forall-RangeStrideSegment-Sequential.exe"
+	@echo "... test-forall-RangeSegment-Sequential.exe"
+	@echo "... test-forall-ListSegment-Sequential.exe"
+	@echo "... test-forall-ListSegmentView-Sequential.exe"
+	@echo "... test-forall-RangeSegment2DView-Sequential.exe"
+	@echo "... test-forall-RangeStrideSegmentView-Sequential.exe"
+	@echo "... test-forall-RangeSegmentView-Sequential.exe"
+	@echo "... test-forall-basic-ReduceSum-Sequential.exe"
+	@echo "... test-forall-basic-ReduceMax-Sequential.exe"
+	@echo "... test-forall-basic-ReduceMinLoc-Sequential.exe"
+	@echo "... test-forall-basic-ReduceMaxLoc-Sequential.exe"
+	@echo "... test-forall-basic-ReduceMin-Sequential.exe"
+	@echo "... test-forall-basic-ReduceBitAnd-Sequential.exe"
+	@echo "... test-forall-basic-ReduceBitOr-Sequential.exe"
+	@echo "... test-forall-segment-multiple-ReduceSum-Sequential.exe"
+	@echo "... test-forall-segment-multiple-ReduceMinLoc-Sequential.exe"
+	@echo "... test-forall-segment-multiple-ReduceMaxLoc-Sequential.exe"
+	@echo "... test-forall-segment-multiple-ReduceMin-Sequential.exe"
+	@echo "... test-forall-segment-multiple-ReduceMax-Sequential.exe"
+	@echo "... test-forall-indexset-multiple-ReduceSum-Sequential.exe"
+	@echo "... test-forall-indexset-multiple-ReduceMax-Sequential.exe"
+	@echo "... test-forall-indexset-multiple-ReduceMinLoc-Sequential.exe"
+	@echo "... test-forall-indexset-multiple-ReduceMaxLoc-Sequential.exe"
+	@echo "... test-forall-indexset-multiple-ReduceMin-Sequential.exe"
+	@echo "... test-forall-ResourceIcountIndexSet-Sequential.exe"
+	@echo "... test-forall-ResourceIndexSet-Sequential.exe"
+	@echo "... test-forall-resource-RangeStrideSegment-Sequential.exe"
+	@echo "... test-forall-resource-RangeSegment-Sequential.exe"
+	@echo "... test-forall-resource-ListSegment-Sequential.exe"
+	@echo "... test-forall-CombiningAdapter-3D-Sequential.exe"
+	@echo "... test-forall-CombiningAdapter-2D-Sequential.exe"
+	@echo "... test-forall-CombiningAdapter-1D-Sequential.exe"
+	@echo "... test-forall-atomic-basic-unsigned-Sequential.exe"
+	@echo "... test-forall-atomic-basic-Sequential.exe"
+	@echo "... test-forall-AtomicOutOfBoundsMultiView-Sequential.exe"
+	@echo "... test-forall-AtomicMultiView-Sequential.exe"
+	@echo "... test-forall-AtomicView-Sequential.exe"
+	@echo "... test-forall-AtomicRefAdd-Sequential.exe"
+	@echo "... test-forall-AtomicRefCAS-Sequential.exe"
+	@echo "... test-forall-AtomicRefLoadStore-Sequential.exe"
+	@echo "... test-forall-AtomicRefSub-Sequential.exe"
+	@echo "... test-forall-AtomicRefMinMax-Sequential.exe"
+	@echo "... test-forall-AtomicRefLogical-Sequential.exe"
+	@echo "... test-forall-region-Sequential.exe"
+	@echo "... test-aligned-indexset.exe"
+	@echo "... test-kernel-basic-single-loop-Segments-Sequential.exe"
+	@echo "... test-kernel-resource-basic-single-loop-Segments-Sequential.exe"
+	@echo "... test-kernel-basic-single-icount-loop-Sequential.exe"
+	@echo "... test-kernel-basic-fission-fusion-loop-Sequential.exe"
+	@echo "... test-kernel-conditional-fission-fusion-loop-Sequential.exe"
+	@echo "... test-kernel-resource-nested-loop-Basic-Sequential.exe"
+	@echo "... test-kernel-nested-loop-Basic-Sequential.exe"
+	@echo "... test-kernel-resource-nested-loop-MultiLambda-Sequential.exe"
+	@echo "... test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.exe"
+	@echo "... test-kernel-nested-loop-MultiLambda-Sequential.exe"
+	@echo "... test-kernel-nested-loop-MultiLambdaParam-Sequential.exe"
+	@echo "... test-kernel-resource-nested-loop-ReduceSum-Sequential.exe"
+	@echo "... test-kernel-resource-nested-loop-BlockReduceSum-Sequential.exe"
+	@echo "... test-kernel-nested-loop-ReduceSum-Sequential.exe"
+	@echo "... test-kernel-nested-loop-BlockReduceSum-Sequential.exe"
+	@echo "... test-kernel-nested-loop-segments-Sequential.exe"
+	@echo "... test-kernel-nested-loop-PermutedView2D-Sequential.exe"
+	@echo "... test-kernel-nested-loop-OffsetView2D-Sequential.exe"
+	@echo "... test-kernel-nested-loop-PermutedView3D-Sequential.exe"
+	@echo "... test-kernel-nested-loop-PermutedOffsetView3D-Sequential.exe"
+	@echo "... test-kernel-nested-loop-OffsetView3D-Sequential.exe"
+	@echo "... test-kernel-nested-loop-PermutedOffsetView2D-Sequential.exe"
+	@echo "... test-kernel-reduceloc-Min2D-Sequential.exe"
+	@echo "... test-kernel-reduceloc-Max2D-Sequential.exe"
+	@echo "... test-kernel-reduceloc-Max2DViewTuple-Sequential.exe"
+	@echo "... test-kernel-reduceloc-Min2DView-Sequential.exe"
+	@echo "... test-kernel-reduceloc-Max2DView-Sequential.exe"
+	@echo "... test-kernel-reduceloc-Min2DViewTuple-Sequential.exe"
+	@echo "... test-kernel-single-loop-ForICount-32-Sequential.exe"
+	@echo "... test-kernel-single-loop-ForICount-8-Sequential.exe"
+	@echo "... test-kernel-single-loop-TileTCount-32-Sequential.exe"
+	@echo "... test-kernel-single-loop-TileTCount-8-Sequential.exe"
+	@echo "... test-kernel-tile-LocalArray2D-Sequential.exe"
+	@echo "... test-kernel-tile-Dynamic2D-Sequential.exe"
+	@echo "... test-kernel-tile-Fixed2D-Sequential.exe"
+	@echo "... test-kernel-region-Sequential.exe"
+	@echo "... test-Exclusive-scan-Sequential.exe"
+	@echo "... test-ExclusiveInplace-scan-Sequential.exe"
+	@echo "... test-Inclusive-scan-Sequential.exe"
+	@echo "... test-InclusiveInplace-scan-Sequential.exe"
+	@echo "... test-teams-BasicShared-Sequential.exe"
+	@echo "... test-tensor-register-double-SegmentedSumOuter.exe"
+	@echo "... test-tensor-register-double-SegmentedBroadcastInner.exe"
+	@echo "... test-tensor-register-double-SegmentedDotProduct.exe"
+	@echo "... test-tensor-register-double-FMS.exe"
+	@echo "... test-tensor-register-double-Divide.exe"
+	@echo "... test-tensor-register-double-Scatter.exe"
+	@echo "... test-tensor-register-double-Max.exe"
+	@echo "... test-tensor-register-double-Load.exe"
+	@echo "... test-tensor-register-float-SegmentedSumOuter.exe"
+	@echo "... test-tensor-register-float-SegmentedDotProduct.exe"
+	@echo "... test-tensor-register-float-Max.exe"
+	@echo "... test-tensor-register-float-DotProduct.exe"
+	@echo "... test-tensor-register-int64_t-Load.exe"
+	@echo "... test-tensor-register-int32_t-FMS.exe"
+	@echo "... test-tensor-register-float-Divide.exe"
+	@echo "... test-tensor-register-int32_t-SegmentedDotProduct.exe"
+	@echo "... test-tensor-register-int32_t-DotProduct.exe"
+	@echo "... test-tensor-register-double-FMA.exe"
+	@echo "... test-tensor-register-int32_t-Load.exe"
+	@echo "... test-tensor-register-double-Add.exe"
+	@echo "... test-tensor-register-float-SegmentedBroadcastInner.exe"
+	@echo "... test-tensor-register-int32_t-Max.exe"
+	@echo "... test-tensor-register-double-GetSet.exe"
+	@echo "... test-tensor-register-int32_t-GetSet.exe"
+	@echo "... test-tensor-register-int64_t-SegmentedDotProduct.exe"
+	@echo "... test-tensor-register-int32_t-Store.exe"
+	@echo "... test-tensor-register-int64_t-Store.exe"
+	@echo "... test-tensor-register-int32_t-Add.exe"
+	@echo "... test-tensor-register-int32_t-Scatter.exe"
+	@echo "... test-tensor-register-float-Min.exe"
+	@echo "... test-tensor-register-int64_t-SegmentedSumOuter.exe"
+	@echo "... test-tensor-register-int64_t-DotProduct.exe"
+	@echo "... test-tensor-register-int32_t-Subtract.exe"
+	@echo "... test-tensor-register-int32_t-SegmentedSumOuter.exe"
+	@echo "... test-tensor-register-double-SegmentedSumInner.exe"
+	@echo "... test-tensor-register-float-Store.exe"
+	@echo "... test-tensor-register-int32_t-Multiply.exe"
+	@echo "... test-tensor-register-int32_t-SegmentedSumInner.exe"
+	@echo "... test-tensor-register-int32_t-FMA.exe"
+	@echo "... test-tensor-register-int32_t-Gather.exe"
+	@echo "... test-tensor-register-int32_t-SegmentedBroadcastOuter.exe"
+	@echo "... test-tensor-register-int64_t-Gather.exe"
+	@echo "... test-tensor-register-float-GetSet.exe"
+	@echo "... test-tensor-register-int64_t-SegmentedSumInner.exe"
+	@echo "... test-tensor-register-int32_t-Min.exe"
+	@echo "... test-tensor-register-int64_t-SegmentedBroadcastInner.exe"
+	@echo "... test-tensor-register-double-Subtract.exe"
+	@echo "... test-tensor-register-int32_t-Divide.exe"
+	@echo "... test-tensor-register-double-Multiply.exe"
+	@echo "... test-tensor-register-float-FMA.exe"
+	@echo "... test-tensor-register-int64_t-Scatter.exe"
+	@echo "... test-tensor-register-int64_t-FMS.exe"
+	@echo "... test-tensor-register-float-SegmentedSumInner.exe"
+	@echo "... test-tensor-register-int64_t-Add.exe"
+	@echo "... test-tensor-register-double-SegmentedBroadcastOuter.exe"
+	@echo "... test-tensor-register-float-SegmentedBroadcastOuter.exe"
+	@echo "... test-tensor-register-float-Load.exe"
+	@echo "... test-tensor-register-int32_t-SegmentedBroadcastInner.exe"
+	@echo "... test-tensor-register-int64_t-Multiply.exe"
+	@echo "... test-tensor-register-float-FMS.exe"
+	@echo "... test-tensor-register-int64_t-Subtract.exe"
+	@echo "... test-tensor-register-int64_t-Max.exe"
+	@echo "... test-tensor-register-int64_t-GetSet.exe"
+	@echo "... test-tensor-register-int64_t-Divide.exe"
+	@echo "... test-tensor-register-int64_t-FMA.exe"
+	@echo "... test-tensor-register-float-Gather.exe"
+	@echo "... test-tensor-register-int64_t-Min.exe"
+	@echo "... test-tensor-register-int64_t-SegmentedBroadcastOuter.exe"
+	@echo "... test-tensor-register-double-DotProduct.exe"
+	@echo "... test-tensor-register-double-Store.exe"
+	@echo "... test-tensor-register-float-Scatter.exe"
+	@echo "... test-tensor-register-float-Add.exe"
+	@echo "... test-tensor-register-double-Gather.exe"
+	@echo "... test-tensor-register-float-Subtract.exe"
+	@echo "... test-tensor-register-double-Min.exe"
+	@echo "... test-tensor-register-float-Multiply.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-Load_RowMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-CtorGetSet.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_MatrixVector.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-float-ColMajor-Store_ColMajor.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_LoadStore.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-ET_Negate.exe"
+	@echo "... test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_Add.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_Subtract.exe"
+	@echo "... test-tensor-matrix-int64_t-RowMajor-ET_Divide.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.exe"
+	@echo "... test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.exe"
+	@echo "... test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.exe"
+	@echo "... test-tensor-matrix-double-ColMajor-Load_ColMajor.exe"
+	@echo "... test-tensor-matrix-double-RowMajor-ET_Negate.exe"
+	@echo "... test-CombiningAdapter-1D.exe"
+	@echo "... test-CombiningAdapter-2D.exe"
+	@echo "... test-PermutedCombiningAdapter-1D.exe"
+	@echo "... test-CombiningAdapter-3D.exe"
+	@echo "... test-PermutedCombiningAdapter-2D.exe"
+	@echo "... test-PermutedCombiningAdapter-3D.exe"
+	@echo "... test-indexvalue.exe"
+	@echo "... test-indexset.exe"
+	@echo "... test-listsegment.exe"
+	@echo "... test-rangestridesegment.exe"
+	@echo "... test-rangesegment.exe"
+	@echo "... test-rajavec.exe"
+	@echo "... test-iterators.exe"
+	@echo "... test-float-limits.exe"
+	@echo "... test-integral-limits.exe"
+	@echo "... test-timer.exe"
+	@echo "... test-span.exe"
+	@echo "... test-operators-logical.exe"
+	@echo "... test-operators-math.exe"
+	@echo "... test-operators-equivalence.exe"
+	@echo "... test-operators-bitwise-modulus.exe"
+	@echo "... test-operators-identity.exe"
+	@echo "... test-reducer-reset-seq.exe"
+	@echo "... test-reducer-constructors-seq.exe"
+	@echo "... test-resource-AsyncTime-Sequential.exe"
+	@echo "... test-resource-BasicAsyncSemantics-Sequential.exe"
+	@echo "... test-resource-JoinAsyncSemantics-Sequential.exe"
+	@echo "... test-resource-Depends-Sequential.exe"
+	@echo "... test-resource-MultiStream-Sequential.exe"
+	@echo "... test-atomic-incdec.exe"
+	@echo "... test-atomic-ref-accessors.exe"
+	@echo "... test-atomic-ref-exchanges.exe"
+	@echo "... test-atomic-ref-constructor.exe"
+	@echo "... test-atomic-ref-minmax.exe"
+	@echo "... test-atomic-ref-bitwise.exe"
+	@echo "... test-atomic-ref-addsub.exe"
+	@echo "... test-standard-layout.exe"
+	@echo "... test-typedlayout.exe"
+	@echo "... test-typedview.exe"
+	@echo "... test-makelayout.exe"
+	@echo "... test-multiview.exe"
+	@echo "... test-algorithm-sort-Sequential.exe"
+	@echo "... test-algorithm-stable-sort-Sequential.exe"
+	@echo "... test-algorithm-util-sort-Shell-Sequential.exe"
+	@echo "... test-algorithm-util-sort-Intro-Sequential.exe"
+	@echo "... test-algorithm-util-sort-Heap-Sequential.exe"
+	@echo "... test-algorithm-util-sort-Merge-Sequential.exe"
+	@echo "... test-algorithm-util-sort-Insertion-Sequential.exe"
+	@echo "... test-workgroup-Constructor-Single-Sequential.exe"
+	@echo "... test-workgroup-Enqueue-Single-Sequential.exe"
+	@echo "... test-workgroup-WorkStorage-Iterator-Sequential.exe"
+	@echo "... test-workgroup-Enqueue-Multiple-Sequential.exe"
+	@echo "... test-workgroup-WorkStorage-InsertCall-Sequential.exe"
+	@echo "... test-workgroup-Vtable-Single-Sequential.exe"
+	@echo "... test-workgroup-WorkStorage-Constructor-Sequential.exe"
+	@echo "... test-workgroup-WorkStorage-Multiple-Sequential.exe"
+	@echo "... test-simd.exe"
+	@echo "... test-sharedmem.exe"
+	@echo "... test-kernel.exe"
+	@echo "... test-synchronize.exe"
 	@echo "... resource-teams"
 	@echo "... multiview"
 	@echo "... wave-eqn"

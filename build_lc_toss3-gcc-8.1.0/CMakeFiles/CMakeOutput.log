@@ -28,33 +28,33 @@ The C compiler identification is GNU, found in "/g/g20/cuneo3/testraja/RAJA/buil
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_aa7ba/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_aa7ba.dir/build.make CMakeFiles/cmTC_aa7ba.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_aaa63/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_aaa63.dir/build.make CMakeFiles/cmTC_aaa63.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_aa7ba.dir/testCXXCompiler.cxx.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++     -o CMakeFiles/cmTC_aa7ba.dir/testCXXCompiler.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_aa7ba
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aa7ba.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_aa7ba.dir/testCXXCompiler.cxx.o  -o cmTC_aa7ba 
+Building CXX object CMakeFiles/cmTC_aaa63.dir/testCXXCompiler.cxx.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++     -o CMakeFiles/cmTC_aaa63.dir/testCXXCompiler.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_aaa63
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aaa63.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_aaa63.dir/testCXXCompiler.cxx.o  -o cmTC_aaa63 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_71c28/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_71c28.dir/build.make CMakeFiles/cmTC_71c28.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_451c1/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_451c1.dir/build.make CMakeFiles/cmTC_451c1.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -v -o CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Building CXX object CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -v -o CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp
 Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs
 COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/g++
 Target: x86_64-pc-linux-gnu
 Configured with: /builddir/build/BUILD/gccspack/spack/var/spack/stage/gcc-8.1.0-yf4dn5leietjepntgrnkv4syhgmb2nmm/gcc-8.1.0/configure --prefix=/usr/tce/packages/gcc/gcc-8.1.0 --libdir=/usr/tce/packages/gcc/gcc-8.1.0/lib64 --disable-multilib --enable-languages=c,obj-c++,c++,fortran,objc,go,lto --with-mpfr=/ --with-gmp=/usr --enable-lto --with-quad --with-sysroot=/ --with-stage1-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-boot-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-gnu-ld --with-gnu-as --with-ld=/usr/tce/packages/gcc/gcc-8.1.0/bin/ld --with-as=/usr/tce/packages/gcc/gcc-8.1.0/bin/as --with-mpc=/ --with-isl=/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh
 Thread model: posix
 gcc version 8.1.0 (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1plus -quiet -v -D_GNU_SOURCE /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o -version -o /var/tmp/cuneo3/ccSAu22a.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1plus -quiet -v -D_GNU_SOURCE /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o -version -o /var/tmp/cuneo3/cc9ZTohJ.s
 GNU C++14 (GCC) version 8.1.0 (x86_64-pc-linux-gnu)
 	compiled by GNU C version 8.1.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version isl-0.18-GMP
 
@@ -75,15 +75,15 @@ GNU C++14 (GCC) version 8.1.0 (x86_64-pc-linux-gnu)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: fab5a6f98e2662ca42b7024e940b961b
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o /var/tmp/cuneo3/ccSAu22a.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o /var/tmp/cuneo3/cc9ZTohJ.s
 GNU assembler version 2.30 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.30
 COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
-Linking CXX executable cmTC_71c28
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_71c28.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++      -v -rdynamic CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_71c28 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+Linking CXX executable cmTC_451c1
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_451c1.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++      -v -rdynamic CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_451c1 
 Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs
 COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/g++
 COLLECT_LTO_WRAPPER=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper
@@ -93,9 +93,9 @@ Thread model: posix
 gcc version 8.1.0 (GCC) 
 COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_71c28' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccEKubzf.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_71c28 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_71c28' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_451c1' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccETy1GO.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_451c1 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_451c1' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -124,19 +124,19 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_71c28/fast ]
-  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_71c28.dir/build.make CMakeFiles/cmTC_71c28.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_451c1/fast ]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_451c1.dir/build.make CMakeFiles/cmTC_451c1.dir/build]
   ignore line: [gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -v -o CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Building CXX object CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -v -o CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs]
   ignore line: [COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/g++]
   ignore line: [Target: x86_64-pc-linux-gnu]
   ignore line: [Configured with: /builddir/build/BUILD/gccspack/spack/var/spack/stage/gcc-8.1.0-yf4dn5leietjepntgrnkv4syhgmb2nmm/gcc-8.1.0/configure --prefix=/usr/tce/packages/gcc/gcc-8.1.0 --libdir=/usr/tce/packages/gcc/gcc-8.1.0/lib64 --disable-multilib --enable-languages=c,obj-c++,c++,fortran,objc,go,lto --with-mpfr=/ --with-gmp=/usr --enable-lto --with-quad --with-sysroot=/ --with-stage1-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-boot-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-gnu-ld --with-gnu-as --with-ld=/usr/tce/packages/gcc/gcc-8.1.0/bin/ld --with-as=/usr/tce/packages/gcc/gcc-8.1.0/bin/as --with-mpc=/ --with-isl=/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.1.0 (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1plus -quiet -v -D_GNU_SOURCE /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o -version -o /var/tmp/cuneo3/ccSAu22a.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1plus -quiet -v -D_GNU_SOURCE /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o -version -o /var/tmp/cuneo3/cc9ZTohJ.s]
   ignore line: [GNU C++14 (GCC) version 8.1.0 (x86_64-pc-linux-gnu)]
   ignore line: [	compiled by GNU C version 8.1.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version isl-0.18-GMP]
   ignore line: []
@@ -157,15 +157,15 @@ Parsed CXX implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: fab5a6f98e2662ca42b7024e940b961b]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o /var/tmp/cuneo3/ccSAu22a.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o /var/tmp/cuneo3/cc9ZTohJ.s]
   ignore line: [GNU assembler version 2.30 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.30]
   ignore line: [COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking CXX executable cmTC_71c28]
-  ignore line: [/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_71c28.dir/link.txt --verbose=1]
-  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/g++      -v -rdynamic CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_71c28 ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking CXX executable cmTC_451c1]
+  ignore line: [/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_451c1.dir/link.txt --verbose=1]
+  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/g++      -v -rdynamic CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_451c1 ]
   ignore line: [Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs]
   ignore line: [COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/g++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper]
@@ -175,13 +175,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 8.1.0 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_71c28' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccEKubzf.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_71c28 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_451c1' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccETy1GO.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_451c1 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o]
     arg [/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/var/tmp/cuneo3/ccEKubzf.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/var/tmp/cuneo3/ccETy1GO.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -197,7 +197,7 @@ Parsed CXX implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_71c28] ==> ignore
+    arg [cmTC_451c1] ==> ignore
     arg [/lib/../lib64/crt1.o] ==> ignore
     arg [/lib/../lib64/crti.o] ==> ignore
     arg [/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o] ==> ignore
@@ -206,7 +206,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../..] ==> dir [/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../..]
-    arg [CMakeFiles/cmTC_71c28.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_451c1.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -231,14 +231,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++2a] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_a924b/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_a924b.dir/build.make CMakeFiles/cmTC_a924b.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_07b28/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_07b28.dir/build.make CMakeFiles/cmTC_07b28.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_a924b.dir/feature_tests.cxx.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++2a -o CMakeFiles/cmTC_a924b.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_a924b
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a924b.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_a924b.dir/feature_tests.cxx.o  -o cmTC_a924b 
+Building CXX object CMakeFiles/cmTC_07b28.dir/feature_tests.cxx.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++2a -o CMakeFiles/cmTC_07b28.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_07b28
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07b28.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_07b28.dir/feature_tests.cxx.o  -o cmTC_07b28 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -304,14 +304,14 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Detecting CXX [-std=c++17] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_427d2/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_427d2.dir/build.make CMakeFiles/cmTC_427d2.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_fa5cd/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_fa5cd.dir/build.make CMakeFiles/cmTC_fa5cd.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_427d2.dir/feature_tests.cxx.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++17 -o CMakeFiles/cmTC_427d2.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_427d2
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_427d2.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_427d2.dir/feature_tests.cxx.o  -o cmTC_427d2 
+Building CXX object CMakeFiles/cmTC_fa5cd.dir/feature_tests.cxx.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++17 -o CMakeFiles/cmTC_fa5cd.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_fa5cd
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fa5cd.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_fa5cd.dir/feature_tests.cxx.o  -o cmTC_fa5cd 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -377,14 +377,14 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_ad8cd/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_ad8cd.dir/build.make CMakeFiles/cmTC_ad8cd.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_c1439/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_c1439.dir/build.make CMakeFiles/cmTC_c1439.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_ad8cd.dir/feature_tests.cxx.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++14 -o CMakeFiles/cmTC_ad8cd.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_ad8cd
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ad8cd.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_ad8cd.dir/feature_tests.cxx.o  -o cmTC_ad8cd 
+Building CXX object CMakeFiles/cmTC_c1439.dir/feature_tests.cxx.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++14 -o CMakeFiles/cmTC_c1439.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c1439
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c1439.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_c1439.dir/feature_tests.cxx.o  -o cmTC_c1439 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -450,14 +450,14 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_8e823/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_8e823.dir/build.make CMakeFiles/cmTC_8e823.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_3779f/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_3779f.dir/build.make CMakeFiles/cmTC_3779f.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_8e823.dir/feature_tests.cxx.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++11 -o CMakeFiles/cmTC_8e823.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_8e823
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8e823.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_8e823.dir/feature_tests.cxx.o  -o cmTC_8e823 
+Building CXX object CMakeFiles/cmTC_3779f.dir/feature_tests.cxx.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++11 -o CMakeFiles/cmTC_3779f.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_3779f
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3779f.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_3779f.dir/feature_tests.cxx.o  -o cmTC_3779f 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -523,14 +523,14 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_106bf/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_106bf.dir/build.make CMakeFiles/cmTC_106bf.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_4427a/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_4427a.dir/build.make CMakeFiles/cmTC_4427a.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_106bf.dir/feature_tests.cxx.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++98 -o CMakeFiles/cmTC_106bf.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_106bf
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_106bf.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_106bf.dir/feature_tests.cxx.o  -o cmTC_106bf 
+Building CXX object CMakeFiles/cmTC_4427a.dir/feature_tests.cxx.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++    -std=c++98 -o CMakeFiles/cmTC_4427a.dir/feature_tests.cxx.o -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_4427a
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4427a.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/g++       -rdynamic CMakeFiles/cmTC_4427a.dir/feature_tests.cxx.o  -o cmTC_4427a 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -594,33 +594,33 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Determining if the C compiler works passed with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_f0e20/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_f0e20.dir/build.make CMakeFiles/cmTC_f0e20.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_6339f/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_6339f.dir/build.make CMakeFiles/cmTC_6339f.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f0e20.dir/testCCompiler.c.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc    -o CMakeFiles/cmTC_f0e20.dir/testCCompiler.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/testCCompiler.c
-Linking C executable cmTC_f0e20
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f0e20.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_f0e20.dir/testCCompiler.c.o  -o cmTC_f0e20 
+Building C object CMakeFiles/cmTC_6339f.dir/testCCompiler.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc    -o CMakeFiles/cmTC_6339f.dir/testCCompiler.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_6339f
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6339f.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_6339f.dir/testCCompiler.c.o  -o cmTC_6339f 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_c8091/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_c8091.dir/build.make CMakeFiles/cmTC_c8091.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_cee14/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_cee14.dir/build.make CMakeFiles/cmTC_cee14.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -v -o CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o   -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c
+Building C object CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -v -o CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o   -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c
 Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs
 COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/cc
 Target: x86_64-pc-linux-gnu
 Configured with: /builddir/build/BUILD/gccspack/spack/var/spack/stage/gcc-8.1.0-yf4dn5leietjepntgrnkv4syhgmb2nmm/gcc-8.1.0/configure --prefix=/usr/tce/packages/gcc/gcc-8.1.0 --libdir=/usr/tce/packages/gcc/gcc-8.1.0/lib64 --disable-multilib --enable-languages=c,obj-c++,c++,fortran,objc,go,lto --with-mpfr=/ --with-gmp=/usr --enable-lto --with-quad --with-sysroot=/ --with-stage1-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-boot-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-gnu-ld --with-gnu-as --with-ld=/usr/tce/packages/gcc/gcc-8.1.0/bin/ld --with-as=/usr/tce/packages/gcc/gcc-8.1.0/bin/as --with-mpc=/ --with-isl=/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh
 Thread model: posix
 gcc version 8.1.0 (GCC) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1 -quiet -v /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o -version -o /var/tmp/cuneo3/ccWkqh7V.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1 -quiet -v /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o -version -o /var/tmp/cuneo3/ccuEiiYJ.s
 GNU C17 (GCC) version 8.1.0 (x86_64-pc-linux-gnu)
 	compiled by GNU C version 8.1.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version isl-0.18-GMP
 
@@ -638,15 +638,15 @@ GNU C17 (GCC) version 8.1.0 (x86_64-pc-linux-gnu)
 
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: c1e03d33fcb33276674088bdc8e19a1d
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
- /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o /var/tmp/cuneo3/ccWkqh7V.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o /var/tmp/cuneo3/ccuEiiYJ.s
 GNU assembler version 2.30 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.30
 COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
-Linking C executable cmTC_c8091
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c8091.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc     -v -rdynamic CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o  -o cmTC_c8091 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+Linking C executable cmTC_cee14
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cee14.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc     -v -rdynamic CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o  -o cmTC_cee14 
 Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs
 COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/cc
 COLLECT_LTO_WRAPPER=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper
@@ -656,9 +656,9 @@ Thread model: posix
 gcc version 8.1.0 (GCC) 
 COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/
 LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c8091' '-mtune=generic' '-march=x86-64'
- /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccRUdKp2.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c8091 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c8091' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_cee14' '-mtune=generic' '-march=x86-64'
+ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccmUhNwK.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_cee14 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_cee14' '-mtune=generic' '-march=x86-64'
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -681,19 +681,19 @@ Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_c8091/fast ]
-  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_c8091.dir/build.make CMakeFiles/cmTC_c8091.dir/build]
+  ignore line: [Run Build Command(s):/usr/bin/gmake cmTC_cee14/fast ]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_cee14.dir/build.make CMakeFiles/cmTC_cee14.dir/build]
   ignore line: [gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp']
-  ignore line: [Building C object CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o]
-  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -v -o CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o   -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Building C object CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -v -o CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o   -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c]
   ignore line: [Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs]
   ignore line: [COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/cc]
   ignore line: [Target: x86_64-pc-linux-gnu]
   ignore line: [Configured with: /builddir/build/BUILD/gccspack/spack/var/spack/stage/gcc-8.1.0-yf4dn5leietjepntgrnkv4syhgmb2nmm/gcc-8.1.0/configure --prefix=/usr/tce/packages/gcc/gcc-8.1.0 --libdir=/usr/tce/packages/gcc/gcc-8.1.0/lib64 --disable-multilib --enable-languages=c,obj-c++,c++,fortran,objc,go,lto --with-mpfr=/ --with-gmp=/usr --enable-lto --with-quad --with-sysroot=/ --with-stage1-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-boot-ldflags='-Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib -Wl,-rpath,/usr/tce/packages/gcc/gcc-8.1.0/lib64 -Wl,-rpath,/lib -Wl,-rpath,/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh/lib -Wl,-rpath,/usr/lib -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib -Wl,-rpath,/lib -Wl,-rpath,/lib64 -Wl,-rpath,/usr/lib64 -Wl,-rpath,/usr/tce/packages/binutils/binutils-2.30/lib64 -Wl,-rpath,/lib64 -static-libstdc++ -static-libgcc' --with-gnu-ld --with-gnu-as --with-ld=/usr/tce/packages/gcc/gcc-8.1.0/bin/ld --with-as=/usr/tce/packages/gcc/gcc-8.1.0/bin/as --with-mpc=/ --with-isl=/builddir/build/BUILD/gccspack/spack/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/isl-0.18-a6bgwfhlamdrd6tbb7l6oonhnxruvlfh]
   ignore line: [Thread model: posix]
   ignore line: [gcc version 8.1.0 (GCC) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1 -quiet -v /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o -version -o /var/tmp/cuneo3/ccWkqh7V.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/cc1 -quiet -v /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o -version -o /var/tmp/cuneo3/ccuEiiYJ.s]
   ignore line: [GNU C17 (GCC) version 8.1.0 (x86_64-pc-linux-gnu)]
   ignore line: [	compiled by GNU C version 8.1.0, GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1, isl version isl-0.18-GMP]
   ignore line: []
@@ -711,15 +711,15 @@ Parsed C implicit link information from above output:
   ignore line: []
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: c1e03d33fcb33276674088bdc8e19a1d]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o /var/tmp/cuneo3/ccWkqh7V.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/tce/packages/gcc/gcc-8.1.0/bin/as -v --64 -o CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o /var/tmp/cuneo3/ccuEiiYJ.s]
   ignore line: [GNU assembler version 2.30 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.30]
   ignore line: [COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
-  ignore line: [Linking C executable cmTC_c8091]
-  ignore line: [/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c8091.dir/link.txt --verbose=1]
-  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/cc     -v -rdynamic CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o  -o cmTC_c8091 ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking C executable cmTC_cee14]
+  ignore line: [/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cee14.dir/link.txt --verbose=1]
+  ignore line: [/usr/tce/packages/gcc/gcc-8.1.0/bin/cc     -v -rdynamic CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o  -o cmTC_cee14 ]
   ignore line: [Reading specs from /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/specs]
   ignore line: [COLLECT_GCC=/usr/tce/packages/gcc/gcc-8.1.0/bin/cc]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper]
@@ -729,13 +729,13 @@ Parsed C implicit link information from above output:
   ignore line: [gcc version 8.1.0 (GCC) ]
   ignore line: [COMPILER_PATH=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_c8091' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccRUdKp2.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_c8091 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_cee14' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2 -plugin /usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so -plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper -plugin-opt=-fresolution=/var/tmp/cuneo3/ccmUhNwK.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/ -rpath /usr/tce/packages/gcc/gcc-8.1.0/lib64 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_cee14 /lib/../lib64/crt1.o /lib/../lib64/crti.o /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../.. CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtend.o /lib/../lib64/crtn.o]
     arg [/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/tce/packages/gcc/gcc-8.1.0/libexec/gcc/x86_64-pc-linux-gnu/8.1.0/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/var/tmp/cuneo3/ccRUdKp2.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/var/tmp/cuneo3/ccmUhNwK.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -751,7 +751,7 @@ Parsed C implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_c8091] ==> ignore
+    arg [cmTC_cee14] ==> ignore
     arg [/lib/../lib64/crt1.o] ==> ignore
     arg [/lib/../lib64/crti.o] ==> ignore
     arg [/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/crtbegin.o] ==> ignore
@@ -760,7 +760,7 @@ Parsed C implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../..] ==> dir [/usr/tce/packages/gcc/gcc-8.1.0/lib64/gcc/x86_64-pc-linux-gnu/8.1.0/../../..]
-    arg [CMakeFiles/cmTC_c8091.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [CMakeFiles/cmTC_cee14.dir/CMakeCCompilerABI.c.o] ==> ignore
     arg [-lgcc] ==> lib [gcc]
     arg [--as-needed] ==> ignore
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -787,14 +787,14 @@ Parsed C implicit link information from above output:
 Detecting C [-std=c11] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_9a7c3/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_9a7c3.dir/build.make CMakeFiles/cmTC_9a7c3.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_ed432/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_ed432.dir/build.make CMakeFiles/cmTC_ed432.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_9a7c3.dir/feature_tests.c.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -std=c11 -o CMakeFiles/cmTC_9a7c3.dir/feature_tests.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.c
-Linking C executable cmTC_9a7c3
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9a7c3.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_9a7c3.dir/feature_tests.c.o  -o cmTC_9a7c3 
+Building C object CMakeFiles/cmTC_ed432.dir/feature_tests.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -std=c11 -o CMakeFiles/cmTC_ed432.dir/feature_tests.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.c
+Linking C executable cmTC_ed432
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ed432.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_ed432.dir/feature_tests.c.o  -o cmTC_ed432 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -807,14 +807,14 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Detecting C [-std=c99] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_33ee7/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_33ee7.dir/build.make CMakeFiles/cmTC_33ee7.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_ac2ef/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_ac2ef.dir/build.make CMakeFiles/cmTC_ac2ef.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_33ee7.dir/feature_tests.c.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -std=c99 -o CMakeFiles/cmTC_33ee7.dir/feature_tests.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.c
-Linking C executable cmTC_33ee7
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_33ee7.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_33ee7.dir/feature_tests.c.o  -o cmTC_33ee7 
+Building C object CMakeFiles/cmTC_ac2ef.dir/feature_tests.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -std=c99 -o CMakeFiles/cmTC_ac2ef.dir/feature_tests.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.c
+Linking C executable cmTC_ac2ef
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac2ef.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_ac2ef.dir/feature_tests.c.o  -o cmTC_ac2ef 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -827,14 +827,14 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
 Detecting C [-std=c90] compiler features compiled with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_82de6/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_82de6.dir/build.make CMakeFiles/cmTC_82de6.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_36a6a/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_36a6a.dir/build.make CMakeFiles/cmTC_36a6a.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_82de6.dir/feature_tests.c.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -std=c90 -o CMakeFiles/cmTC_82de6.dir/feature_tests.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.c
-Linking C executable cmTC_82de6
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_82de6.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_82de6.dir/feature_tests.c.o  -o cmTC_82de6 
+Building C object CMakeFiles/cmTC_36a6a.dir/feature_tests.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -std=c90 -o CMakeFiles/cmTC_36a6a.dir/feature_tests.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/feature_tests.c
+Linking C executable cmTC_36a6a
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36a6a.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc      -rdynamic CMakeFiles/cmTC_36a6a.dir/feature_tests.c.o  -o cmTC_36a6a 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 
@@ -842,17 +842,45 @@ gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.
     Feature record: C_FEATURE:0c_restrict
     Feature record: C_FEATURE:0c_static_assert
     Feature record: C_FEATURE:0c_variadic_macros
+Determining if the include file pthread.h exists passed with the following output:
+Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_51098/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_51098.dir/build.make CMakeFiles/cmTC_51098.dir/build
+gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_51098.dir/CheckIncludeFile.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -Wall -Wextra    -fPIE   -o CMakeFiles/cmTC_51098.dir/CheckIncludeFile.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_51098
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_51098.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc  -Wall -Wextra       -rdynamic CMakeFiles/cmTC_51098.dir/CheckIncludeFile.c.o  -o cmTC_51098 
+gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
+
+
+Determining if the function pthread_create exists in the pthread passed with the following output:
+Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_2ad5c/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_2ad5c.dir/build.make CMakeFiles/cmTC_2ad5c.dir/build
+gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2ad5c.dir/CheckFunctionExists.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -Wall -Wextra   -DCHECK_FUNCTION_EXISTS=pthread_create -fPIE   -o CMakeFiles/cmTC_2ad5c.dir/CheckFunctionExists.c.o   -c /usr/tce/packages/cmake/cmake-3.14.5/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTC_2ad5c
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2ad5c.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc  -Wall -Wextra   -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_2ad5c.dir/CheckFunctionExists.c.o  -o cmTC_2ad5c -lpthread 
+gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
+
+
 Determining if the posix_memalign exist passed with the following output:
 Change Dir: /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/gmake cmTC_0abcd/fast 
-/usr/bin/gmake -f CMakeFiles/cmTC_0abcd.dir/build.make CMakeFiles/cmTC_0abcd.dir/build
+Run Build Command(s):/usr/bin/gmake cmTC_91902/fast 
+/usr/bin/gmake -f CMakeFiles/cmTC_91902.dir/build.make CMakeFiles/cmTC_91902.dir/build
 gmake[1]: Entering directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0abcd.dir/CheckSymbolExists.c.o
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -Wall -Wextra    -fPIE   -o CMakeFiles/cmTC_0abcd.dir/CheckSymbolExists.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_0abcd
-/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0abcd.dir/link.txt --verbose=1
-/usr/tce/packages/gcc/gcc-8.1.0/bin/cc  -Wall -Wextra       CMakeFiles/cmTC_0abcd.dir/CheckSymbolExists.c.o  -o cmTC_0abcd 
+Building C object CMakeFiles/cmTC_91902.dir/CheckSymbolExists.c.o
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc   -Wall -Wextra    -fPIE   -o CMakeFiles/cmTC_91902.dir/CheckSymbolExists.c.o   -c /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_91902
+/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake -E cmake_link_script CMakeFiles/cmTC_91902.dir/link.txt --verbose=1
+/usr/tce/packages/gcc/gcc-8.1.0/bin/cc  -Wall -Wextra       -rdynamic CMakeFiles/cmTC_91902.dir/CheckSymbolExists.c.o  -o cmTC_91902 
 gmake[1]: Leaving directory `/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp'
 
 File /g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/CMakeFiles/CMakeTmp/CheckSymbolExists.c:

@@ -138,15 +138,22 @@ namespace expt
     };
 
 
+
     template <typename TYPE, TYPE VALUE>
-    struct Diag {
-        static_assert(std::is_same<TYPE,void>::value,"diagnostic");
+    struct ValueDiag {
+        static_assert(std::is_same<TYPE,void>::value,"value_diagnostic");
+        static const TYPE value = VALUE;
+    };
+
+    template <typename TYPE>
+    struct TypeDiag {
+        static_assert(std::is_same<TYPE,void>::value,"type_diagnostic");
+        using Type = TYPE;
     };
 
     template<typename INDEX_TYPE, size_t IDX, INDEX_TYPE DELTA, INDEX_TYPE HEAD, INDEX_TYPE... TAIL>
     struct AddStaticIndexArray<INDEX_TYPE, IDX, DELTA, StaticIndexArray<camp::int_seq<INDEX_TYPE,HEAD,TAIL...>>> 
     {
-        using diag = Diag<decltype(DELTA),DELTA>;
         using Orig = StaticIndexArray<camp::int_seq<INDEX_TYPE,HEAD,TAIL...>>;
         using AddTail = typename AddStaticIndexArray<INDEX_TYPE,IDX-1,DELTA,typename Orig::Tail>::Type;
         using Type = typename PrependStaticIndexArray<INDEX_TYPE,HEAD,AddTail>::Type;
@@ -157,7 +164,7 @@ namespace expt
     struct AddStaticIndexArray<INDEX_TYPE, 0, DELTA, StaticIndexArray<camp::int_seq<INDEX_TYPE,HEAD,TAIL...>>>
     {
 
-        using diag = Diag<decltype(DELTA),DELTA>;
+        static_assert(HEAD+DELTA < 1000, "bad_value");
         using Orig = StaticIndexArray<camp::int_seq<INDEX_TYPE,HEAD,TAIL...>>;
         using Type = typename PrependStaticIndexArray<INDEX_TYPE,HEAD+DELTA,typename Orig::Tail>::Type;
         using Seq  = typename PrependStaticIndexArray<INDEX_TYPE,HEAD+DELTA,typename Orig::Tail>::Seq;
@@ -312,54 +319,39 @@ namespace expt
         }
     };
 
+        template< typename TILE, typename VALUE, size_t IDX>
+        struct SetStaticTensorTileBegin;
 
-
-
-
-
-        template< typename TILE, typename STORAGE, size_t IDX>
-        struct AdvanceStaticTensorTile;
-
-        template< typename INDEX_TYPE, TensorTileSize TENSOR_SIZE, typename BEGIN, typename SIZE, typename STORAGE, size_t IDX > 
-        struct AdvanceStaticTensorTile<
+        template< typename INDEX_TYPE, TensorTileSize TENSOR_SIZE, typename BEGIN, typename SIZE, INDEX_TYPE VALUE, size_t IDX > 
+        struct SetStaticTensorTileBegin<
               StaticTensorTile<INDEX_TYPE, TENSOR_SIZE, BEGIN, SIZE >,
-              STORAGE,
+              camp::integral_constant<INDEX_TYPE,VALUE>,
               IDX
         > {
-
             using BeginType = StaticIndexArray<BEGIN>;
             using Type = StaticTensorTile<
                 INDEX_TYPE,
                 TENSOR_SIZE,
-                typename AddStaticIndexArray<INDEX_TYPE,IDX,STORAGE::s_dim_elem(IDX),BeginType>::Seq,
+                typename SetStaticIndexArray<INDEX_TYPE,IDX,VALUE,BeginType>::Seq,
                 SIZE
             >;
         };
 
-        template< typename ORIG, typename TILE, typename STORAGE, size_t IDX>
-        struct RemainderStaticTensorTile;
+        template< typename TILE, typename VALUE, size_t IDX>
+        struct SetStaticTensorTileSize;
 
-        template< typename ORIG, typename INDEX_TYPE, TensorTileSize TENSOR_SIZE, typename BEGIN, typename SIZE, typename STORAGE, size_t IDX > 
-        struct RemainderStaticTensorTile<
-              ORIG,
+        template< typename INDEX_TYPE, TensorTileSize TENSOR_SIZE, typename BEGIN, typename SIZE, INDEX_TYPE VALUE, size_t IDX > 
+        struct SetStaticTensorTileSize<
               StaticTensorTile<INDEX_TYPE, TENSOR_SIZE, BEGIN, SIZE >,
-              STORAGE,
+              camp::integral_constant<INDEX_TYPE,VALUE>,
               IDX
         > {
-
-
-            using BeginType = StaticIndexArray<BEGIN>;
-            using TILE = StaticTensorTile<INDEX_TYPE, TENSOR_SIZE, BEGIN, SIZE >;
-
-            static const INDEX_TYPE TILE_BEGIN = TILE::begin_type::value_at(IDX);
-            static const INDEX_TYPE ORIG_BEGIN = ORIG::begin_type::value_at(IDX);
-            static const INDEX_TYPE ORIG_SIZE  = ORIG:: size_type::value_at(IDX);
-            
+            using SizeType = StaticIndexArray<SIZE>;
             using Type = StaticTensorTile<
                 INDEX_TYPE,
-                TENSOR_PARTIAL,
-                typename SetStaticIndexArray<INDEX_TYPE,IDX,ORIG_BEGIN + ORIG_SIZE - TILE_BEGIN,BeginType>::Seq,
-                SIZE
+                TENSOR_SIZE,
+                BEGIN,
+                typename SetStaticIndexArray<INDEX_TYPE,IDX,VALUE,SizeType>::Seq
             >;
         };
 

@@ -44,6 +44,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/blt/tests/smoke/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/cmake_install.cmake")
 endif()
 
@@ -100,6 +105,11 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
 file(INSTALL DESTINATION "/g/g20/cuneo3/testraja/RAJA/install_lc_toss3-gcc-8.1.0/lib/pkgconfig" TYPE FILE FILES "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/RAJA.pc")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

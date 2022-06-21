@@ -3902,6 +3902,12 @@ camp/number/number.hpp
 camp/number/number.hpp
 ../tpl/camp/include/camp/camp/number/number.hpp
 
+/g/g20/cuneo3/testraja/RAJA/examples/plugin/counter-plugin.cpp
+RAJA/util/PluginStrategy.hpp
+/g/g20/cuneo3/testraja/RAJA/examples/plugin/RAJA/util/PluginStrategy.hpp
+iostream
+-
+
 /g/g20/cuneo3/testraja/RAJA/examples/plugin/test-plugin.cpp
 RAJA/RAJA.hpp
 /g/g20/cuneo3/testraja/RAJA/examples/plugin/RAJA/RAJA.hpp

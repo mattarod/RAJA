@@ -34,6 +34,8 @@ namespace expt
 
 
 
+    template<typename STORAGE, typename DIM_SEQ, typename IDX_SEQ>
+    struct StaticTensorTileExec;
 
     template<typename STORAGE, typename DIM_SEQ>
     struct TensorTileExec;
@@ -98,20 +100,6 @@ namespace expt
       }
 
 
-      template< typename OTILE, typename TTYPE, typename BODY >
-      struct StaticLoopHalt
-      {
-          static auto const orig_begin = OTILE::begin_type::value_at(DIM0);
-          static auto const orig_size =  OTILE:: size_type::value_at(DIM0);
-          static auto const tile_begin = TTYPE::begin_type::value_at(DIM0);
-
-          static const bool value =  (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size + STORAGE::s_dim_elem(DIM0) );
-	  
-          static_assert( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size+ STORAGE::s_dim_elem(DIM0)*2), "hrm" );
-      };
-
-
-
 
       template<
           typename OTILE,
@@ -121,53 +109,34 @@ namespace expt
       RAJA_HOST_DEVICE
       RAJA_INLINE
       static
-      typename std::enable_if<StaticLoopHalt<OTILE,TTYPE,BODY>::value>::type
+      void
       static_exec(
           OTILE const &otile,
           TTYPE const &tile,
           BODY && body
       ){
+
 
         auto constexpr orig_begin = OTILE::begin_type::value_at(DIM0);
         auto constexpr orig_size =  OTILE:: size_type::value_at(DIM0);
 
         auto constexpr tile_begin = TTYPE::begin_type::value_at(DIM0);
 
-        static_assert( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size+ STORAGE::s_dim_elem(DIM0) ), "huh" );
+        auto constexpr step_size  = STORAGE::s_dim_elem(DIM0);
 
-        if( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size) ){
-           inner_t::static_exec(otile, tile, body);
-           using NextType = typename expt::AdvanceStaticTensorTile<TTYPE,STORAGE,(size_t)DIM0>::Type;
-           NextType next_tile;
-           static_exec(otile, next_tile, body);
-        } else if ( tile_begin < (orig_begin + orig_size ) ) {
-           using PartType    = typename expt::RemainderStaticTensorTile<OTILE,TTYPE,STORAGE,(size_t)DIM0>::Type;
-           PartType part_tile;
-           inner_t::static_exec(otile,part_tile,body);
-        }
+        auto constexpr iter_count =
+               (tile_begin >= orig_begin) && (tile_begin < (orig_begin+orig_size))
+                 ? ((orig_begin + orig_size) - tile_begin + step_size - 1) / step_size
+                 : 0;
 
+        using IterCount = camp::integral_constant<typename TTYPE::index_type,iter_count>;
+        using DimSeq = camp::idx_seq<DIM0,DIM_REST...>;
+        using IdxSeq = typename camp::detail::gen_seq<typename TTYPE::index_type,IterCount>::type;
+
+        StaticTensorTileExec<STORAGE,DimSeq,IdxSeq>::exec(otile,tile,body);
+        
       }
 
-
-      template<
-          typename OTILE,
-          typename TTYPE,
-          typename BODY
-      >
-      RAJA_HOST_DEVICE
-      RAJA_INLINE
-      static
-      typename std::enable_if<! StaticLoopHalt<OTILE,TTYPE,BODY>::value>::type
-      static_exec(
-          OTILE const &otile,
-          TTYPE const &tile,
-          BODY && body
-      ){
-         (void) otile;
-         (void) tile;
-         (void) body;
-         return;
-      }
 
 
     };
@@ -194,7 +163,7 @@ namespace expt
       RAJA_HOST_DEVICE
       RAJA_INLINE
       static
-      void static_exec(OTILE &, TTYPE const &tile, BODY && body){
+      void static_exec(OTILE const &, TTYPE const &tile, BODY && body){
 
         // execute body, passing in the current tile
         body(tile);
@@ -236,6 +205,97 @@ namespace expt
 
     }
 
+
+    template<typename STORAGE, typename DIM_SEQ, typename IDX_SEQ>
+    struct StaticTensorTileExec;
+
+    /**
+     * Implement a dimension tiling loop
+     */
+
+    template<typename STORAGE, camp::idx_t DIM0, camp::idx_t ... DIM_REST, camp::idx_t IDX, camp::idx_t ... IDX_REST>
+    struct StaticTensorTileExec<STORAGE, camp::idx_seq<DIM0, DIM_REST...>,camp::idx_seq<IDX,IDX_REST...>>{
+
+          using DimList  = camp::idx_seq<DIM0, DIM_REST...>;
+          using DimTail  = camp::idx_seq<      DIM_REST...>;
+          using IdxList  = camp::idx_seq<IDX , IDX_REST...>;
+          using IdxTail  = camp::idx_seq<      IDX_REST...>;
+
+          using DownExec = TensorTileExec<STORAGE,camp::idx_seq<DIM_REST...>>;
+          using NextExec = StaticTensorTileExec<STORAGE,camp::idx_seq<DIM0,DIM_REST...>,camp::idx_seq<IDX_REST...>>;
+
+          static auto const step_size = STORAGE::s_dim_elem(DIM0);
+
+          template<
+              typename OTILE,
+              typename TTYPE,
+              typename BODY
+          >
+          RAJA_HOST_DEVICE
+          RAJA_INLINE
+          static
+          void
+          exec(
+              OTILE const &otile,
+              TTYPE const &tile,
+              BODY && body
+          ){
+    
+            auto constexpr orig_begin = OTILE::begin_type::value_at(DIM0);
+            auto constexpr orig_size =  OTILE:: size_type::value_at(DIM0);
+    
+            auto constexpr tile_begin = TTYPE::begin_type::value_at(DIM0);
+
+            using NextBegin = camp::integral_constant<typename TTYPE::index_type,tile_begin+STORAGE::s_dim_elem(DIM0)>;
+            using TailSize  = camp::integral_constant<typename TTYPE::index_type,(orig_begin+orig_size)-tile_begin>;
+
+            using NextTile  = typename expt::SetStaticTensorTileBegin<TTYPE,NextBegin,(size_t)DIM0>::Type;
+
+            using TailTile  = typename expt::SetStaticTensorTileSize <TTYPE,TailSize ,(size_t)DIM0>::Type;
+            using PartTile  = typename TailTile::Partial;
+
+    
+            static_assert( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size+ STORAGE::s_dim_elem(DIM0) ), "OOB" );
+     
+            if( (tile_begin + STORAGE::s_dim_elem(DIM0) ) <= (orig_begin + orig_size) ){
+               DownExec::static_exec(otile, tile, body);
+               NextTile next_tile;
+               NextExec::exec(otile, next_tile, body);
+            } else if ( tile_begin < (orig_begin + orig_size ) ) {
+               PartTile part_tile;
+               DownExec::static_exec(otile,part_tile,body);
+            }
+    
+          }
+
+
+
+    };
+
+
+
+    template<typename STORAGE, camp::idx_t DIM0, camp::idx_t IDX, camp::idx_t ... IDX_REST>
+    struct StaticTensorTileExec<STORAGE, camp::idx_seq<DIM0>, camp::idx_seq<IDX,IDX_REST...>>{
+
+      template<typename OTILE, typename TTYPE, typename BODY>
+      RAJA_HOST_DEVICE
+      RAJA_INLINE
+      static void exec(OTILE const &, TTYPE const &tile, BODY && body) {
+          // execute body, passing in the current tile
+          body(tile);
+      }
+
+    };
+
+    template<typename STORAGE, camp::idx_t ... DIM_REST>
+    struct StaticTensorTileExec<STORAGE, camp::idx_seq<DIM_REST...>, camp::idx_seq<> >{
+
+      template<typename OTILE, typename TTYPE, typename BODY>
+      RAJA_HOST_DEVICE
+      RAJA_INLINE
+      static void exec(OTILE const &, TTYPE const &, BODY &&) {}
+
+    };
 
 
 

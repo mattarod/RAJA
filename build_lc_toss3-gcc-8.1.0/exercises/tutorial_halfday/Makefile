@@ -102,6 +102,17 @@ list_install_components/fast: list_install_components
 
 .PHONY : list_install_components/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/tce/packages/cmake/cmake-3.14.5/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -930,6 +941,7 @@ help:
 	@echo "... ex3_colored-indexset_solution"
 	@echo "... ex2_approx-pi"
 	@echo "... ex7_nested-loop-reorder"
+	@echo "... test"
 	@echo "... ex6_stencil-offset-layout"
 	@echo "... ex1_vector-addition_solution"
 	@echo "... ex6_stencil-offset-layout_solution"

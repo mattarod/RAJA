@@ -75,3 +75,9 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/camp" TYPE FILE FILES "/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include/camp/config.hpp")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for each subdirectory.
+  include("/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/test/cmake_install.cmake")
+
+endif()
+

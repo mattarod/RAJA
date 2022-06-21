@@ -37,3 +37,8 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/blt/thirdparty_builtin/googletest-master-2020-01-07/cmake_install.cmake")
+endif()
+

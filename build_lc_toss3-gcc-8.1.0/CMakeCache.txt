@@ -62,6 +62,20 @@ BLT_SOURCE_DIR:PATH=/g/g20/cuneo3/testraja/RAJA/blt
 
 BLT_VERSION:STRING=0.5.0
 
+//Builds the googlemock subproject
+BUILD_GMOCK:BOOL=OFF
+
+BUILD_GTEST:BOOL=ON
+
+//Build the testing tree.
+BUILD_TESTING:BOOL=ON
+
+//Path to a program.
+BZRCOMMAND:FILEPATH=BZRCOMMAND-NOTFOUND
+
+//Build tests
+CAMP_ENABLE_TESTS:BOOL=ON
+
 //Path to ClangFormat executable
 CLANGFORMAT_EXECUTABLE:FILEPATH=CLANGFORMAT_EXECUTABLE-NOTFOUND
 
@@ -157,8 +171,56 @@ CMAKE_Fortran_MODULE_DIRECTORY:PATH=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-g
 //gfx architecture to use when generating HIP/ROCm code
 CMAKE_HIP_ARCHITECTURES:STRING=gfx900
 
+//User executables (bin)
+CMAKE_INSTALL_BINDIR:PATH=bin
+
+//Read-only architecture-independent data (DATAROOTDIR)
+CMAKE_INSTALL_DATADIR:PATH=
+
+//Read-only architecture-independent data root (share)
+CMAKE_INSTALL_DATAROOTDIR:PATH=share
+
+//Documentation root (DATAROOTDIR/doc/PROJECT_NAME)
+CMAKE_INSTALL_DOCDIR:PATH=
+
+//C header files (include)
+CMAKE_INSTALL_INCLUDEDIR:PATH=include
+
+//Info documentation (DATAROOTDIR/info)
+CMAKE_INSTALL_INFODIR:PATH=
+
+//Object code libraries (lib64)
+CMAKE_INSTALL_LIBDIR:PATH=lib64
+
+//Program executables (libexec)
+CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
+
+//Locale-dependent data (DATAROOTDIR/locale)
+CMAKE_INSTALL_LOCALEDIR:PATH=
+
+//Modifiable single-machine data (var)
+CMAKE_INSTALL_LOCALSTATEDIR:PATH=var
+
+//Man documentation (DATAROOTDIR/man)
+CMAKE_INSTALL_MANDIR:PATH=
+
+//C header files for non-gcc (/usr/include)
+CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
+
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/g/g20/cuneo3/testraja/RAJA/install_lc_toss3-gcc-8.1.0
+
+//Run-time variable data (LOCALSTATEDIR/run)
+CMAKE_INSTALL_RUNSTATEDIR:PATH=
+
+//System admin executables (sbin)
+CMAKE_INSTALL_SBINDIR:PATH=sbin
+
+//Modifiable architecture-independent data (com)
+CMAKE_INSTALL_SHAREDSTATEDIR:PATH=com
+
+//Read-only single-machine data (etc)
+CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/usr/tce/packages/gcc/gcc-8.1.0/bin/ld
@@ -281,8 +343,30 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Path to the coverage program that CTest uses for performing coverage
+// inspection
+COVERAGE_COMMAND:FILEPATH=/usr/tce/packages/gcc/gcc-8.1.0/bin/gcov
+
+//Extra command line flags to pass to the coverage tool
+COVERAGE_EXTRA_FLAGS:STRING=-l
+
 //Path to Cppcheck executable
 CPPCHECK_EXECUTABLE:FILEPATH=CPPCHECK_EXECUTABLE-NOTFOUND
+
+//How many times to retry timed-out CTest submissions.
+CTEST_SUBMIT_RETRY_COUNT:STRING=3
+
+//How long to wait between timed-out CTest submissions.
+CTEST_SUBMIT_RETRY_DELAY:STRING=5
+
+//Path to a program.
+CVSCOMMAND:FILEPATH=/usr/bin/cvs
+
+//Options passed to the cvs update command.
+CVS_UPDATE_OPTIONS:STRING=-d -A -P
+
+//Maximum time allowed before CTest will kill the test.
+DART_TESTING_TIMEOUT:STRING=1500
 
 DESUL_ENABLE_TESTS:BOOL=Off
 
@@ -380,7 +464,7 @@ ENABLE_OPENMP:BOOL=Off
 ENABLE_SPHINX:BOOL=ON
 
 //Enables tests
-ENABLE_TESTS:BOOL=Off
+ENABLE_TESTS:BOOL=On
 
 //Enables Uncrustify support
 ENABLE_UNCRUSTIFY:BOOL=ON
@@ -405,20 +489,44 @@ EXAMPLE_OUTPUT_DIRECTORY:PATH=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1
 //\ncamp source repository
 EXTERNAL_CAMP_SOURCE_DIR:FILEPATH=
 
+//Path to a program.
+GITCOMMAND:FILEPATH=/usr/tce/bin/git
+
 //Git command line client
 GIT_EXECUTABLE:FILEPATH=/usr/tce/bin/git
 
+//Path to a program.
+HGCOMMAND:FILEPATH=/usr/bin/hg
+
+INSTALL_GMOCK:BOOL=OFF
+
+//Enable installation of googletest. (Projects embedding googletest
+// may want to turn this OFF.)
+INSTALL_GTEST:BOOL=OFF
+
 //Directory where compiled libraries will go in the build tree
 LIBRARY_OUTPUT_PATH:PATH=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/lib
+
+//Command to build the project
+MAKECOMMAND:STRING=/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 
 MEMORYCHECK_COMMAND:PATH=/usr/tce/bin/valgrind
 
 MEMORYCHECK_COMMAND_OPTIONS:PATH=--trace-children=yes --leak-check=full
 
+//File that contains suppressions for the memory checker
+MEMORYCHECK_SUPPRESSIONS_FILE:FILEPATH=
+
+//Path to a program.
+P4COMMAND:FILEPATH=P4COMMAND-NOTFOUND
+
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
 
-RAJA_ALL_SOURCES:STRING=/g/g20/cuneo3/testraja/RAJA/src/AlignedRangeIndexSetBuilders.cpp;/g/g20/cuneo3/testraja/RAJA/src/DepGraphNode.cpp;/g/g20/cuneo3/testraja/RAJA/src/LockFreeIndexSetBuilders.cpp;/g/g20/cuneo3/testraja/RAJA/src/MemUtils_CUDA.cpp;/g/g20/cuneo3/testraja/RAJA/src/MemUtils_HIP.cpp;/g/g20/cuneo3/testraja/RAJA/src/MemUtils_SYCL.cpp;/g/g20/cuneo3/testraja/RAJA/src/PluginStrategy.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_teams_basic.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-forall.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_daxpy.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_add-vectors.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_dot-product.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_indexset-segments.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-multiply.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_nested-loop-reorder.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_vertexsum-coloring.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_reductions.cpp;/g/g20/cuneo3/testraja/RAJA/examples/teams_flatten.cpp;/g/g20/cuneo3/testraja/RAJA/examples/teams_reductions.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-runtime-teams.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_scan.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_sort.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_atomic-histogram.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_offset-layout.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_batched-matrix-multiply.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-transpose-local-array.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_tiled-matrix-transpose.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_halo-exchange.cpp;/g/g20/cuneo3/testraja/RAJA/examples/pi-reduce_vs_atomic.cpp;/g/g20/cuneo3/testraja/RAJA/examples/raja-teams.cpp;/g/g20/cuneo3/testraja/RAJA/examples/teams_matrix-multiply.cpp;/g/g20/cuneo3/testraja/RAJA/examples/jacobi.cpp;/g/g20/cuneo3/testraja/RAJA/examples/red-black-gauss-seidel.cpp;/g/g20/cuneo3/testraja/RAJA/examples/wave-eqn.cpp;/g/g20/cuneo3/testraja/RAJA/examples/multiview.cpp;/g/g20/cuneo3/testraja/RAJA/examples/kernel-dynamic-tile.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-kernel.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-teams.cpp;/g/g20/cuneo3/testraja/RAJA/examples/plugin/test-plugin.cpp;/g/g20/cuneo3/testraja/RAJA/examples/plugin/counter-plugin.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array_solution.cpp
+//Path to a program.
+PYTHON_EXECUTABLE:FILEPATH=/usr/tce/bin/python
+
+RAJA_ALL_SOURCES:STRING=/g/g20/cuneo3/testraja/RAJA/blt/tests/smoke/blt_gtest_smoke.cpp;/g/g20/cuneo3/testraja/RAJA/src/AlignedRangeIndexSetBuilders.cpp;/g/g20/cuneo3/testraja/RAJA/src/DepGraphNode.cpp;/g/g20/cuneo3/testraja/RAJA/src/LockFreeIndexSetBuilders.cpp;/g/g20/cuneo3/testraja/RAJA/src/MemUtils_CUDA.cpp;/g/g20/cuneo3/testraja/RAJA/src/MemUtils_HIP.cpp;/g/g20/cuneo3/testraja/RAJA/src/MemUtils_SYCL.cpp;/g/g20/cuneo3/testraja/RAJA/src/PluginStrategy.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/integration/plugin/test-plugin-forall-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/test/integration/plugin/plugin_to_test.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/integration/plugin/test-plugin-kernel-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/test/integration/plugin/plugin_to_test.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/integration/plugin/test-plugin-workgroup-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/test/integration/plugin/plugin_to_test.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/indexset/test-forall-IndexSet-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/indexset/test-forall-IcountIndexSet-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/indexset-view/test-forall-IndexSetView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/indexset-view/test-forall-IcountIndexSetView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment/test-forall-ListSegment-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment/test-forall-RangeSegment-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment/test-forall-RangeStrideSegment-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment-view/test-forall-ListSegmentView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment-view/test-forall-RangeSegmentView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment-view/test-forall-RangeSegment2DView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/segment-view/test-forall-RangeStrideSegmentView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceMin-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceMax-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceMinLoc-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceMaxLoc-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceBitAnd-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-basic/test-forall-basic-ReduceBitOr-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-segment/test-forall-segment-multiple-ReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-segment/test-forall-segment-multiple-ReduceMin-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-segment/test-forall-segment-multiple-ReduceMax-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-segment/test-forall-segment-multiple-ReduceMinLoc-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-segment/test-forall-segment-multiple-ReduceMaxLoc-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-indexset/test-forall-indexset-multiple-ReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-indexset/test-forall-indexset-multiple-ReduceMin-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-indexset/test-forall-indexset-multiple-ReduceMax-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-indexset/test-forall-indexset-multiple-ReduceMinLoc-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/reduce-multiple-indexset/test-forall-indexset-multiple-ReduceMaxLoc-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/resource-indexset/test-forall-ResourceIndexSet-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/resource-indexset/test-forall-ResourceIcountIndexSet-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/resource-segment/test-forall-resource-ListSegment-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/resource-segment/test-forall-resource-RangeSegment-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/resource-segment/test-forall-resource-RangeStrideSegment-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/CombiningAdapter/test-forall-CombiningAdapter-1D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/CombiningAdapter/test-forall-CombiningAdapter-2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/CombiningAdapter/test-forall-CombiningAdapter-3D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-basic/test-forall-atomic-basic-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-basic/test-forall-atomic-basic-unsigned-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-view/test-forall-AtomicView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-view/test-forall-AtomicMultiView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-view/test-forall-AtomicOutOfBoundsMultiView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-ref/test-forall-AtomicRefAdd-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-ref/test-forall-AtomicRefSub-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-ref/test-forall-AtomicRefLoadStore-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-ref/test-forall-AtomicRefCAS-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-ref/test-forall-AtomicRefMinMax-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/atomic-ref/test-forall-AtomicRefLogical-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/forall/region/test-forall-region-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/indexset-build/test-aligned-indexset.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/basic-single-loop/test-kernel-resource-basic-single-loop-Segments-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/basic-single-loop/test-kernel-basic-single-loop-Segments-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/basic-single-icount-loop/test-kernel-basic-single-icount-loop-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/basic-fission-fusion-loop/test-kernel-basic-fission-fusion-loop-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/conditional-fission-fusion-loop/test-kernel-conditional-fission-fusion-loop-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop/test-kernel-resource-nested-loop-Basic-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop/test-kernel-resource-nested-loop-MultiLambda-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop/test-kernel-resource-nested-loop-MultiLambdaParam-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop/test-kernel-nested-loop-Basic-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop/test-kernel-nested-loop-MultiLambda-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop/test-kernel-nested-loop-MultiLambdaParam-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-reducesum/test-kernel-resource-nested-loop-ReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-reducesum/test-kernel-resource-nested-loop-BlockReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-reducesum/test-kernel-nested-loop-ReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-reducesum/test-kernel-nested-loop-BlockReduceSum-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-segment-types/test-kernel-nested-loop-segments-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-view-types/test-kernel-nested-loop-PermutedView2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-view-types/test-kernel-nested-loop-PermutedView3D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-view-types/test-kernel-nested-loop-OffsetView2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-view-types/test-kernel-nested-loop-OffsetView3D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-view-types/test-kernel-nested-loop-PermutedOffsetView2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/nested-loop-view-types/test-kernel-nested-loop-PermutedOffsetView3D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/reduce-loc/test-kernel-reduceloc-Min2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/reduce-loc/test-kernel-reduceloc-Max2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/reduce-loc/test-kernel-reduceloc-Min2DView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/reduce-loc/test-kernel-reduceloc-Max2DView-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/reduce-loc/test-kernel-reduceloc-Min2DViewTuple-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/reduce-loc/test-kernel-reduceloc-Max2DViewTuple-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/single-loop-tile-icount-tcount/test-kernel-single-loop-ForICount-8-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/single-loop-tile-icount-tcount/test-kernel-single-loop-ForICount-32-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/single-loop-tile-icount-tcount/test-kernel-single-loop-TileTCount-8-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/single-loop-tile-icount-tcount/test-kernel-single-loop-TileTCount-32-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/tile-variants/test-kernel-tile-Fixed2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/tile-variants/test-kernel-tile-Dynamic2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/tile-variants/test-kernel-tile-LocalArray2D-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/kernel/region/test-kernel-region-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/scan/test-Exclusive-scan-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/scan/test-ExclusiveInplace-scan-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/scan/test-Inclusive-scan-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/scan/test-InclusiveInplace-scan-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/teams/test-teams-BasicShared-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-GetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Load.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Store.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Gather.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Scatter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Multiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-DotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-FMA.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-FMS.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Max.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-Min.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-SegmentedDotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-SegmentedBroadcastInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-SegmentedBroadcastOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-SegmentedSumInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int32_t-SegmentedSumOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-GetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Load.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Store.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Gather.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Scatter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Multiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-DotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-FMA.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-FMS.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Max.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-Min.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-SegmentedDotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-SegmentedBroadcastInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-SegmentedBroadcastOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-SegmentedSumInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-int64_t-SegmentedSumOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-GetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Load.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Store.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Gather.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Scatter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Multiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-DotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-FMA.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-FMS.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Max.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-Min.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-SegmentedDotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-SegmentedBroadcastInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-SegmentedBroadcastOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-SegmentedSumInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-float-SegmentedSumOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-GetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Load.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Store.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Gather.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Scatter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Multiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-DotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-FMA.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-FMS.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Max.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-Min.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-SegmentedDotProduct.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-SegmentedBroadcastInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-SegmentedBroadcastOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-SegmentedSumInner.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/register/test-tensor-register-double-SegmentedSumOuter.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-RowMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int32_t-ColMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-RowMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-int64_t-ColMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-RowMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-float-ColMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-RowMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-CtorGetSet.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-Load_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-Load_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-Store_RowMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-Store_ColMajor.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_LoadStore.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_Add.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_Subtract.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_Divide.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_MatrixVector.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiply.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_MatrixMatrixMultiplyAdd.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/functional/tensor/matrix/test-tensor-matrix-double-ColMajor-ET_Negate.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/util/test-CombiningAdapter-1D.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/util/test-CombiningAdapter-2D.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/util/test-CombiningAdapter-3D.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/util/test-PermutedCombiningAdapter-1D.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/util/test-PermutedCombiningAdapter-2D.cpp;/g/g20/cuneo3/testraja/RAJA/test/functional/util/test-PermutedCombiningAdapter-3D.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/index/test-indexset.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/index/test-indexvalue.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/index/test-listsegment.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/index/test-rangesegment.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/index/test-rangestridesegment.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/internal/test-iterators.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/internal/test-rajavec.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/test-float-limits.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/test-integral-limits.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/test-timer.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/test-span.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/operator/test-operators-math.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/operator/test-operators-logical.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/operator/test-operators-equivalence.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/operator/test-operators-bitwise-modulus.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/util/operator/test-operators-identity.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/reducer/test-reducer-constructors-seq.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/reducer/test-reducer-reset-seq.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/resource/test-resource-Depends-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/resource/test-resource-MultiStream-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/resource/test-resource-AsyncTime-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/resource/test-resource-BasicAsyncSemantics-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/resource/test-resource-JoinAsyncSemantics-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-incdec.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-ref-constructor.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-ref-accessors.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-ref-exchanges.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-ref-addsub.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-ref-minmax.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/atomic/test-atomic-ref-bitwise.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/view-layout/test-standard-layout.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/view-layout/test-typedlayout.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/view-layout/test-typedview.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/view-layout/test-makelayout.cpp;/g/g20/cuneo3/testraja/RAJA/test/unit/view-layout/test-multiview.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-sort-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-stable-sort-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-util-sort-Shell-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-util-sort-Heap-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-util-sort-Intro-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-util-sort-Merge-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/algorithm/test-algorithm-util-sort-Insertion-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-Constructor-Single-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-Enqueue-Single-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-Enqueue-Multiple-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-Vtable-Single-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-WorkStorage-Constructor-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-WorkStorage-Iterator-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-WorkStorage-InsertCall-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/test/unit/workgroup/test-workgroup-WorkStorage-Multiple-Sequential.cpp;/g/g20/cuneo3/testraja/RAJA/test/old-tests/unit/test-kernel.cpp;/g/g20/cuneo3/testraja/RAJA/test/old-tests/unit/test-sharedmem.cpp;/g/g20/cuneo3/testraja/RAJA/test/old-tests/unit/test-simd.cpp;/g/g20/cuneo3/testraja/RAJA/test/old-tests/unit/cpu/test-synchronize.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_teams_basic.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-forall.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_daxpy.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_add-vectors.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_dot-product.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_indexset-segments.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-multiply.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_nested-loop-reorder.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_vertexsum-coloring.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_reductions.cpp;/g/g20/cuneo3/testraja/RAJA/examples/teams_flatten.cpp;/g/g20/cuneo3/testraja/RAJA/examples/teams_reductions.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-runtime-teams.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_scan.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_sort.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_atomic-histogram.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_offset-layout.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_batched-matrix-multiply.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_matrix-transpose-local-array.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_tiled-matrix-transpose.cpp;/g/g20/cuneo3/testraja/RAJA/examples/tut_halo-exchange.cpp;/g/g20/cuneo3/testraja/RAJA/examples/pi-reduce_vs_atomic.cpp;/g/g20/cuneo3/testraja/RAJA/examples/raja-teams.cpp;/g/g20/cuneo3/testraja/RAJA/examples/teams_matrix-multiply.cpp;/g/g20/cuneo3/testraja/RAJA/examples/jacobi.cpp;/g/g20/cuneo3/testraja/RAJA/examples/red-black-gauss-seidel.cpp;/g/g20/cuneo3/testraja/RAJA/examples/wave-eqn.cpp;/g/g20/cuneo3/testraja/RAJA/examples/multiview.cpp;/g/g20/cuneo3/testraja/RAJA/examples/kernel-dynamic-tile.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-kernel.cpp;/g/g20/cuneo3/testraja/RAJA/examples/resource-teams.cpp;/g/g20/cuneo3/testraja/RAJA/examples/plugin/test-plugin.cpp;/g/g20/cuneo3/testraja/RAJA/examples/plugin/counter-plugin.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex1_vector-addition_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex2_approx-pi_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex3_colored-indexset_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex4_atomic-histogram_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex5_line-of-sight_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex6_stencil-offset-layout_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex7_nested-loop-reorder_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex8_tiled-matrix-transpose_solution.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array.cpp;/g/g20/cuneo3/testraja/RAJA/exercises/tutorial_halfday/ex9_matrix-transpose-local-array_solution.cpp
 
 //Value Computed by CMake
 RAJA_BINARY_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0
@@ -484,6 +592,9 @@ RAJA_ENABLE_TARGET_OPENMP:BOOL=OFF
 //Build TBB support
 RAJA_ENABLE_TBB:BOOL=OFF
 
+//Build tests
+RAJA_ENABLE_TESTS:BOOL=ON
+
 //Enable warnings as errors for CI
 RAJA_ENABLE_WARNINGS:BOOL=OFF
 
@@ -528,8 +639,20 @@ RAJA_USE_FLOAT:BOOL=OFF
 //Use clock_gettime from time.h for timer
 RAJA_USE_GETTIME:BOOL=OFF
 
+//Name of the computer/site where compile is being run
+SITE:STRING=quartz770
+
+//Path to the SLURM sbatch executable
+SLURM_SBATCH_COMMAND:FILEPATH=/usr/bin/sbatch
+
+//Path to the SLURM srun executable
+SLURM_SRUN_COMMAND:FILEPATH=/usr/bin/srun
+
 //Path to Sphinx executable
 SPHINX_EXECUTABLE:FILEPATH=/usr/bin/sphinx-build
+
+//Path to a program.
+SVNCOMMAND:FILEPATH=/usr/bin/svn
 
 //driver used to wrap test commands
 TEST_DRIVER:STRING=
@@ -546,16 +669,61 @@ VALGRIND_EXECUTABLE:FILEPATH=/usr/tce/bin/valgrind
 //Path to Yapf executable
 YAPF_EXECUTABLE:FILEPATH=YAPF_EXECUTABLE-NOTFOUND
 
+_BLT_GTEST_COMPILE_FLAGS:STRING='   '
+
+_BLT_GTEST_DEFINES:STRING=-DGTEST_HAS_DEATH_TEST=1
+
+_BLT_GTEST_INCLUDES:STRING=/g/g20/cuneo3/testraja/RAJA/blt/thirdparty_builtin/googletest-master-2020-01-07/googletest/include
+
+_BLT_GTEST_IS_OBJECT_LIBRARY:BOOL=FALSE
+
+_BLT_GTEST_IS_REGISTERED_LIBRARY:BOOL=TRUE
+
+_BLT_GTEST_LIBRARIES:STRING=gtest_main;gtest;-lpthread
+
+_BLT_GTEST_TREAT_INCLUDES_AS_SYSTEM:BOOL=TRUE
+
 //Limits BLT issuing more than one warning for style version
 _BLT_STYLE_VERSION_WARNING_ISSUED:BOOL=FALSE
 
-camp_ALL_SOURCES:STRING=/g/g20/cuneo3/testraja/RAJA/tpl/camp/./src/errors.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/camp.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/concepts.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/defines.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/detail/sfinae.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/detail/test.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/helpers.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/lambda.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list/at.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list/find_if.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list/list.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/make_unique.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/map.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/number.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/number/if.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/number/number.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/cuda.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/event.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/hip.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/host.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/omp_target.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/platform.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/sycl.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/size.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/tuple.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/type_traits.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/type_traits/is_same.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/value.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/value/eval.hpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include/camp/config.hpp
+camp_ALL_SOURCES:STRING=/g/g20/cuneo3/testraja/RAJA/tpl/camp/./src/errors.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/camp.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/concepts.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/defines.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/detail/sfinae.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/detail/test.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/helpers.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/lambda.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list/at.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list/find_if.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/list/list.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/make_unique.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/map.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/number.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/number/if.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/number/number.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/cuda.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/event.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/hip.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/host.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/omp_target.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/platform.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/resource/sycl.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/size.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/tuple.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/type_traits.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/type_traits/is_same.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/value.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/include/camp/value/eval.hpp;/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp/include/camp/config.hpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/resource.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/tuple.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/accumulate.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/at_key.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/filter.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/find_if.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/flatten.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/index_of.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/lambda.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/number.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/size.cpp;/g/g20/cuneo3/testraja/RAJA/tpl/camp/test/transform.cpp
 
 //Value Computed by CMake
 camp_BINARY_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/tpl/camp
 
 //Value Computed by CMake
 camp_SOURCE_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/tpl/camp
+
+//Value Computed by CMake
+googletest-distribution_BINARY_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/blt/thirdparty_builtin/googletest-master-2020-01-07
+
+//Value Computed by CMake
+googletest-distribution_SOURCE_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/blt/thirdparty_builtin/googletest-master-2020-01-07
+
+//Value Computed by CMake
+gtest_BINARY_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/build_lc_toss3-gcc-8.1.0/blt/thirdparty_builtin/googletest-master-2020-01-07/googletest
+
+//Value Computed by CMake
+gtest_SOURCE_DIR:STATIC=/g/g20/cuneo3/testraja/RAJA/blt/thirdparty_builtin/googletest-master-2020-01-07/googletest
+
+//Build gtest's sample programs.
+gtest_build_samples:BOOL=OFF
+
+//Build all of gtest's own tests.
+gtest_build_tests:BOOL=OFF
+
+//Disable uses of pthreads in gtest.
+gtest_disable_pthreads:BOOL=OFF
+
+//Use shared (DLL) run-time lib even when Google Test is built
+// as static lib.
+gtest_force_shared_crt:BOOL=OFF
+
+//Build gtest with internal symbols hidden in shared libraries.
+gtest_hide_internal_symbols:BOOL=OFF
+
+//Dependencies for the target
+gtest_main_LIB_DEPENDS:STATIC=general;gtest;
 
 
 ########################
@@ -578,6 +746,8 @@ BLT_ENABLE_MSVC_STATIC_MD_TO_MT-ADVANCED:INTERNAL=1
 BLT_RUN_BENCHMARKS_TARGET_NAME-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: BLT_VERSION
 BLT_VERSION-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: BZRCOMMAND
+BZRCOMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -594,6 +764,8 @@ CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 CMAKE_COMMAND:INTERNAL=/usr/tce/packages/cmake/cmake-3.14.5/bin/cmake
 //Path to cpack program executable.
 CMAKE_CPACK_COMMAND:INTERNAL=/usr/tce/packages/cmake/cmake-3.14.5/bin/cpack
+//ADVANCED property for variable: CMAKE_CTEST_COMMAND
+CMAKE_CTEST_COMMAND-ADVANCED:INTERNAL=1
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/tce/packages/cmake/cmake-3.14.5/bin/ctest
 //ADVANCED property for variable: CMAKE_CXX_COMPILER
@@ -656,11 +828,51 @@ CMAKE_GENERATOR_INSTANCE:INTERNAL=
 CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
+//Have symbol pthread_create
+CMAKE_HAVE_LIBC_CREATE:INTERNAL=
+//Have library pthreads
+CMAKE_HAVE_PTHREADS_CREATE:INTERNAL=
+//Have library pthread
+CMAKE_HAVE_PTHREAD_CREATE:INTERNAL=1
+//Have include pthread.h
+CMAKE_HAVE_PTHREAD_H:INTERNAL=1
 //Source directory with the top level CMakeLists.txt file for this
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/g/g20/cuneo3/testraja/RAJA
+//ADVANCED property for variable: CMAKE_INSTALL_BINDIR
+CMAKE_INSTALL_BINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATADIR
+CMAKE_INSTALL_DATADIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DATAROOTDIR
+CMAKE_INSTALL_DATAROOTDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_DOCDIR
+CMAKE_INSTALL_DOCDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INCLUDEDIR
+CMAKE_INSTALL_INCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_INFODIR
+CMAKE_INSTALL_INFODIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBDIR
+CMAKE_INSTALL_LIBDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LIBEXECDIR
+CMAKE_INSTALL_LIBEXECDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALEDIR
+CMAKE_INSTALL_LOCALEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_LOCALSTATEDIR
+CMAKE_INSTALL_LOCALSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_MANDIR
+CMAKE_INSTALL_MANDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_OLDINCLUDEDIR
+CMAKE_INSTALL_OLDINCLUDEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_RUNSTATEDIR
+CMAKE_INSTALL_RUNSTATEDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SBINDIR
+CMAKE_INSTALL_SBINDIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_INSTALL_SHAREDSTATEDIR
+CMAKE_INSTALL_SHAREDSTATEDIR-ADVANCED:INTERNAL=1
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=0
+//ADVANCED property for variable: CMAKE_INSTALL_SYSCONFDIR
+CMAKE_INSTALL_SYSCONFDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
@@ -678,7 +890,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=7
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=65
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
@@ -721,6 +933,20 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: COVERAGE_COMMAND
+COVERAGE_COMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: COVERAGE_EXTRA_FLAGS
+COVERAGE_EXTRA_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CTEST_SUBMIT_RETRY_COUNT
+CTEST_SUBMIT_RETRY_COUNT-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CTEST_SUBMIT_RETRY_DELAY
+CTEST_SUBMIT_RETRY_DELAY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CVSCOMMAND
+CVSCOMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CVS_UPDATE_OPTIONS
+CVS_UPDATE_OPTIONS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: DART_TESTING_TIMEOUT
+DART_TESTING_TIMEOUT-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_DOT_EXECUTABLE
 DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
@@ -735,16 +961,34 @@ ENABLE_WRAP_ALL_TESTS_WITH_MPIEXEC-ADVANCED:INTERNAL=1
 FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][cfound components:  doxygen dot ][v1.8.5()]
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/tce/bin/git][v2.29.1()]
+//Details about finding PythonInterp
+FIND_PACKAGE_MESSAGE_DETAILS_PythonInterp:INTERNAL=[/usr/tce/bin/python][v2.7.16()]
 //Details about finding Sphinx
 FIND_PACKAGE_MESSAGE_DETAILS_Sphinx:INTERNAL=[/usr/bin/sphinx-build][v()]
+//Details about finding Threads
+FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding Valgrind
 FIND_PACKAGE_MESSAGE_DETAILS_Valgrind:INTERNAL=[/usr/tce/bin/valgrind][v()]
+//ADVANCED property for variable: GITCOMMAND
+GITCOMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: GIT_EXECUTABLE
 GIT_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: HGCOMMAND
+HGCOMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: LIBRARY_OUTPUT_PATH
 LIBRARY_OUTPUT_PATH-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MAKECOMMAND
+MAKECOMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MEMORYCHECK_COMMAND
+MEMORYCHECK_COMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: MEMORYCHECK_SUPPRESSIONS_FILE
+MEMORYCHECK_SUPPRESSIONS_FILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: P4COMMAND
+P4COMMAND-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: PYTHON_EXECUTABLE
+PYTHON_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: RAJA_ALL_SOURCES
 RAJA_ALL_SOURCES-ADVANCED:INTERNAL=1
 //STRINGS property for variable: RAJA_ENABLE_EXTERNAL_CUB
@@ -761,6 +1005,38 @@ RAJA_HAVE_MM_MALLOC:INTERNAL=
 RAJA_HAVE_POSIX_MEMALIGN:INTERNAL=1
 //STRINGS property for variable: RAJA_TIMER
 RAJA_TIMER-STRINGS:INTERNAL=chrono;gettime;clock
+//ADVANCED property for variable: SITE
+SITE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: SLURM_SBATCH_COMMAND
+SLURM_SBATCH_COMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: SLURM_SRUN_COMMAND
+SLURM_SRUN_COMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: SVNCOMMAND
+SVNCOMMAND-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _BLT_GTEST_COMPILE_FLAGS
+_BLT_GTEST_COMPILE_FLAGS-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _BLT_GTEST_DEFINES
+_BLT_GTEST_DEFINES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _BLT_GTEST_INCLUDES
+_BLT_GTEST_INCLUDES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _BLT_GTEST_IS_OBJECT_LIBRARY
+_BLT_GTEST_IS_OBJECT_LIBRARY-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _BLT_GTEST_LIBRARIES
+_BLT_GTEST_LIBRARIES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: _BLT_GTEST_TREAT_INCLUDES_AS_SYSTEM
+_BLT_GTEST_TREAT_INCLUDES_AS_SYSTEM-ADVANCED:INTERNAL=1
+//CMAKE_INSTALL_PREFIX during last run
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/g/g20/cuneo3/testraja/RAJA/install_lc_toss3-gcc-8.1.0
 //ADVANCED property for variable: camp_ALL_SOURCES
 camp_ALL_SOURCES-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: gtest_build_samples
+gtest_build_samples-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: gtest_build_tests
+gtest_build_tests-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: gtest_disable_pthreads
+gtest_disable_pthreads-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: gtest_force_shared_crt
+gtest_force_shared_crt-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: gtest_hide_internal_symbols
+gtest_hide_internal_symbols-ADVANCED:INTERNAL=1
 
