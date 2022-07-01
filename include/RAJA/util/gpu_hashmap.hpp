@@ -51,7 +51,7 @@ public:
   /// Constructor for the hashmap. Requires the user to pass in a chunk of
   /// allocated memory, along with its size in bytes.
   gpu_hashmap(void *chunk, size_t size)
-      : table(table), capacity(size / BUCKET_SIZE)
+      : table(reinterpret_cast<bucket_t *>(chunk)), capacity(size / BUCKET_SIZE)
   {
     if (size < BUCKET_SIZE) {
       throw std::invalid_argument(
@@ -78,7 +78,7 @@ public:
     HASHER hasher;
     size_t hash_code = hasher(k);
 
-    for (int i = 0; i < capacity; ++i) {
+    for (size_t i = 0; i < capacity; ++i) {
       size_t index = (hash_code + i) % capacity;
       bucket_t &bucket = table[index];
       if (bucket.first == EMPTY) {
@@ -105,7 +105,7 @@ public:
     HASHER hasher;
     size_t hash_code = hasher(k);
 
-    for (int i = 0; i < capacity; ++i) {
+    for (size_t i = 0; i < capacity; ++i) {
       size_t index = (hash_code + i) % capacity;
       bucket_t &bucket = table[index];
       if (bucket.first == EMPTY || bucket.first == DELETED) {
@@ -130,7 +130,7 @@ public:
     HASHER hasher;
     size_t hash_code = hasher(k);
 
-    for (int i = 0; i < capacity; ++i) {
+    for (size_t i = 0; i < capacity; ++i) {
       size_t index = (hash_code + i) % capacity;
       bucket_t &bucket = table[index];
       if (bucket.first == EMPTY) {
