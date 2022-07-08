@@ -63,12 +63,18 @@ public:
     if (chunk == nullptr) {
       throw std::invalid_argument("Parameter [chunk] must not be null.");
     }
-
-    // Set all bucket's keys to EMPTY.
-    // TODO: Do this in GPU.
-    for (size_t i = 0; i < capacity; ++i) {
-      table[i].first = EMPTY;
-    }
+  }
+  
+  /// Get the capacity of the table, in buckets.
+  size_t get_capacity() const { return capacity; }
+  
+  /// Initialize the bucket at the given index.
+  /// This must be done for ALL i in [0, capacity) before use.
+  /// This is implemented this way so this operation can be parallelized
+  /// through RAJA.
+  void initialize(int i) {
+	// Set all bucket's keys to EMPTY.
+    table[i].first = EMPTY;
   }
 
   /// Searches for key K. If found, return true and set v to its value.

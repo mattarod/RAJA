@@ -73,20 +73,33 @@ typedef size_t K;
 typedef size_t V;
 typedef RAJA::gpu_hashmap<K, V, std::hash<K>, EMPTY, DELETED> test_hashmap_t;
 
+void initialize(test_hashmap_t &map) {
+  size_t capacity = map.get_capacity();
+  constexpr int CUDA_BLOCK_SIZE = 256;
+  
+  RAJA::forall<RAJA::cuda_exec<CUDA_BLOCK_SIZE>>(
+    RAJA::RangeSegment(0, capacity - 1), 
+    [&map] RAJA_DEVICE (int i) { 
+      map.initialize(i);
+    }
+  );
+}
+
 // A trivial test that simply constructs and deconstructs a hash map.
 TEST(GPUHashmapUnitTest, ConstructionTest)
-{
+{	  
   constexpr size_t CHUNK_SIZE = 1000;
-  void *chunk = allocate(CHUNK_SIZE);
+  void *chunk = allocate_gpu(CHUNK_SIZE);
   test_hashmap_t map(chunk, CHUNK_SIZE);
-  deallocate(chunk);
+  initialize(map);
+  deallocate_gpu(chunk);
 }
 
 // A trivial test that simply constructs and deconstructs a hash map.
 TEST(GPUHashmapUnitTest, OneElementTest)
 {
   constexpr size_t CHUNK_SIZE = 1000;
-  void *chunk = allocate(CHUNK_SIZE);
+  void *chunk = allocate_gpu(CHUNK_SIZE);
   test_hashmap_t map(chunk, CHUNK_SIZE);
 
   // Insertion of a new key should succeed
@@ -114,5 +127,5 @@ TEST(GPUHashmapUnitTest, OneElementTest)
   // Reinsertion of removed key should succeed
   ASSERT_TRUE(map.insert(1, 3));
 
-  deallocate(chunk);
+  deallocate_gpu(chunk);
 }
