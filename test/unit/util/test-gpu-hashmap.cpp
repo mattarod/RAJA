@@ -15,57 +15,31 @@
 #include "RAJA_gtest.hpp"
 #include "RAJA_test-base.hpp"
 
-void *allocate(RAJA::Index_type size)
+// Allocate a fixed number of bytes.
+void *allocate(const size_t size)
 {
-  int8_t *ptr;
+  char *ptr;
 #if defined(RAJA_ENABLE_CUDA)
-  cudaErrchk(cudaMallocManaged((void **)&ptr,
-                               sizeof(int8_t) * size,
-                               cudaMemAttachGlobal));
+  cudaErrchk(cudaMallocManaged((void **)&ptr, size, cudaMemAttachGlobal));
 #else
-  ptr = new int8_t[size];
+  ptr = new char[size];
 #endif
   return (void *)ptr;
 }
 
+// Free a pointer allocated by the allocate() method above.
 void deallocate(void *&ptr)
 {
+  char *cptr = (char *)ptr;
   if (ptr) {
-    int8_t *ptri = (int8_t *)ptr;
 #if defined(RAJA_ENABLE_CUDA)
-    cudaErrchk(cudaFree(ptri));
+    cudaErrchk(cudaFree(cptr));
 #else
-    delete[] ptri;
+    delete[] cptr;
 #endif
     ptr = nullptr;
   }
 }
-
-#if defined(RAJA_ENABLE_CUDA) || defined(RAJA_ENABLE_HIP)
-int8_t *allocate_gpu(RAJA::Index_type size)
-{
-  int8_t *ptr;
-#if defined(RAJA_ENABLE_CUDA)
-  cudaErrchk(cudaMalloc((void **)&ptr, sizeof(int8_t) * size));
-#elif defined(RAJA_ENABLE_HIP)
-  hipErrchk(hipMalloc((void **)&ptr, sizeof(int8_t) * size));
-#endif
-  return ptr;
-}
-
-void deallocate_gpu(void *&ptr)
-{
-  if (ptr) {
-    int8_t *ptri = (int8_t *)ptr;
-#if defined(RAJA_ENABLE_CUDA)
-    cudaErrchk(cudaFree(ptri));
-#elif defined(RAJA_ENABLE_HIP)
-    hipErrchk(hipFree(ptri));
-#endif
-    ptr = nullptr;
-  }
-}
-#endif
 
 constexpr size_t EMPTY(size_t(-1));
 constexpr size_t DELETED(size_t(-2));
@@ -73,59 +47,111 @@ typedef size_t K;
 typedef size_t V;
 typedef RAJA::gpu_hashmap<K, V, std::hash<K>, EMPTY, DELETED> test_hashmap_t;
 
-void initialize(test_hashmap_t &map) {
-  size_t capacity = map.get_capacity();
+RAJA_HOST_DEVICE void initialize(test_hashmap_t *map)
+{
+  size_t capacity = map->get_capacity();
   constexpr int CUDA_BLOCK_SIZE = 256;
-  
-  RAJA::forall<RAJA::cuda_exec<CUDA_BLOCK_SIZE>>(
-    RAJA::RangeSegment(0, capacity - 1), 
-    [&map] RAJA_DEVICE (int i) { 
-      map.initialize(i);
-    }
-  );
+  using policy = RAJA::cuda_exec<CUDA_BLOCK_SIZE>;
+  auto range = RAJA::RangeSegment(0, capacity);
+
+  RAJA::forall<policy>(range,
+                       [=] RAJA_HOST_DEVICE(int i) { map->initialize(i); });
 }
 
 // A trivial test that simply constructs and deconstructs a hash map.
 TEST(GPUHashmapUnitTest, ConstructionTest)
-{	  
+{
   constexpr size_t CHUNK_SIZE = 1000;
-  void *chunk = allocate_gpu(CHUNK_SIZE);
-  test_hashmap_t map(chunk, CHUNK_SIZE);
+  void *chunk = allocate(CHUNK_SIZE);
+  auto map = new test_hashmap_t(chunk, CHUNK_SIZE);
   initialize(map);
-  deallocate_gpu(chunk);
+  deallocate(chunk);
+  delete map;
+}
+
+RAJA_HOST_DEVICE bool contains(test_hashmap_t *map, const K &k, V &v)
+{
+  using policy = RAJA::cuda_exec<1>;
+  auto range = RAJA::RangeSegment(0, 1);
+  RAJA::ReduceBitAnd<RAJA::cuda_reduce, bool> result_reduction(true);
+  RAJA::ReduceBitOr<RAJA::cuda_reduce, V> v_reduction((V)0x0);
+
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
+    V temp = v;
+    bool result = map->contains(k, temp);
+    result_reduction &= result;
+    v_reduction |= v;
+  });
+
+  v = v_reduction.get();
+  return result_reduction.get();
+}
+
+RAJA_HOST_DEVICE bool insert(test_hashmap_t *map, const K &k, const V &v)
+{
+  using policy = RAJA::cuda_exec<1>;
+  auto range = RAJA::RangeSegment(0, 1);
+  RAJA::ReduceBitAnd<RAJA::cuda_reduce, bool> result_reduction(true);
+
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
+    bool result = map->insert(k, v);
+    result_reduction &= result;
+  });
+
+  return result_reduction.get();
+}
+
+RAJA_HOST_DEVICE bool remove(test_hashmap_t *map, const K &k, V &v)
+{
+  using policy = RAJA::cuda_exec<1>;
+  auto range = RAJA::RangeSegment(0, 1);
+  RAJA::ReduceBitAnd<RAJA::cuda_reduce, bool> result_reduction(true);
+  RAJA::ReduceBitOr<RAJA::cuda_reduce, V> v_reduction((V)0x0);
+
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
+    V temp = v;
+    bool result = map->remove(k, temp);
+    result_reduction &= result;
+    v_reduction |= v;
+  });
+
+  v = v_reduction.get();
+  return result_reduction.get();
 }
 
 // A trivial test that simply constructs and deconstructs a hash map.
 TEST(GPUHashmapUnitTest, OneElementTest)
 {
   constexpr size_t CHUNK_SIZE = 1000;
-  void *chunk = allocate_gpu(CHUNK_SIZE);
-  test_hashmap_t map(chunk, CHUNK_SIZE);
+  void *chunk = allocate(CHUNK_SIZE);
+  auto map = new test_hashmap_t(chunk, CHUNK_SIZE);
 
   // Insertion of a new key should succeed
-  ASSERT_TRUE(map.insert(1, 2));
+  ASSERT_TRUE(insert(map, 1, 2));
 
   // Reinsertion of same key should fail
-  ASSERT_FALSE(map.insert(1, 3));
+  ASSERT_FALSE(insert(map, 1, 3));
 
   // Map should contain key and have the correct associated value
   V v = 0;
-  ASSERT_TRUE(map.contains(1, v));
+  bool result = contains(map, 1, v);
+  ASSERT_TRUE(result);
   ASSERT_EQ(v, 2);
 
   // Map should not contain a non-inserted key
-  ASSERT_FALSE(map.contains(2, v));
+  ASSERT_FALSE(contains(map, 2, v));
 
   // Removing the key should succeed
   v = 0;
-  ASSERT_TRUE(map.remove(1, v));
+  ASSERT_TRUE(remove(map, 1, v));
   ASSERT_EQ(v, 2);
 
   // Lookup of removed key should fail
-  ASSERT_FALSE(map.remove(1, v));
+  ASSERT_FALSE(remove(map, 1, v));
 
   // Reinsertion of removed key should succeed
-  ASSERT_TRUE(map.insert(1, 3));
+  ASSERT_TRUE(insert(map, 1, 3));
 
-  deallocate_gpu(chunk);
+  deallocate(chunk);
+  delete map;
 }

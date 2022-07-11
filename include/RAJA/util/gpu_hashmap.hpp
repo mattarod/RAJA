@@ -64,22 +64,23 @@ public:
       throw std::invalid_argument("Parameter [chunk] must not be null.");
     }
   }
-  
+
   /// Get the capacity of the table, in buckets.
   size_t get_capacity() const { return capacity; }
-  
+
   /// Initialize the bucket at the given index.
   /// This must be done for ALL i in [0, capacity) before use.
   /// This is implemented this way so this operation can be parallelized
   /// through RAJA.
-  void initialize(int i) {
-	// Set all bucket's keys to EMPTY.
+  RAJA_HOST_DEVICE void initialize(int i)
+  {
+    // Set all bucket's keys to EMPTY.
     table[i].first = EMPTY;
   }
 
   /// Searches for key K. If found, return true and set v to its value.
   /// Otherwise, return false.
-  bool contains(const K &k, V &v)
+  RAJA_HOST_DEVICE bool contains(const K &k, V &v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -106,7 +107,7 @@ public:
   /// Inserts a key/value pair. Returns true if successful; false if failed.
   /// Failure may occur due to finding that the key is already inserted,
   /// or due to the entire table being full (pathologically bad, but possible.)
-  bool insert(const K &k, const V &v)
+  RAJA_HOST_DEVICE bool insert(const K &k, const V &v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -131,7 +132,7 @@ public:
 
   /// Removes a key/value pair. If found and removed,
   /// return true and set v to its value. Otherwise, return false.
-  bool remove(const K &k, V &v)
+  RAJA_HOST_DEVICE bool remove(const K &k, V &v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
