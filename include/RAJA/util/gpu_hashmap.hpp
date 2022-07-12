@@ -72,7 +72,7 @@ public:
   /// This must be done for ALL i in [0, capacity) before use.
   /// This is implemented this way so this operation can be parallelized
   /// through RAJA.
-  RAJA_HOST_DEVICE void initialize(int i)
+  RAJA_DEVICE void initialize(int i)
   {
     // Set all bucket's keys to EMPTY.
     table[i].first = EMPTY;
@@ -80,7 +80,7 @@ public:
 
   /// Searches for key K. If found, return true and set v to its value.
   /// Otherwise, return false.
-  RAJA_HOST_DEVICE bool contains(const K &k, V *v)
+  RAJA_DEVICE bool contains(const K &k, V *v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -107,7 +107,7 @@ public:
   /// Inserts a key/value pair. Returns true if successful; false if failed.
   /// Failure may occur due to finding that the key is already inserted,
   /// or due to the entire table being full (pathologically bad, but possible.)
-  RAJA_HOST_DEVICE bool insert(const K &k, const V &v)
+  RAJA_DEVICE bool insert(const K &k, const V &v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -132,7 +132,7 @@ public:
 
   /// Removes a key/value pair. If found and removed,
   /// return true and set v to its value. Otherwise, return false.
-  RAJA_HOST_DEVICE bool remove(const K &k, V *v)
+  RAJA_DEVICE bool remove(const K &k, V *v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);

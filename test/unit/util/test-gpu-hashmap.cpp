@@ -41,21 +41,29 @@ void deallocate(void *&ptr)
   }
 }
 
+struct gpu_hasher {
+  RAJA_DEVICE
+  size_t operator()(size_t const &s) const noexcept
+  {
+    constexpr size_t LARGE_PRIME = 17;  // FIXME
+    return s * LARGE_PRIME;
+  }
+};
+
 constexpr size_t EMPTY(size_t(-1));
 constexpr size_t DELETED(size_t(-2));
 typedef size_t K;
 typedef size_t V;
-typedef RAJA::gpu_hashmap<K, V, std::hash<K>, EMPTY, DELETED> test_hashmap_t;
+typedef RAJA::gpu_hashmap<K, V, gpu_hasher, EMPTY, DELETED> test_hashmap_t;
 
-RAJA_HOST_DEVICE void initialize(test_hashmap_t *map)
+void initialize(test_hashmap_t *map)
 {
   size_t capacity = map->get_capacity();
   constexpr int CUDA_BLOCK_SIZE = 256;
   using policy = RAJA::cuda_exec<CUDA_BLOCK_SIZE>;
   auto range = RAJA::RangeSegment(0, capacity);
 
-  RAJA::forall<policy>(range,
-                       [=] RAJA_HOST_DEVICE(int i) { map->initialize(i); });
+  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int i) { map->initialize(i); });
 }
 
 // A trivial test that simply constructs and deconstructs a hash map.
@@ -69,42 +77,42 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
   delete map;
 }
 
-RAJA_HOST_DEVICE bool contains(test_hashmap_t *map, const K &k, V *v)
+bool contains(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
   bool result = false;
   bool *result_ptr = &result;
 
-  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
     *result_ptr = map->contains(k, v);
   });
 
   return result;
 }
 
-RAJA_HOST_DEVICE bool insert(test_hashmap_t *map, const K &k, const V &v)
+bool insert(test_hashmap_t *map, const K &k, const V &v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
   bool result = false;
   bool *result_ptr = &result;
 
-  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
     *result_ptr = map->insert(k, v);
   });
 
   return result;
 }
 
-RAJA_HOST_DEVICE bool remove(test_hashmap_t *map, const K &k, V *v)
+bool remove(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
   bool result = false;
   bool *result_ptr = &result;
 
-  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
     *result_ptr = map->remove(k, v);
   });
 
