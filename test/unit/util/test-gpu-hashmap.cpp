@@ -69,54 +69,46 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
   delete map;
 }
 
-RAJA_HOST_DEVICE bool contains(test_hashmap_t *map, const K &k, V &v)
+RAJA_HOST_DEVICE bool contains(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
-  RAJA::ReduceBitAnd<RAJA::cuda_reduce, bool> result_reduction(true);
-  RAJA::ReduceBitOr<RAJA::cuda_reduce, V> v_reduction((V)0x0);
+  bool result = false;
+  bool *result_ptr = &result;
 
   RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
-    V temp = v;
-    bool result = map->contains(k, temp);
-    result_reduction &= result;
-    v_reduction |= v;
+    *result_ptr = map->contains(k, v);
   });
 
-  v = v_reduction.get();
-  return result_reduction.get();
+  return result;
 }
 
 RAJA_HOST_DEVICE bool insert(test_hashmap_t *map, const K &k, const V &v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
-  RAJA::ReduceBitAnd<RAJA::cuda_reduce, bool> result_reduction(true);
+  bool result = false;
+  bool *result_ptr = &result;
 
   RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
-    bool result = map->insert(k, v);
-    result_reduction &= result;
+    *result_ptr = map->insert(k, v);
   });
 
-  return result_reduction.get();
+  return result;
 }
 
-RAJA_HOST_DEVICE bool remove(test_hashmap_t *map, const K &k, V &v)
+RAJA_HOST_DEVICE bool remove(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
-  RAJA::ReduceBitAnd<RAJA::cuda_reduce, bool> result_reduction(true);
-  RAJA::ReduceBitOr<RAJA::cuda_reduce, V> v_reduction((V)0x0);
+  bool result = false;
+  bool *result_ptr = &result;
 
   RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
-    V temp = v;
-    bool result = map->remove(k, temp);
-    result_reduction &= result;
-    v_reduction |= v;
+    *result_ptr = map->remove(k, v);
   });
 
-  v = v_reduction.get();
-  return result_reduction.get();
+  return result;
 }
 
 // A trivial test that simply constructs and deconstructs a hash map.
@@ -134,20 +126,20 @@ TEST(GPUHashmapUnitTest, OneElementTest)
 
   // Map should contain key and have the correct associated value
   V v = 0;
-  bool result = contains(map, 1, v);
+  bool result = contains(map, 1, &v);
   ASSERT_TRUE(result);
   ASSERT_EQ(v, 2);
 
   // Map should not contain a non-inserted key
-  ASSERT_FALSE(contains(map, 2, v));
+  ASSERT_FALSE(contains(map, 2, &v));
 
   // Removing the key should succeed
   v = 0;
-  ASSERT_TRUE(remove(map, 1, v));
+  ASSERT_TRUE(remove(map, 1, &v));
   ASSERT_EQ(v, 2);
 
   // Lookup of removed key should fail
-  ASSERT_FALSE(remove(map, 1, v));
+  ASSERT_FALSE(remove(map, 1, &v));
 
   // Reinsertion of removed key should succeed
   ASSERT_TRUE(insert(map, 1, 3));

@@ -80,7 +80,7 @@ public:
 
   /// Searches for key K. If found, return true and set v to its value.
   /// Otherwise, return false.
-  RAJA_HOST_DEVICE bool contains(const K &k, V &v)
+  RAJA_HOST_DEVICE bool contains(const K &k, V *v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -94,7 +94,7 @@ public:
       }
       if (bucket.first == k) {
         // Key found!
-        v = bucket.second;
+        *v = bucket.second;
         return true;
       }
     }
@@ -132,7 +132,7 @@ public:
 
   /// Removes a key/value pair. If found and removed,
   /// return true and set v to its value. Otherwise, return false.
-  RAJA_HOST_DEVICE bool remove(const K &k, V &v)
+  RAJA_HOST_DEVICE bool remove(const K &k, V *v)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -146,7 +146,7 @@ public:
       }
       if (bucket.first == k) {
         // Key found!
-        v = bucket.second;
+        *v = bucket.second;
         bucket.first = DELETED;
         return true;
       }
