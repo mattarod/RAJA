@@ -75,7 +75,7 @@ public:
   RAJA_DEVICE void initialize(int i)
   {
     // Set all bucket's keys to EMPTY.
-    table[i].first = EMPTY;
+    if (i < capacity) table[i].first = EMPTY;
   }
 
   /// Searches for key K. If found, return true and set v to its value.

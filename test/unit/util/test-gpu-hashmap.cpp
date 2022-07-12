@@ -20,7 +20,7 @@ void *allocate(const size_t size)
 {
   char *ptr;
 #if defined(RAJA_ENABLE_CUDA)
-  cudaErrchk(cudaMallocManaged((void **)&ptr, size, cudaMemAttachGlobal));
+  cudaErrchk(cudaMallocManaged((void **)&ptr, size));
 #else
   ptr = new char[size];
 #endif
