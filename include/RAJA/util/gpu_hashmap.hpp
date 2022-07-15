@@ -39,7 +39,6 @@ class gpu_hashmap
 {
   // A bucket consisting of a key/value pair.
   typedef std::pair<K, V> bucket_t;
-  static constexpr size_t BUCKET_SIZE = sizeof(bucket_t);
 
   // An array of buckets representing the hash table itself.
   bucket_t *table;
@@ -48,31 +47,29 @@ class gpu_hashmap
   size_t capacity;
 
 public:
-  /// Constructor for the hashmap. Requires the user to pass in a chunk of
+  static constexpr size_t BUCKET_SIZE = sizeof(bucket_t);
+
+  /// Initializer for the hashmap. Requires the user to pass in a chunk of
   /// allocated memory, along with its size in bytes.
-  gpu_hashmap(void *chunk, size_t size)
-      : table(reinterpret_cast<bucket_t *>(chunk)), capacity(size / BUCKET_SIZE)
+  RAJA_DEVICE bool initialize(void *chunk, size_t size)
   {
-    if (size < BUCKET_SIZE) {
-      throw std::invalid_argument(
-          "This class requires " + std::to_string(BUCKET_SIZE) +
-          " bytes per bucket, so a chunk of size " + std::to_string(size) +
-          " bytes is insufficient to accommodate even a single bucket.");
+    if (size < BUCKET_SIZE || chunk == nullptr) {
+      return false;
     }
 
-    if (chunk == nullptr) {
-      throw std::invalid_argument("Parameter [chunk] must not be null.");
-    }
+    table = reinterpret_cast<bucket_t *>(chunk);
+    capacity = size / BUCKET_SIZE;
+    return true;
   }
 
   /// Get the capacity of the table, in buckets.
-  size_t get_capacity() const { return capacity; }
+  RAJA_DEVICE size_t get_capacity() const { return capacity; }
 
   /// Initialize the bucket at the given index.
   /// This must be done for ALL i in [0, capacity) before use.
   /// This is implemented this way so this operation can be parallelized
   /// through RAJA.
-  RAJA_DEVICE void initialize(int i)
+  RAJA_DEVICE void initialize_table(int i)
   {
     // Set all bucket's keys to EMPTY.
     if (i < capacity) table[i].first = EMPTY;

@@ -15,32 +15,6 @@
 #include "RAJA_gtest.hpp"
 #include "RAJA_test-base.hpp"
 
-// Allocate a fixed number of bytes.
-void *allocate(const size_t size)
-{
-  char *ptr;
-#if defined(RAJA_ENABLE_CUDA)
-  cudaErrchk(cudaMallocManaged((void **)&ptr, size));
-#else
-  ptr = new char[size];
-#endif
-  return (void *)ptr;
-}
-
-// Free a pointer allocated by the allocate() method above.
-void deallocate(void *&ptr)
-{
-  char *cptr = (char *)ptr;
-  if (ptr) {
-#if defined(RAJA_ENABLE_CUDA)
-    cudaErrchk(cudaFree(cptr));
-#else
-    delete[] cptr;
-#endif
-    ptr = nullptr;
-  }
-}
-
 struct gpu_hasher {
   RAJA_DEVICE
   size_t operator()(size_t const &s) const noexcept
@@ -56,27 +30,82 @@ typedef size_t K;
 typedef size_t V;
 typedef RAJA::gpu_hashmap<K, V, gpu_hasher, EMPTY, DELETED> test_hashmap_t;
 
-void initialize(test_hashmap_t *map)
+// Allocate [size] objects of type T in GPU memory and return a pointer to it.
+template <typename T>
+T *allocate(size_t size)
 {
-  size_t capacity = map->get_capacity();
+  T *ptr;
+#if defined(RAJA_ENABLE_CUDA)
+  cudaErrchk(
+      cudaMallocManaged((void **)&ptr, sizeof(T) * size, cudaMemAttachGlobal));
+#elif defined(RAJA_ENABLE_HIP)
+  hipErrchk(hipMalloc((void **)&ptr, sizeof(T) * size));
+#elif defined(RAJA_ENABLE_SYCL)
+  ptr = sycl_res->allocate<T>(size, camp::resources::MemoryAccess::Managed);
+#else
+  ptr = new T[size];
+#endif
+  return ptr;
+}
+
+// Deallocate a pointer allocated by allocate().
+template <typename T>
+void deallocate(T *&ptr)
+{
+  if (ptr) {
+#if defined(RAJA_ENABLE_CUDA)
+    cudaErrchk(cudaFree(ptr));
+#elif defined(RAJA_ENABLE_HIP)
+    hipErrchk(hipFree(ptr));
+#elif defined(RAJA_ENABLE_SYCL)
+    sycl_res->deallocate(ptr);
+#else
+    delete[] ptr;
+#endif
+    ptr = nullptr;
+  }
+}
+
+// Allocate a chunk of memory for [count] buckets.
+void *allocate_table(size_t count)
+{
+  char *chunk = allocate<char>(count * test_hashmap_t::BUCKET_SIZE);
+  return reinterpret_cast<void *>(chunk);
+}
+
+// Deallocate a chunk of memory allocated by allocate_table().
+void deallocate_table(void *&ptr)
+{
+  char *ptr_c = reinterpret_cast<char *>(ptr);
+  deallocate(ptr_c);
+  ptr = nullptr;
+}
+
+// Helper function that initializes the gpu_hashmap.
+void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
+{
   constexpr int CUDA_BLOCK_SIZE = 256;
   using policy = RAJA::cuda_exec<CUDA_BLOCK_SIZE>;
-  auto range = RAJA::RangeSegment(0, capacity);
+  auto range = RAJA::RangeSegment(0, 1);
 
-  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int i) { map->initialize(i); });
+  // Initialize the hashmap object.
+  bool result = true;
+  bool *result_ptr = &result;
+  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int i) {
+    *result_ptr =
+        map->initialize(chunk, bucket_count * test_hashmap_t::BUCKET_SIZE);
+  });
+
+  ASSERT_TRUE(result_ptr);
+
+  // Initialize the buckets in the hashmap.
+  range = RAJA::RangeSegment(0, bucket_count);
+  RAJA::forall<policy>(range,
+                       [=] RAJA_DEVICE(int i) { map->initialize_table(i); });
 }
 
-// A trivial test that simply constructs and deconstructs a hash map.
-TEST(GPUHashmapUnitTest, ConstructionTest)
-{
-  constexpr size_t CHUNK_SIZE = 1000;
-  void *chunk = allocate(CHUNK_SIZE);
-  auto map = new test_hashmap_t(chunk, CHUNK_SIZE);
-  initialize(map);
-  deallocate(chunk);
-  delete map;
-}
-
+// Helper function. A function called from host that evokes a map's contains
+// function in device.
 bool contains(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
@@ -91,6 +120,8 @@ bool contains(test_hashmap_t *map, const K &k, V *v)
   return result;
 }
 
+// Helper function. A function called from host that evokes a map's insert
+// function in device.
 bool insert(test_hashmap_t *map, const K &k, const V &v)
 {
   using policy = RAJA::cuda_exec<1>;
@@ -105,6 +136,8 @@ bool insert(test_hashmap_t *map, const K &k, const V &v)
   return result;
 }
 
+// Helper function. A function called from host that evokes a map's remove
+// function in device.
 bool remove(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
@@ -119,12 +152,28 @@ bool remove(test_hashmap_t *map, const K &k, V *v)
   return result;
 }
 
+//------------------//
+// TESTS BEGIN HERE //
+//------------------//
+
 // A trivial test that simply constructs and deconstructs a hash map.
+TEST(GPUHashmapUnitTest, ConstructionTest)
+{
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  constexpr size_t BUCKET_COUNT = 1000;
+  void *chunk = allocate_table(1000);
+  initialize(map, chunk, BUCKET_COUNT);
+  deallocate_table(chunk);
+  delete map;
+}
+
+// A small test that repeatedly inserts, removes, and tests a single element.
 TEST(GPUHashmapUnitTest, OneElementTest)
 {
-  constexpr size_t CHUNK_SIZE = 1000;
-  void *chunk = allocate(CHUNK_SIZE);
-  auto map = new test_hashmap_t(chunk, CHUNK_SIZE);
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  constexpr size_t BUCKET_COUNT = 1000;
+  void *chunk = allocate_table(1000);
+  initialize(map, chunk, BUCKET_COUNT);
 
   // Insertion of a new key should succeed
   ASSERT_TRUE(insert(map, 1, 2));
@@ -152,6 +201,6 @@ TEST(GPUHashmapUnitTest, OneElementTest)
   // Reinsertion of removed key should succeed
   ASSERT_TRUE(insert(map, 1, 3));
 
-  deallocate(chunk);
+  deallocate_table(chunk);
   delete map;
 }
