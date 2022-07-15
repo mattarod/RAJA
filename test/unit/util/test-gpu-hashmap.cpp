@@ -89,14 +89,16 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
   auto range = RAJA::RangeSegment(0, 1);
 
   // Initialize the hashmap object.
-  bool result = true;
-  bool *result_ptr = &result;
+  bool *result_gpu = allocate<bool>(1);
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int i) {
-    //*result_ptr =
-    map->initialize(chunk, bucket_count * test_hashmap_t::BUCKET_SIZE);
+    *result_gpu =
+        map->initialize(chunk, bucket_count * test_hashmap_t::BUCKET_SIZE);
   });
 
-  // ASSERT_TRUE(result_ptr);
+  bool result = false;
+  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
+  ASSERT_TRUE(result);
+  deallocate(result_gpu);
 
   // Initialize the buckets in the hashmap.
   range = RAJA::RangeSegment(0, bucket_count);
@@ -110,13 +112,18 @@ bool contains(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
-  bool result = false;
-  bool *result_ptr = &result;
+  bool *result_gpu = allocate<bool>(1);
+  V *v_gpu = allocate<V>(1);
 
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
-    *result_ptr = map->contains(k, v);
+    *result_gpu = map->contains(k, v_gpu);
   });
 
+  bool result = false;
+  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
+  cudaMemcpy(v, v_gpu, 1, cudaMemcpyDeviceToHost);
+  deallocate(result_gpu);
+  deallocate(v_gpu);
   return result;
 }
 
@@ -126,13 +133,15 @@ bool insert(test_hashmap_t *map, const K &k, const V &v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
-  bool result = false;
-  bool *result_ptr = &result;
+  bool *result_gpu = allocate<bool>(1);
 
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
-    *result_ptr = map->insert(k, v);
+    *result_gpu = map->insert(k, v);
   });
 
+  bool result = false;
+  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
+  deallocate(result_gpu);
   return result;
 }
 
@@ -142,13 +151,18 @@ bool remove(test_hashmap_t *map, const K &k, V *v)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
-  bool result = false;
-  bool *result_ptr = &result;
+  bool *result_gpu = allocate<bool>(1);
+  V *v_gpu = allocate<V>(1);
 
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
-    *result_ptr = map->remove(k, v);
+    *result_gpu = map->remove(k, v_gpu);
   });
 
+  bool result = false;
+  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
+  cudaMemcpy(v, v_gpu, 1, cudaMemcpyDeviceToHost);
+  deallocate(result_gpu);
+  deallocate(v_gpu);
   return result;
 }
 
