@@ -20,6 +20,8 @@
 
 #include <utility>  // for std::pair
 
+#include "../policy/desul/atomic.hpp"
+
 namespace RAJA
 {
 

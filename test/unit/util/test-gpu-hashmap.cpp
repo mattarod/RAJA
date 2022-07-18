@@ -19,13 +19,15 @@ struct gpu_hasher {
   RAJA_DEVICE
   size_t operator()(size_t const &s) const noexcept
   {
-    constexpr size_t LARGE_PRIME = 17;  // FIXME
+    constexpr size_t LARGE_PRIME = 2654435761;
     return s * LARGE_PRIME;
   }
 };
 
-constexpr size_t EMPTY(size_t(-1));
-constexpr size_t DELETED(size_t(-2));
+constexpr size_t KEY_OFFSET = 0x0CE1000000000000;
+constexpr size_t VAL_OFFSET = 0x07A1000000000000;
+constexpr size_t EMPTY = size_t(-1);
+constexpr size_t DELETED = size_t(-2);
 typedef size_t K;
 typedef size_t V;
 typedef RAJA::gpu_hashmap<K, V, gpu_hasher, EMPTY, DELETED> test_hashmap_t;
@@ -120,8 +122,8 @@ bool contains(test_hashmap_t *map, const K &k, V *v)
   });
 
   bool result = false;
-  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
-  cudaMemcpy(v, v_gpu, 1, cudaMemcpyDeviceToHost);
+  cudaMemcpy(&result, result_gpu, sizeof(bool), cudaMemcpyDeviceToHost);
+  cudaMemcpy(v, v_gpu, sizeof(V), cudaMemcpyDeviceToHost);
   deallocate(result_gpu);
   deallocate(v_gpu);
   return result;
@@ -140,7 +142,7 @@ bool insert(test_hashmap_t *map, const K &k, const V &v)
   });
 
   bool result = false;
-  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
+  cudaMemcpy(&result, result_gpu, sizeof(bool), cudaMemcpyDeviceToHost);
   deallocate(result_gpu);
   return result;
 }
@@ -159,8 +161,8 @@ bool remove(test_hashmap_t *map, const K &k, V *v)
   });
 
   bool result = false;
-  cudaMemcpy(&result, result_gpu, 1, cudaMemcpyDeviceToHost);
-  cudaMemcpy(v, v_gpu, 1, cudaMemcpyDeviceToHost);
+  cudaMemcpy(&result, result_gpu, sizeof(bool), cudaMemcpyDeviceToHost);
+  cudaMemcpy(v, v_gpu, sizeof(V), cudaMemcpyDeviceToHost);
   deallocate(result_gpu);
   deallocate(v_gpu);
   return result;
@@ -174,8 +176,8 @@ bool remove(test_hashmap_t *map, const K &k, V *v)
 TEST(GPUHashmapUnitTest, ConstructionTest)
 {
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  constexpr size_t BUCKET_COUNT = 1000;
-  void *chunk = allocate_table(1000);
+  constexpr size_t BUCKET_COUNT = 16;
+  void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
   deallocate_table(chunk);
   deallocate(map);
@@ -185,35 +187,38 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
 TEST(GPUHashmapUnitTest, OneElementTest)
 {
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  constexpr size_t BUCKET_COUNT = 1000;
-  void *chunk = allocate_table(1000);
+  constexpr size_t BUCKET_COUNT = 16;
+  void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
   // Insertion of a new key should succeed
-  ASSERT_TRUE(insert(map, 1, 2));
+  ASSERT_TRUE(insert(map, KEY_OFFSET, VAL_OFFSET));
 
   // Reinsertion of same key should fail
-  ASSERT_FALSE(insert(map, 1, 3));
+  ASSERT_FALSE(insert(map, KEY_OFFSET, VAL_OFFSET + 1));
 
   // Map should contain key and have the correct associated value
   V v = 0;
-  bool result = contains(map, 1, &v);
-  ASSERT_TRUE(result);
-  ASSERT_EQ(v, 2);
+  ASSERT_TRUE(contains(map, KEY_OFFSET, &v));
+  ASSERT_EQ(v, VAL_OFFSET);
 
   // Map should not contain a non-inserted key
-  ASSERT_FALSE(contains(map, 2, &v));
+  ASSERT_FALSE(contains(map, KEY_OFFSET + 1, &v));
 
   // Removing the key should succeed
   v = 0;
-  ASSERT_TRUE(remove(map, 1, &v));
-  ASSERT_EQ(v, 2);
+  ASSERT_TRUE(remove(map, KEY_OFFSET, &v));
+  ASSERT_EQ(v, VAL_OFFSET);
 
   // Lookup of removed key should fail
-  ASSERT_FALSE(remove(map, 1, &v));
+  ASSERT_FALSE(remove(map, KEY_OFFSET, &v));
 
-  // Reinsertion of removed key should succeed
-  ASSERT_TRUE(insert(map, 1, 3));
+  // Reinsertion of removed key with a different value should succeed
+  ASSERT_TRUE(insert(map, KEY_OFFSET, VAL_OFFSET + 2));
+
+  // The value should indeed be different
+  ASSERT_TRUE(contains(map, KEY_OFFSET, &v));
+  ASSERT_EQ(v, VAL_OFFSET + 2);
 
   deallocate_table(chunk);
   deallocate(map);
