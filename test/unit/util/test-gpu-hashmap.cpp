@@ -9,8 +9,9 @@
 /// Source file containing unit tests for gpu_hashmap class
 ///
 
-#include <RAJA/RAJA.hpp>
+#include <random>
 
+#include "RAJA/RAJA.hpp"
 #include "RAJA/util/gpu_hashmap.hpp"
 #include "RAJA_gtest.hpp"
 #include "RAJA_test-base.hpp"
@@ -175,10 +176,15 @@ bool remove(test_hashmap_t *map, const K &k, V *v)
 // A trivial test that simply constructs and deconstructs a hash map.
 TEST(GPUHashmapUnitTest, ConstructionTest)
 {
-  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  // The number of buckets to use in the hash table for this test.
   constexpr size_t BUCKET_COUNT = 16;
+
+  // Initialize map
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
+
+  // Clean up.
   deallocate_table(chunk);
   deallocate(map);
 }
@@ -186,8 +192,11 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
 // A small test that repeatedly inserts, removes, and tests a single element.
 TEST(GPUHashmapUnitTest, OneElementTest)
 {
-  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  // The number of buckets to use in the hash table for this test.
   constexpr size_t BUCKET_COUNT = 16;
+
+  // Initialize map
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -220,6 +229,125 @@ TEST(GPUHashmapUnitTest, OneElementTest)
   ASSERT_TRUE(contains(map, KEY_OFFSET, &v));
   ASSERT_EQ(v, VAL_OFFSET + 2);
 
+  // Clean up.
+  deallocate_table(chunk);
+  deallocate(map);
+}
+
+// A test that inserts and removes a moderate number of elements.
+TEST(GPUHashmapUnitTest, ModerateElementsTest)
+{
+  // The number of buckets to use in the hash table for this test.
+  constexpr size_t BUCKET_COUNT = 16384;
+
+  // Initialize map
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  void *chunk = allocate_table(BUCKET_COUNT);
+  initialize(map, chunk, BUCKET_COUNT);
+
+  // General hashmap guidance is that they should be about 70% full.
+  constexpr size_t ELEMENT_COUNT = (BUCKET_COUNT * 7) / 10;
+
+  // Insert the elements.
+  // TODO: It would probably be better to do this in a more idiomatically
+  // RAJA-like way.
+  for (size_t i = 0; i < ELEMENT_COUNT; ++i) {
+    ASSERT_TRUE(insert(map, KEY_OFFSET + i, VAL_OFFSET + i));
+  }
+
+  // Test for existence of the keys.
+  V v = 0;
+  for (size_t i = 0; i < ELEMENT_COUNT; ++i) {
+    ASSERT_TRUE(contains(map, KEY_OFFSET + i, &v));
+    ASSERT_EQ(v, VAL_OFFSET + i);
+  }
+
+  // Remove the keys.
+  for (size_t i = 0; i < ELEMENT_COUNT; ++i) {
+    ASSERT_TRUE(remove(map, KEY_OFFSET + i, &v));
+    ASSERT_EQ(v, VAL_OFFSET + i);
+  }
+
+  // Clean up.
+  deallocate_table(chunk);
+  deallocate(map);
+}
+
+// Comparison against a reference implementation for correctness and
+// consistency.
+TEST(GPUHashmapUnitTest, ConsistencyTest)
+{
+  using std::make_pair;
+
+  // The number of operations to perform.
+  constexpr size_t OPS = 16384;
+
+  // The number of buckets to use in the hash table for this test.
+  constexpr size_t BUCKET_COUNT = 16384;
+
+  // General hashmap guidance is that they should be about 70% full.
+  constexpr size_t ELEMENT_COUNT = (BUCKET_COUNT * 7) / 10;
+
+  // For this test, we want about 50% of the keys to be present in the map.
+  constexpr size_t KEY_RANGE = ELEMENT_COUNT * 2;
+
+  // Initialize map
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  void *chunk = allocate_table(BUCKET_COUNT);
+  initialize(map, chunk, BUCKET_COUNT);
+
+  // A reference implementation to test against.
+  std::map<K, V> ref;
+
+  // Initialize RNG.
+  std::mt19937 mt;
+  std::uniform_int_distribution<int> action_dist(0, 2);
+  std::uniform_int_distribution<K> key_dist(0, KEY_RANGE);
+  std::uniform_int_distribution<V> val_dist(0, size_t(-1));
+
+  // Initialize with half of the elements.
+  for (size_t k = 0; k < KEY_RANGE; k += 2) {
+    V v = val_dist(mt);
+    ASSERT_TRUE(insert(map, k, v));
+    ref.insert(make_pair(k, v));
+  }
+
+  for (size_t i = 0; i < OPS; ++i) {
+    int action = action_dist(mt);
+    K k = key_dist(mt);
+
+    if (action == 0) {
+      // Contains
+      V actual_v;
+      bool actual_result = contains(map, k, &actual_v);
+      auto it = ref.find(k);
+      bool expected_result = (it != ref.end());
+      ASSERT_EQ(actual_result, expected_result);
+      if (expected_result) {
+        V expected_v = it->second;
+        ASSERT_EQ(actual_v, expected_v);
+      }
+    } else if (action == 1) {
+      // Insert
+      V v = val_dist(mt);
+      bool actual_result = insert(map, k, v);
+      bool expected_result = ref.insert(make_pair(k, v)).second;
+      ASSERT_EQ(actual_result, expected_result);
+    } else {
+      // Remove
+      V v;
+      bool actual_result = remove(map, k, &v);
+      auto it = ref.erase(k);
+      bool expected_result = (it != ref.end());
+      ASSERT_EQ(actual_result, expected_result);
+      if(expected_result) {
+        V expected_v = it->second;
+        ASSERT_EQ(actual_v, expected_v);
+      }
+    }
+  }
+
+  // Clean up.
   deallocate_table(chunk);
   deallocate(map);
 }
