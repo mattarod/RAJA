@@ -79,13 +79,16 @@ public:
 
   /// Searches for key K. If found, return true and set v to its value.
   /// Otherwise, return false.
-  RAJA_DEVICE bool contains(const K &k, V *v)
+  RAJA_DEVICE bool contains(const K &k, V *v, size_t *probe_count)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
+    size_t &i = *probe_count;
 
-    for (size_t i = 0; i < capacity; ++i) {
+    i = 0;
+    while (i < capacity) {
       size_t index = (hash_code + i) % capacity;
+      ++i;  // this sets probe_count to the correct value before the return.
       bucket_t &bucket = table[index];
       if (bucket.first == EMPTY) {
         // Found EMPTY--therefore, the key cannot exist anywhere in the table.
@@ -94,6 +97,7 @@ public:
       if (bucket.first == k) {
         // Key found!
         *v = bucket.second;
+
         return true;
       }
     }
@@ -103,16 +107,31 @@ public:
     return false;
   }
 
+  RAJA_DEVICE bool contains(const K &k, V *v)
+  {
+    // Delegate with a dummy variable
+    size_t _;
+    return contains(k, v, &_);
+  }
+
+
   /// Inserts a key/value pair. Returns true if successful; false if failed.
   /// Failure may occur due to finding that the key is already inserted,
   /// or due to the entire table being full (pathologically bad, but possible.)
-  RAJA_DEVICE bool insert(const K &k, const V &v)
+  RAJA_DEVICE bool insert(const K &k, const V &v, size_t *probe_count)
   {
+    // FIXME: if this method encounters DELETED, then it can deposit an element
+    // in that slot, but it must keep scanning until it hits EMPTY! It is
+    // possible the key already exists in a later bucket!
+
     HASHER hasher;
     size_t hash_code = hasher(k);
+    size_t &i = *probe_count;
 
-    for (size_t i = 0; i < capacity; ++i) {
+    i = 0;
+    while (i < capacity) {
       size_t index = (hash_code + i) % capacity;
+      ++i;  // this sets probe_count to the correct value before the return.
       bucket_t &bucket = table[index];
       if (bucket.first == EMPTY || bucket.first == DELETED) {
         bucket.first = k;
@@ -129,15 +148,25 @@ public:
     return false;
   }
 
+  RAJA_DEVICE bool insert(const K &k, const V &v)
+  {
+    // Delegate with a dummy variable
+    size_t _;
+    return insert(k, v, &_);
+  }
+
   /// Removes a key/value pair. If found and removed,
   /// return true and set v to its value. Otherwise, return false.
-  RAJA_DEVICE bool remove(const K &k, V *v)
+  RAJA_DEVICE bool remove(const K &k, V *v, size_t *probe_count)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
+    size_t &i = *probe_count;
 
-    for (size_t i = 0; i < capacity; ++i) {
+    i = 0;
+    while (i < capacity) {
       size_t index = (hash_code + i) % capacity;
+      ++i;  // this sets probe_count to the correct value before the return.
       bucket_t &bucket = table[index];
       if (bucket.first == EMPTY) {
         // Found EMPTY--therefore, the key cannot exist anywhere in the table.
@@ -154,6 +183,13 @@ public:
     // Fallback (pathological): checked every single bucket and not one was
     // EMPTY so we couldn't terminate early
     return false;
+  }
+
+  RAJA_DEVICE bool remove(const K &k, V *v)
+  {
+    // Delegate with a dummy variable
+    size_t _;
+    return remove(k, v, &_);
   }
 };
 

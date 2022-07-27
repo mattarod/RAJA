@@ -111,62 +111,101 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
 
 // Helper function. A function called from host that evokes a map's contains
 // function in device.
-bool contains(test_hashmap_t *map, const K &k, V *v)
+bool contains(test_hashmap_t *map, const K &k, V *v, size_t *probe_count)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
   bool *result_gpu = allocate<bool>(1);
   V *v_gpu = allocate<V>(1);
+  size_t *probe_count_gpu = allocate<size_t>(1);
 
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
-    *result_gpu = map->contains(k, v_gpu);
+    *result_gpu = map->contains(k, v_gpu, probe_count_gpu);
   });
 
   bool result = false;
   cudaMemcpy(&result, result_gpu, sizeof(bool), cudaMemcpyDeviceToHost);
   cudaMemcpy(v, v_gpu, sizeof(V), cudaMemcpyDeviceToHost);
+  cudaMemcpy(probe_count,
+             probe_count_gpu,
+             sizeof(size_t),
+             cudaMemcpyDeviceToHost);
   deallocate(result_gpu);
   deallocate(v_gpu);
+  deallocate(probe_count_gpu);
   return result;
+}
+
+bool contains(test_hashmap_t *map, const K &k, V *v)
+{
+  // Delegate with a dummy variable
+  size_t _;
+  return contains(map, k, v, &_);
 }
 
 // Helper function. A function called from host that evokes a map's insert
 // function in device.
-bool insert(test_hashmap_t *map, const K &k, const V &v)
+bool insert(test_hashmap_t *map, const K &k, const V &v, size_t *probe_count)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
   bool *result_gpu = allocate<bool>(1);
+  size_t *probe_count_gpu = allocate<size_t>(1);
 
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
-    *result_gpu = map->insert(k, v);
+    *result_gpu = map->insert(k, v, probe_count_gpu);
   });
 
   bool result = false;
   cudaMemcpy(&result, result_gpu, sizeof(bool), cudaMemcpyDeviceToHost);
+  cudaMemcpy(probe_count,
+             probe_count_gpu,
+             sizeof(size_t),
+             cudaMemcpyDeviceToHost);
   deallocate(result_gpu);
+  deallocate(probe_count_gpu);
   return result;
+}
+
+bool insert(test_hashmap_t *map, const K &k, const V &v)
+{
+  // Delegate with a dummy variable
+  size_t _;
+  return insert(map, k, v, &_);
 }
 
 // Helper function. A function called from host that evokes a map's remove
 // function in device.
-bool remove(test_hashmap_t *map, const K &k, V *v)
+bool remove(test_hashmap_t *map, const K &k, V *v, size_t *probe_count)
 {
   using policy = RAJA::cuda_exec<1>;
   auto range = RAJA::RangeSegment(0, 1);
   bool *result_gpu = allocate<bool>(1);
   V *v_gpu = allocate<V>(1);
+  size_t *probe_count_gpu = allocate<size_t>(1);
 
   RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
-    *result_gpu = map->remove(k, v_gpu);
+    *result_gpu = map->remove(k, v_gpu, probe_count_gpu);
   });
 
   bool result = false;
   cudaMemcpy(&result, result_gpu, sizeof(bool), cudaMemcpyDeviceToHost);
   cudaMemcpy(v, v_gpu, sizeof(V), cudaMemcpyDeviceToHost);
+  cudaMemcpy(probe_count,
+             probe_count_gpu,
+             sizeof(size_t),
+             cudaMemcpyDeviceToHost);
   deallocate(result_gpu);
   deallocate(v_gpu);
+  deallocate(probe_count_gpu);
   return result;
+}
+
+bool remove(test_hashmap_t *map, const K &k, V *v)
+{
+  // Delegate with a dummy variable
+  size_t _;
+  return remove(map, k, v, &_);
 }
 
 //------------------//
@@ -283,7 +322,7 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   constexpr size_t OPS = 16384;
 
   // The number of buckets to use in the hash table for this test.
-  constexpr size_t BUCKET_COUNT = 16384;
+  constexpr size_t BUCKET_COUNT = 16;  // 16384;
 
   // General hashmap guidance is that they should be about 70% full.
   constexpr size_t ELEMENT_COUNT = (BUCKET_COUNT * 7) / 10;
@@ -313,13 +352,14 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   }
 
   for (size_t i = 0; i < OPS; ++i) {
+    size_t probe_count = 0;
     int action = action_dist(mt);
     K k = key_dist(mt);
 
     if (action == 0) {
       // Contains
       V actual_v;
-      bool actual_result = contains(map, k, &actual_v);
+      bool actual_result = contains(map, k, &actual_v, &probe_count);
       auto it = ref.find(k);
       bool expected_result = (it != ref.end());
       ASSERT_EQ(actual_result, expected_result);
@@ -330,18 +370,26 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
     } else if (action == 1) {
       // Insert
       V v = val_dist(mt);
-      bool actual_result = insert(map, k, v);
-      bool expected_result = ref.insert(make_pair(k, v)).second;
-      ASSERT_EQ(actual_result, expected_result);
+      bool actual_result = insert(map, k, v, &probe_count);
+      auto ret = ref.insert(make_pair(k, v));
+      auto it = ret.first;
+      bool expected_result = ret.second;
+      ASSERT_EQ(actual_result, expected_result)
+          << " insert result mismatch occurred with key " << k << ", value "
+          << v << ", operation " << i
+          << ". Element preventing insertion is: " << (it->first) << ", "
+          << (it->second) << " with probe_count: " << probe_count;
+
     } else {
       // Remove
-      V v;
-      bool actual_result = remove(map, k, &v);
-      auto it = ref.erase(k);
+      V actual_v;
+      bool actual_result = remove(map, k, &actual_v, &probe_count);
+      auto it = ref.find(k);
       bool expected_result = (it != ref.end());
       ASSERT_EQ(actual_result, expected_result);
-      if(expected_result) {
+      if (expected_result) {
         V expected_v = it->second;
+        ref.erase(it);
         ASSERT_EQ(actual_v, expected_v);
       }
     }
