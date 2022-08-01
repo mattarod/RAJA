@@ -48,6 +48,84 @@ class gpu_hashmap
   // The number of buckets that the table can accommodate.
   size_t capacity;
 
+  enum probe_result_t {
+    PRESENT,           // found key
+    ABSENT_AVAILABLE,  // determined key was absent, and found room for it
+    ABSENT_FULL        // determined key was absent, but found no room for it
+  };
+
+  // Delegate method for insert, remove, and contains.
+  // Probes the hash table for key k.
+  // If k is present, return FOUND_K, and set location to its index.
+  // If k is absent, return FOUND_, and set location to the first instance of
+  // DELETED or EMPTY seen.
+  RAJA_DEVICE probe_result_t probe(const K &k,
+                                   size_t &location,
+                                   size_t *probe_count)
+  {
+    HASHER hasher;
+    size_t hash_code = hasher(k);
+    size_t &i = *probe_count;
+    location = capacity;  // Initialize location to invalid index
+
+    // We stay in this first loop body until we find k, EMPTY, or DELETED.
+    // In the first two cases, we return; in the last case, we break and proceed
+    // to the next loop down.
+    i = 0;
+    while (i < capacity) {
+      size_t index = (hash_code + i) % capacity;
+      ++i;  // this sets probe_count to the correct value before the return.
+      bucket_t &bucket = table[index];
+
+      if (bucket.first == k) {
+        // Found the key.
+        location = index;
+        return PRESENT;
+
+      } else if (bucket.first == EMPTY) {
+        // Found EMPTY--therefore, the key cannot exist anywhere in the table.
+        // We haven't yet found any instance of DELETED,
+        // so this EMPTY is the first available slot.
+        location = index;
+        return ABSENT_AVAILABLE;
+
+      } else if (bucket.first == DELETED) {
+        // If this is the first instance of DELETED, record it.
+        // However, keep probing--the key could be further down the line.
+        // We break out of this loop and proceed to the next loop.
+        location = index;
+        break;
+      }
+    }
+
+    // If we have found an instance of DELETED, we enter this second, simpler
+    // loop body, and stay in it until we find k or EMPTY.
+    while (i < capacity) {
+      size_t index = (hash_code + i) % capacity;
+      ++i;
+      bucket_t &bucket = table[index];
+
+      if (bucket.first == k) {
+        // Found the key. Since it was actually found, we want location to point
+        // to it, not the first instance of DELETED.
+        location = index;
+        return PRESENT;
+
+      } else if (bucket.first == EMPTY) {
+        // Found EMPTY--therefore, the key cannot exist anywhere in the table.
+        // location was already set to the first instance of DELETED by the loop
+        // above.
+        return ABSENT_AVAILABLE;
+      }
+    }
+
+    // Fallback (pathological): checked every single bucket without finding K or
+    // EMPTY, so unable to terminate early. If location is set to a valid index,
+    // we found a DELETED bucket that can accommodate k; otherwise, the whole
+    // hash table is completely full!
+    return location == capacity ? ABSENT_FULL : ABSENT_AVAILABLE;
+  }
+
 public:
   static constexpr size_t BUCKET_SIZE = sizeof(bucket_t);
 
@@ -74,37 +152,21 @@ public:
   RAJA_DEVICE void initialize_table(int i)
   {
     // Set all bucket's keys to EMPTY.
-    if (i < capacity) table[i].first = EMPTY;
+    if (i < capacity) {
+      table[i].first = EMPTY;
+    }
   }
 
   /// Searches for key K. If found, return true and set v to its value.
   /// Otherwise, return false.
   RAJA_DEVICE bool contains(const K &k, V *v, size_t *probe_count)
   {
-    HASHER hasher;
-    size_t hash_code = hasher(k);
-    size_t &i = *probe_count;
-
-    i = 0;
-    while (i < capacity) {
-      size_t index = (hash_code + i) % capacity;
-      ++i;  // this sets probe_count to the correct value before the return.
-      bucket_t &bucket = table[index];
-      if (bucket.first == EMPTY) {
-        // Found EMPTY--therefore, the key cannot exist anywhere in the table.
-        return false;
-      }
-      if (bucket.first == k) {
-        // Key found!
-        *v = bucket.second;
-
-        return true;
-      }
+    size_t index;
+    bool result = probe(k, index, probe_count) == PRESENT;
+    if (result) {
+      *v = table[index].second;
     }
-
-    // Fallback (pathological): checked every single bucket and not one was
-    // EMPTY so we couldn't terminate early
-    return false;
+    return result;
   }
 
   RAJA_DEVICE bool contains(const K &k, V *v)
@@ -120,32 +182,13 @@ public:
   /// or due to the entire table being full (pathologically bad, but possible.)
   RAJA_DEVICE bool insert(const K &k, const V &v, size_t *probe_count)
   {
-    // FIXME: if this method encounters DELETED, then it can deposit an element
-    // in that slot, but it must keep scanning until it hits EMPTY! It is
-    // possible the key already exists in a later bucket!
-
-    HASHER hasher;
-    size_t hash_code = hasher(k);
-    size_t &i = *probe_count;
-
-    i = 0;
-    while (i < capacity) {
-      size_t index = (hash_code + i) % capacity;
-      ++i;  // this sets probe_count to the correct value before the return.
-      bucket_t &bucket = table[index];
-      if (bucket.first == EMPTY || bucket.first == DELETED) {
-        bucket.first = k;
-        bucket.second = v;
-        return true;
-      }
-      if (bucket.first == k) {
-        // Key is already present
-        return false;
-      }
+    size_t index;
+    bool result = probe(k, index, probe_count) == ABSENT_AVAILABLE;
+    if (result) {
+      table[index].first = k;
+      table[index].second = v;
     }
-
-    // Fallback (pathological): insert failed because the entire table is full
-    return false;
+    return result;
   }
 
   RAJA_DEVICE bool insert(const K &k, const V &v)
@@ -159,30 +202,13 @@ public:
   /// return true and set v to its value. Otherwise, return false.
   RAJA_DEVICE bool remove(const K &k, V *v, size_t *probe_count)
   {
-    HASHER hasher;
-    size_t hash_code = hasher(k);
-    size_t &i = *probe_count;
-
-    i = 0;
-    while (i < capacity) {
-      size_t index = (hash_code + i) % capacity;
-      ++i;  // this sets probe_count to the correct value before the return.
-      bucket_t &bucket = table[index];
-      if (bucket.first == EMPTY) {
-        // Found EMPTY--therefore, the key cannot exist anywhere in the table.
-        return false;
-      }
-      if (bucket.first == k) {
-        // Key found!
-        *v = bucket.second;
-        bucket.first = DELETED;
-        return true;
-      }
+    size_t index;
+    bool result = probe(k, index, probe_count) == PRESENT;
+    if (result) {
+      *v = table[index].second;
+      table[index].first = DELETED;
     }
-
-    // Fallback (pathological): checked every single bucket and not one was
-    // EMPTY so we couldn't terminate early
-    return false;
+    return result;
   }
 
   RAJA_DEVICE bool remove(const K &k, V *v)

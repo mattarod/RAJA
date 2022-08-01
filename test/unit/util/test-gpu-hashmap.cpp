@@ -345,10 +345,12 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   std::uniform_int_distribution<V> val_dist(0, size_t(-1));
 
   // Initialize with half of the elements.
+  size_t size = 0;
   for (size_t k = 0; k < KEY_RANGE; k += 2) {
     V v = val_dist(mt);
     ASSERT_TRUE(insert(map, k, v));
     ref.insert(make_pair(k, v));
+    ++size;
   }
 
   for (size_t i = 0; i < OPS; ++i) {
@@ -371,14 +373,31 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
       // Insert
       V v = val_dist(mt);
       bool actual_result = insert(map, k, v, &probe_count);
+
+      if (size >= BUCKET_COUNT) {
+        // NB: If the size exceeds the number of buckets, our hashmap will fail
+        // to insert and the reference hashmap will not. To prevent this
+        // divergence, we handle this case specially.
+        ASSERT_EQ(size, BUCKET_COUNT);
+        ASSERT_FALSE(actual_result);
+        continue;
+      }
+
       auto ret = ref.insert(make_pair(k, v));
       auto it = ret.first;
       bool expected_result = ret.second;
+
+      // std::cout << "insert (" << k << ", " << v
+      //           << "), result: " << actual_result
+      //           << ", probe_count: " << probe_count << std::endl;
+
       ASSERT_EQ(actual_result, expected_result)
           << " insert result mismatch occurred with key " << k << ", value "
           << v << ", operation " << i
           << ". Element preventing insertion is: " << (it->first) << ", "
           << (it->second) << " with probe_count: " << probe_count;
+
+      if (actual_result) ++size;
 
     } else {
       // Remove
@@ -386,12 +405,18 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
       bool actual_result = remove(map, k, &actual_v, &probe_count);
       auto it = ref.find(k);
       bool expected_result = (it != ref.end());
+
+      // std::cout << "remove (" << k << "), result: " << actual_result
+      //           << ", probe_count: " << probe_count << std::endl;
+
       ASSERT_EQ(actual_result, expected_result);
       if (expected_result) {
         V expected_v = it->second;
         ref.erase(it);
         ASSERT_EQ(actual_v, expected_v);
       }
+
+      if (actual_result) --size;
     }
   }
 
