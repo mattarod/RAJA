@@ -57,8 +57,10 @@ class gpu_hashmap
   // Delegate method for insert, remove, and contains.
   // Probes the hash table for key k.
   // If k is present, return FOUND_K, and set location to its index.
-  // If k is absent, return FOUND_, and set location to the first instance of
-  // DELETED or EMPTY seen.
+  // If k is absent, but an EMPTY bucket was found, return ABSENT_AVAILABLE, and
+  // set location to the first instance of EMPTY seen.
+  // If k is absent, and there is not a single EMPTY bucket in the entire hash
+  // table, return ABSENT_FULL.
   RAJA_DEVICE probe_result_t probe(const K &k,
                                    size_t &location,
                                    size_t *probe_count)
@@ -68,9 +70,9 @@ class gpu_hashmap
     size_t &i = *probe_count;
     location = capacity;  // Initialize location to invalid index
 
-    // We stay in this first loop body until we find k, EMPTY, or DELETED.
-    // In the first two cases, we return; in the last case, we break and proceed
-    // to the next loop down.
+    // We stay in this first loop body until we find k or EMPTY. DELETED buckets
+    // are considered burned, so they are treated the same as any non-matching
+    // key.
     i = 0;
     while (i < capacity) {
       size_t index = (hash_code + i) % capacity;
@@ -84,46 +86,15 @@ class gpu_hashmap
 
       } else if (bucket.first == EMPTY) {
         // Found EMPTY--therefore, the key cannot exist anywhere in the table.
-        // We haven't yet found any instance of DELETED,
-        // so this EMPTY is the first available slot.
         location = index;
-        return ABSENT_AVAILABLE;
-
-      } else if (bucket.first == DELETED) {
-        // If this is the first instance of DELETED, record it.
-        // However, keep probing--the key could be further down the line.
-        // We break out of this loop and proceed to the next loop.
-        location = index;
-        break;
-      }
-    }
-
-    // If we have found an instance of DELETED, we enter this second, simpler
-    // loop body, and stay in it until we find k or EMPTY.
-    while (i < capacity) {
-      size_t index = (hash_code + i) % capacity;
-      ++i;
-      bucket_t &bucket = table[index];
-
-      if (bucket.first == k) {
-        // Found the key. Since it was actually found, we want location to point
-        // to it, not the first instance of DELETED.
-        location = index;
-        return PRESENT;
-
-      } else if (bucket.first == EMPTY) {
-        // Found EMPTY--therefore, the key cannot exist anywhere in the table.
-        // location was already set to the first instance of DELETED by the loop
-        // above.
         return ABSENT_AVAILABLE;
       }
     }
 
-    // Fallback (pathological): checked every single bucket without finding K or
-    // EMPTY, so unable to terminate early. If location is set to a valid index,
-    // we found a DELETED bucket that can accommodate k; otherwise, the whole
-    // hash table is completely full!
-    return location == capacity ? ABSENT_FULL : ABSENT_AVAILABLE;
+
+    // Fallback (pathological): Checked entire table without finding k or EMPTY.
+    // Key is absent, and there is no room to insert it.
+    return ABSENT_FULL;
   }
 
 public:
