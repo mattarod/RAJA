@@ -21,6 +21,7 @@
 #include <utility>  // for std::pair
 
 #include "../policy/desul/atomic.hpp"
+#include "lock/lock_manager.hpp"
 
 namespace RAJA
 {
@@ -48,6 +49,9 @@ class gpu_hashmap
   // The number of buckets that the table can accommodate.
   size_t capacity;
 
+  // Class to handle bucket access.
+  lock_manager lock_mgr;
+
   enum probe_result_t {
     PRESENT,           // found key
     ABSENT_AVAILABLE,  // determined key was absent, and found room for it
@@ -61,6 +65,8 @@ class gpu_hashmap
   // set location to the first instance of EMPTY seen.
   // If k is absent, and there is not a single EMPTY bucket in the entire hash
   // table, return ABSENT_FULL.
+  // This method will also lock the bucket containing the element, and keep it
+  // locked for the caller's sake, except in the case of exhaustive search.
   RAJA_DEVICE probe_result_t probe(const K &k,
                                    size_t &location,
                                    size_t *probe_count)
@@ -70,12 +76,17 @@ class gpu_hashmap
     size_t &i = *probe_count;
     location = capacity;  // Initialize location to invalid index
 
+    size_t last_locked = hash_code % capacity;
+    lock_mgr.acquire(hash_code % capacity);
+
     // We stay in this first loop body until we find k or EMPTY. DELETED buckets
     // are considered burned, so they are treated the same as any non-matching
     // key.
     i = 0;
     while (i < capacity) {
       size_t index = (hash_code + i) % capacity;
+      lock_mgr.exchange(last_locked, index);
+      last_locked = index;
       ++i;  // this sets probe_count to the correct value before the return.
       bucket_t &bucket = table[index];
 
@@ -91,9 +102,9 @@ class gpu_hashmap
       }
     }
 
-
     // Fallback (pathological): Checked entire table without finding k or EMPTY.
     // Key is absent, and there is no room to insert it.
+    lock_mgr.release(last_locked);
     return ABSENT_FULL;
   }
 
@@ -133,10 +144,11 @@ public:
   RAJA_DEVICE bool contains(const K &k, V *v, size_t *probe_count)
   {
     size_t index;
-    bool result = probe(k, index, probe_count) == PRESENT;
-    if (result) {
+    probe_result_t result = probe(k, index, probe_count);
+    if (result == PRESENT) {
       *v = table[index].second;
     }
+    if (result != ABSENT_FULL) lock_mgr.release(index);
     return result;
   }
 
@@ -154,11 +166,12 @@ public:
   RAJA_DEVICE bool insert(const K &k, const V &v, size_t *probe_count)
   {
     size_t index;
-    bool result = probe(k, index, probe_count) == ABSENT_AVAILABLE;
-    if (result) {
+    probe_result_t result = probe(k, index, probe_count);
+    if (result == ABSENT_AVAILABLE) {
       table[index].first = k;
       table[index].second = v;
     }
+    if (result != ABSENT_FULL) lock_mgr.release(index);
     return result;
   }
 
@@ -174,11 +187,12 @@ public:
   RAJA_DEVICE bool remove(const K &k, V *v, size_t *probe_count)
   {
     size_t index;
-    bool result = probe(k, index, probe_count) == PRESENT;
-    if (result) {
+    probe_result_t result = probe(k, index, probe_count);
+    if (result == PRESENT) {
       *v = table[index].second;
       table[index].first = DELETED;
     }
+    if (result != ABSENT_FULL) lock_mgr.release(index);
     return result;
   }
 
@@ -195,6 +209,8 @@ public:
   /// TODO: This can be made faster by parallelizing it.
   RAJA_DEVICE void *resize(void *new_chunk, const size_t new_capacity)
   {
+    lock_mgr.acquire_all();
+
     size_t old_capacity = capacity;
     bucket_t *old_table = table;
 
@@ -225,9 +241,11 @@ public:
       // Restore the old table
       capacity = old_capacity;
       table = old_table;
+      lock_mgr.release_all();
       return nullptr;
     }
 
+    lock_mgr.release_all();
     return reinterpret_cast<void *>(old_table);
   }
 };

@@ -25,18 +25,23 @@ namespace RAJA
 class desul_mutex
 {
 
-  static constexpr desul::MemoryOrderAcquire acquireOrder();
-  static constexpr desul::MemoryOrderRelease releaseOrder();
-  static constexpr desul::MemoryOrderRelaxed relaxedOrder();
-  static constexpr desul::MemoryScopeNode nodeScope();
+  static constexpr desul::MemoryOrderAcquire acquireOrder =
+      desul::MemoryOrderAcquire();
+  static constexpr desul::MemoryOrderRelease releaseOrder =
+      desul::MemoryOrderRelease();
+  static constexpr desul::MemoryOrderRelaxed relaxedOrder =
+      desul::MemoryOrderRelaxed();
+  static constexpr desul::MemoryScopeNode nodeScope = desul::MemoryScopeNode();
 
   // The bool representing the mutex.
   // True means locked, false means unlocked.
-  bool lock = false;
+  bool lock;
 
 public:
+  RAJA_DEVICE desul_mutex() : lock(false) {}
+
   /// Acquire the mutex. If locked, wait until unlocked.
-  void acquire()
+  RAJA_DEVICE void acquire()
   {
     bool succeeded = false;
     while (!succeeded) {
@@ -49,7 +54,7 @@ public:
   }
 
   /// Release the mutex.
-  void release()
+  RAJA_DEVICE void release()
   {
     // Just write false.
     atomic_store(&lock, false, releaseOrder, nodeScope);
