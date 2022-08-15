@@ -102,7 +102,7 @@ public:
 
   /// Initializer for the hashmap. Requires the user to pass in a chunk of
   /// allocated memory, along with its size in bytes.
-  RAJA_DEVICE bool initialize(void *chunk, size_t size)
+  RAJA_DEVICE bool initialize(void *chunk, const size_t size)
   {
     if (size < BUCKET_SIZE || chunk == nullptr) {
       return false;
@@ -120,7 +120,7 @@ public:
   /// This must be done for ALL i in [0, capacity) before use.
   /// This is implemented this way so this operation can be parallelized
   /// through RAJA.
-  RAJA_DEVICE void initialize_table(int i)
+  RAJA_DEVICE void initialize_table(const int i)
   {
     // Set all bucket's keys to EMPTY.
     if (i < capacity) {
@@ -187,6 +187,48 @@ public:
     // Delegate with a dummy variable
     size_t _;
     return remove(k, v, &_);
+  }
+
+  /// Resizes the hashmap.
+  /// If successful, returns old chunk, so that caller can free it. If failed
+  /// due to new chunk not being big enough, returns nullptr.
+  /// TODO: This can be made faster by parallelizing it.
+  RAJA_DEVICE void *resize(void *new_chunk, const size_t new_capacity)
+  {
+    size_t old_capacity = capacity;
+    bucket_t *old_table = table;
+
+    capacity = new_capacity;
+    table = reinterpret_cast<bucket_t *>(new_chunk);
+    bool any_failed = false;
+
+    // Initialize the new table to EMPTY
+    // FIXME: Speed this up with RAJA parallelism.
+    for (size_t i = 0; i < capacity; ++i) {
+      table[i].first = EMPTY;
+    }
+
+    // Copy elements from old table to new.
+    for (size_t i = 0; i < old_capacity; ++i) {
+      bucket_t &bucket = old_table[i];
+      K &k = bucket.first;
+
+      if (k != EMPTY && k != DELETED) {
+        if (!insert(k, bucket.second)) {
+          any_failed = true;
+          break;
+        }
+      }
+    }
+
+    if (any_failed) {
+      // Restore the old table
+      capacity = old_capacity;
+      table = old_table;
+      return nullptr;
+    }
+
+    return reinterpret_cast<void *>(old_table);
   }
 };
 

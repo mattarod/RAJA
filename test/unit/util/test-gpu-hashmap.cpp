@@ -109,6 +109,24 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
                        [=] RAJA_DEVICE(int i) { map->initialize_table(i); });
 }
 
+// Attempts to rezise the hashmap. If successful, returns the old chunk so that
+// the caller can free it. If failed, return nullptr.
+void *resize(test_hashmap_t *map, void *new_chunk, const size_t bucket_count)
+{
+  using policy = RAJA::cuda_exec<1>;
+  auto range = RAJA::RangeSegment(0, 1);
+  void **result_gpu = allocate<void *>(1);
+
+  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
+    *result_gpu = map->resize(new_chunk, bucket_count);
+  });
+
+  void *result = nullptr;
+  cudaMemcpy(&result, result_gpu, sizeof(void *), cudaMemcpyDeviceToHost);
+  deallocate(result_gpu);
+  return result;
+}
+
 // Helper function. A function called from host that evokes a map's contains
 // function in device.
 bool contains(test_hashmap_t *map, const K &k, V *v, size_t *probe_count)
@@ -322,18 +340,19 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   constexpr size_t OPS = 16384;
 
   // The number of buckets to use in the hash table for this test.
-  constexpr size_t BUCKET_COUNT = 16;  // 16384;
+  constexpr size_t START_BUCKET_COUNT = 16384;
 
   // General hashmap guidance is that they should be about 70% full.
-  constexpr size_t ELEMENT_COUNT = (BUCKET_COUNT * 7) / 10;
+  constexpr size_t ELEMENT_COUNT = (START_BUCKET_COUNT * 7) / 10;
 
   // For this test, we want about 50% of the keys to be present in the map.
   constexpr size_t KEY_RANGE = ELEMENT_COUNT * 2;
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  void *chunk = allocate_table(BUCKET_COUNT);
-  initialize(map, chunk, BUCKET_COUNT);
+  void *chunk = allocate_table(START_BUCKET_COUNT);
+  initialize(map, chunk, START_BUCKET_COUNT);
+  size_t bucket_count = START_BUCKET_COUNT;
 
   // A reference implementation to test against.
   std::map<K, V> ref;
@@ -345,12 +364,10 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   std::uniform_int_distribution<V> val_dist(0, size_t(-1));
 
   // Initialize with half of the elements.
-  size_t size = 0;
   for (size_t k = 0; k < KEY_RANGE; k += 2) {
     V v = val_dist(mt);
     ASSERT_TRUE(insert(map, k, v));
     ref.insert(make_pair(k, v));
-    ++size;
   }
 
   for (size_t i = 0; i < OPS; ++i) {
@@ -374,13 +391,21 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
       V v = val_dist(mt);
       bool actual_result = insert(map, k, v, &probe_count);
 
-      if (size >= BUCKET_COUNT) {
-        // NB: If the size exceeds the number of buckets, our hashmap will fail
-        // to insert and the reference hashmap will not. To prevent this
-        // divergence, we handle this case specially.
-        ASSERT_EQ(size, BUCKET_COUNT);
-        ASSERT_FALSE(actual_result);
-        continue;
+      if (!actual_result && probe_count == bucket_count) {
+        std::cout << "Resizing table from " << bucket_count << " to "
+                  << bucket_count * 2 << std::endl;
+
+        // If insert failed and every single bucket was checked, resize.
+        bucket_count *= 2;
+        chunk = allocate_table(bucket_count);
+        void *old_chunk = resize(map, chunk, bucket_count);
+
+        // resize should not fail when increasing size.
+        ASSERT_NE(old_chunk, nullptr);
+        deallocate_table(old_chunk);        
+
+        // With the table resized, reattempt the insertion.
+        actual_result = insert(map, k, v, &probe_count);
       }
 
       auto ret = ref.insert(make_pair(k, v));
@@ -396,8 +421,6 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
           << v << ", operation " << i
           << ". Element preventing insertion is: " << (it->first) << ", "
           << (it->second) << " with probe_count: " << probe_count;
-
-      if (actual_result) ++size;
 
     } else {
       // Remove
@@ -415,8 +438,6 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
         ref.erase(it);
         ASSERT_EQ(actual_v, expected_v);
       }
-
-      if (actual_result) --size;
     }
   }
 
