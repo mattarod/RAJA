@@ -84,6 +84,8 @@ void deallocate_table(void *&ptr)
   ptr = nullptr;
 }
 
+void construct(test_hashmap_t *map) {}
+
 // Helper function that initializes the gpu_hashmap.
 void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
 {
@@ -94,6 +96,7 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
   // Initialize the hashmap object.
   bool *result_gpu = allocate<bool>(1);
   RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int i) {
+    new (map) test_hashmap_t();
     *result_gpu =
         map->initialize(chunk, bucket_count * test_hashmap_t::BUCKET_SIZE);
   });
@@ -105,8 +108,9 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
 
   // Initialize the buckets in the hashmap.
   range = RAJA::RangeSegment(0, bucket_count);
-  RAJA::forall<policy>(range,
-                       [=] RAJA_HOST_DEVICE(int i) { map->initialize_table(i); });
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int i) {
+    map->initialize_table(i);
+  });
 }
 
 // Attempts to rezise the hashmap. If successful, returns the old chunk so that
@@ -238,7 +242,6 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  new (map) test_hashmap_t();
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -255,7 +258,6 @@ TEST(GPUHashmapUnitTest, OneElementTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  new (map) test_hashmap_t();
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -301,7 +303,6 @@ TEST(GPUHashmapUnitTest, ModerateElementsTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  new (map) test_hashmap_t();
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -353,7 +354,6 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
-  new (map) test_hashmap_t();
   void *chunk = allocate_table(START_BUCKET_COUNT);
   initialize(map, chunk, START_BUCKET_COUNT);
   size_t bucket_count = START_BUCKET_COUNT;
@@ -406,7 +406,7 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
 
         // resize should not fail when increasing size.
         ASSERT_NE(old_chunk, nullptr);
-        deallocate_table(old_chunk);        
+        deallocate_table(old_chunk);
 
         // With the table resized, reattempt the insertion.
         actual_result = insert(map, k, v, &probe_count);

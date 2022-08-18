@@ -68,8 +68,8 @@ class gpu_hashmap
   // This method will also lock the bucket containing the element, and keep it
   // locked for the caller's sake, except in the case of exhaustive search.
   RAJA_HOST_DEVICE probe_result_t probe(const K &k,
-                                   size_t &location,
-                                   size_t *probe_count)
+                                        size_t &location,
+                                        size_t *probe_count)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -110,6 +110,8 @@ class gpu_hashmap
 
 public:
   static constexpr size_t BUCKET_SIZE = sizeof(bucket_t);
+
+  RAJA_HOST_DEVICE gpu_hashmap() {}
 
   /// Initializer for the hashmap. Requires the user to pass in a chunk of
   /// allocated memory, along with its size in bytes.
