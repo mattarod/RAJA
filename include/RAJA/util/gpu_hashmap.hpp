@@ -67,7 +67,7 @@ class gpu_hashmap
   // table, return ABSENT_FULL.
   // This method will also lock the bucket containing the element, and keep it
   // locked for the caller's sake, except in the case of exhaustive search.
-  RAJA_DEVICE probe_result_t probe(const K &k,
+  RAJA_HOST_DEVICE probe_result_t probe(const K &k,
                                    size_t &location,
                                    size_t *probe_count)
   {
@@ -113,7 +113,7 @@ public:
 
   /// Initializer for the hashmap. Requires the user to pass in a chunk of
   /// allocated memory, along with its size in bytes.
-  RAJA_DEVICE bool initialize(void *chunk, const size_t size)
+  RAJA_HOST_DEVICE bool initialize(void *chunk, const size_t size)
   {
     if (size < BUCKET_SIZE || chunk == nullptr) {
       return false;
@@ -125,13 +125,13 @@ public:
   }
 
   /// Get the capacity of the table, in buckets.
-  RAJA_DEVICE size_t get_capacity() const { return capacity; }
+  RAJA_HOST_DEVICE size_t get_capacity() const { return capacity; }
 
   /// Initialize the bucket at the given index.
   /// This must be done for ALL i in [0, capacity) before use.
   /// This is implemented this way so this operation can be parallelized
   /// through RAJA.
-  RAJA_DEVICE void initialize_table(const int i)
+  RAJA_HOST_DEVICE void initialize_table(const int i)
   {
     // Set all bucket's keys to EMPTY.
     if (i < capacity) {
@@ -141,7 +141,7 @@ public:
 
   /// Searches for key K. If found, return true and set v to its value.
   /// Otherwise, return false.
-  RAJA_DEVICE bool contains(const K &k, V *v, size_t *probe_count)
+  RAJA_HOST_DEVICE bool contains(const K &k, V *v, size_t *probe_count)
   {
     size_t index;
     probe_result_t result = probe(k, index, probe_count);
@@ -152,7 +152,7 @@ public:
     return result;
   }
 
-  RAJA_DEVICE bool contains(const K &k, V *v)
+  RAJA_HOST_DEVICE bool contains(const K &k, V *v)
   {
     // Delegate with a dummy variable
     size_t _;
@@ -163,7 +163,7 @@ public:
   /// Inserts a key/value pair. Returns true if successful; false if failed.
   /// Failure may occur due to finding that the key is already inserted,
   /// or due to the entire table being full (pathologically bad, but possible.)
-  RAJA_DEVICE bool insert(const K &k, const V &v, size_t *probe_count)
+  RAJA_HOST_DEVICE bool insert(const K &k, const V &v, size_t *probe_count)
   {
     size_t index;
     probe_result_t result = probe(k, index, probe_count);
@@ -175,7 +175,7 @@ public:
     return result;
   }
 
-  RAJA_DEVICE bool insert(const K &k, const V &v)
+  RAJA_HOST_DEVICE bool insert(const K &k, const V &v)
   {
     // Delegate with a dummy variable
     size_t _;
@@ -184,7 +184,7 @@ public:
 
   /// Removes a key/value pair. If found and removed,
   /// return true and set v to its value. Otherwise, return false.
-  RAJA_DEVICE bool remove(const K &k, V *v, size_t *probe_count)
+  RAJA_HOST_DEVICE bool remove(const K &k, V *v, size_t *probe_count)
   {
     size_t index;
     probe_result_t result = probe(k, index, probe_count);
@@ -196,7 +196,7 @@ public:
     return result;
   }
 
-  RAJA_DEVICE bool remove(const K &k, V *v)
+  RAJA_HOST_DEVICE bool remove(const K &k, V *v)
   {
     // Delegate with a dummy variable
     size_t _;
@@ -207,7 +207,7 @@ public:
   /// If successful, returns old chunk, so that caller can free it. If failed
   /// due to new chunk not being big enough, returns nullptr.
   /// TODO: This can be made faster by parallelizing it.
-  RAJA_DEVICE void *resize(void *new_chunk, const size_t new_capacity)
+  RAJA_HOST_DEVICE void *resize(void *new_chunk, const size_t new_capacity)
   {
     lock_mgr.acquire_all();
 

@@ -28,23 +28,23 @@ class lock_manager
   desul_mutex lock;
 
 public:
-  RAJA_DEVICE lock_manager() {}
+  RAJA_HOST_DEVICE lock_manager() {}
 
   /// Acquire the lock for index i.
-  RAJA_DEVICE void acquire(size_t) { lock.acquire(); }
+  RAJA_HOST_DEVICE void acquire(size_t) { lock.acquire(); }
 
   /// Release the lock for index i.
-  RAJA_DEVICE void release(size_t) { lock.release(); }
+  RAJA_HOST_DEVICE void release(size_t) { lock.release(); }
 
   /// Acquire all locks in order to "stop the world."
-  RAJA_DEVICE void acquire_all() { lock.acquire(); }
+  RAJA_HOST_DEVICE void acquire_all() { lock.acquire(); }
 
   /// Release all locks after call to acquire_all().
-  RAJA_DEVICE void release_all() { lock.release(); }
+  RAJA_HOST_DEVICE void release_all() { lock.release(); }
 
   /// Drop the lock on index i and take it on index j.
   /// If i and j are protected by the same lock, no-op.
-  RAJA_DEVICE void exchange(size_t, size_t) {}
+  RAJA_HOST_DEVICE void exchange(size_t, size_t) {}
 };
 
 }  // namespace RAJA

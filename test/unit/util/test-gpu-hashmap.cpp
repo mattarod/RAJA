@@ -17,7 +17,7 @@
 #include "RAJA_test-base.hpp"
 
 struct gpu_hasher {
-  RAJA_DEVICE
+  RAJA_HOST_DEVICE
   size_t operator()(size_t const &s) const noexcept
   {
     constexpr size_t LARGE_PRIME = 2654435761;
@@ -93,7 +93,7 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
 
   // Initialize the hashmap object.
   bool *result_gpu = allocate<bool>(1);
-  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int i) {
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int i) {
     *result_gpu =
         map->initialize(chunk, bucket_count * test_hashmap_t::BUCKET_SIZE);
   });
@@ -106,7 +106,7 @@ void initialize(test_hashmap_t *map, void *chunk, const size_t bucket_count)
   // Initialize the buckets in the hashmap.
   range = RAJA::RangeSegment(0, bucket_count);
   RAJA::forall<policy>(range,
-                       [=] RAJA_DEVICE(int i) { map->initialize_table(i); });
+                       [=] RAJA_HOST_DEVICE(int i) { map->initialize_table(i); });
 }
 
 // Attempts to rezise the hashmap. If successful, returns the old chunk so that
@@ -117,7 +117,7 @@ void *resize(test_hashmap_t *map, void *new_chunk, const size_t bucket_count)
   auto range = RAJA::RangeSegment(0, 1);
   void **result_gpu = allocate<void *>(1);
 
-  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
     *result_gpu = map->resize(new_chunk, bucket_count);
   });
 
@@ -137,7 +137,7 @@ bool contains(test_hashmap_t *map, const K &k, V *v, size_t *probe_count)
   V *v_gpu = allocate<V>(1);
   size_t *probe_count_gpu = allocate<size_t>(1);
 
-  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
     *result_gpu = map->contains(k, v_gpu, probe_count_gpu);
   });
 
@@ -170,7 +170,7 @@ bool insert(test_hashmap_t *map, const K &k, const V &v, size_t *probe_count)
   bool *result_gpu = allocate<bool>(1);
   size_t *probe_count_gpu = allocate<size_t>(1);
 
-  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
     *result_gpu = map->insert(k, v, probe_count_gpu);
   });
 
@@ -202,7 +202,7 @@ bool remove(test_hashmap_t *map, const K &k, V *v, size_t *probe_count)
   V *v_gpu = allocate<V>(1);
   size_t *probe_count_gpu = allocate<size_t>(1);
 
-  RAJA::forall<policy>(range, [=] RAJA_DEVICE(int) {
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int) {
     *result_gpu = map->remove(k, v_gpu, probe_count_gpu);
   });
 
@@ -238,6 +238,7 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  new (map) test_hashmap_t();
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -254,6 +255,7 @@ TEST(GPUHashmapUnitTest, OneElementTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  new (map) test_hashmap_t();
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -299,6 +301,7 @@ TEST(GPUHashmapUnitTest, ModerateElementsTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  new (map) test_hashmap_t();
   void *chunk = allocate_table(BUCKET_COUNT);
   initialize(map, chunk, BUCKET_COUNT);
 
@@ -350,6 +353,7 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
 
   // Initialize map
   test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  new (map) test_hashmap_t();
   void *chunk = allocate_table(START_BUCKET_COUNT);
   initialize(map, chunk, START_BUCKET_COUNT);
   size_t bucket_count = START_BUCKET_COUNT;
