@@ -34,6 +34,13 @@ class lock_manager
   // The number of locks.
   size_t lock_count;
 
+  // Get the lock assigned to a given bucket.
+  RAJA_HOST_DEVICE size_t lock_for_bucket(size_t bucket)
+  {
+    // For now, stripe.
+    return bucket % lock_count;
+  }
+
 public:
   static constexpr size_t LOCK_SIZE = sizeof(lock_t);
 
@@ -68,38 +75,42 @@ public:
   }
 
   /// Acquire the lock for index i.
-  RAJA_HOST_DEVICE void acquire(size_t)
+  RAJA_HOST_DEVICE void acquire(size_t bucket)
   {
-    // FIXME: For now, just use the first lock.
-    lock_table[0].acquire();
+    lock_table[lock_for_bucket(bucket)].acquire();
   }
 
   /// Release the lock for index i.
-  RAJA_HOST_DEVICE void release(size_t)
+  RAJA_HOST_DEVICE void release(size_t bucket)
   {
-    // FIXME: For now, just use the first lock.
-    lock_table[0].release();
+    lock_table[lock_for_bucket(bucket)].release();
   }
 
   /// Acquire all locks in order to "stop the world."
   RAJA_HOST_DEVICE void acquire_all()
   {
-    // FIXME: For now, just use the first lock.
-    lock_table[0].acquire();
+    for (size_t i = 0; i < lock_count; ++i) {
+      lock_table[i].acquire();
+    }
   }
 
   /// Release all locks after call to acquire_all().
   RAJA_HOST_DEVICE void release_all()
   {
-    // FIXME: For now, just use the first lock.
-    lock_table[0].release();
+    for (size_t i = 0; i < lock_count; ++i) {
+      lock_table[i].acquire();
+    }
   }
 
   /// Drop the lock on index i and take it on index j.
   /// If i and j are protected by the same lock, no-op.
-  RAJA_HOST_DEVICE void exchange(size_t, size_t)
+  RAJA_HOST_DEVICE void exchange(size_t bucket_i, size_t bucket_j)
   {
-    /// FIXME: Implement.
+    size_t i = lock_for_bucket(bucket_i);
+    size_t j = lock_for_bucket(bucket_j);
+    if (i == j) return;  // No op
+    release(i);
+    acquire(j);
   }
 };
 
