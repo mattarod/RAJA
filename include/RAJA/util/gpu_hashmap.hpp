@@ -151,7 +151,7 @@ public:
       *v = table[index].second;
     }
     if (result != ABSENT_FULL) lock_mgr.release(index);
-    return result;
+    return result == PRESENT;
   }
 
   RAJA_HOST_DEVICE bool contains(const K &k, V *v)
@@ -174,7 +174,7 @@ public:
       table[index].second = v;
     }
     if (result != ABSENT_FULL) lock_mgr.release(index);
-    return result;
+    return result == ABSENT_AVAILABLE;
   }
 
   RAJA_HOST_DEVICE bool insert(const K &k, const V &v)
@@ -195,7 +195,7 @@ public:
       table[index].first = DELETED;
     }
     if (result != ABSENT_FULL) lock_mgr.release(index);
-    return result;
+    return result == PRESENT;
   }
 
   RAJA_HOST_DEVICE bool remove(const K &k, V *v)
