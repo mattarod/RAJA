@@ -37,7 +37,13 @@ namespace RAJA
 ///                   empty buckets. May not be inserted.
 /// @param DELETED  - A value for K that is reserved by this class to represent
 ///                   deleted buckets. May not be inserted.
-template <typename K, typename V, typename HASHER, K EMPTY, K DELETED>
+/// @param LOCK_MGR - A class that manages locks.
+template <typename K,
+          typename V,
+          typename HASHER,
+          K EMPTY,
+          K DELETED,
+          typename LOCK_MGR>
 class gpu_hashmap
 {
   // A bucket consisting of a key/value pair.
@@ -50,7 +56,7 @@ class gpu_hashmap
   size_t capacity;
 
   // Class to handle bucket access.
-  lock_manager lock_mgr;
+  LOCK_MGR lock_mgr;
 
   enum probe_result_t {
     PRESENT,           // found key
@@ -113,17 +119,22 @@ public:
 
   RAJA_HOST_DEVICE gpu_hashmap() {}
 
-  /// Initializer for the hashmap. Requires the user to pass in a chunk of
-  /// allocated memory, along with its size in bytes.
-  RAJA_HOST_DEVICE bool initialize(void *chunk, const size_t size)
+  /// Initializer for the hashmap. Requires the user to pass in two chunks of
+  /// allocated memory, one for the table and one for the locks, along with
+  /// their sizes in bytes.
+  RAJA_HOST_DEVICE bool initialize(void *table_chunk,
+                                   const size_t table_size,
+                                   void *lock_chunk,
+                                   const size_t lock_size)
   {
-    if (size < BUCKET_SIZE || chunk == nullptr) {
+    if (table_size < BUCKET_SIZE || table_chunk == nullptr) {
       return false;
     }
 
-    table = reinterpret_cast<bucket_t *>(chunk);
-    capacity = size / BUCKET_SIZE;
-    return true;
+    table = reinterpret_cast<bucket_t *>(table_chunk);
+    capacity = table_size / BUCKET_SIZE;
+
+    return lock_mgr.initialize(lock_chunk, lock_size);
   }
 
   /// Get the capacity of the table, in buckets.

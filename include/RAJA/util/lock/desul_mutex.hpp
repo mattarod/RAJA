@@ -15,6 +15,8 @@
 // SPDX-License-Identifier: (BSD-3-Clause)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~//
 
+#ifndef RAJA_DESUL_MUTEX_HPP
+#define RAJA_DESUL_MUTEX_HPP
 
 #include "desul/atomics.hpp"
 
@@ -62,3 +64,5 @@ public:
 };
 
 }  // namespace RAJA
+
+#endif
