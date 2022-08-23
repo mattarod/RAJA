@@ -78,16 +78,6 @@ void *allocate_table(size_t size)
   return reinterpret_cast<void *>(chunk);
 }
 
-// Deallocate a chunk of memory allocated by allocate_table().
-// void deallocate_table(void *&ptr)
-// {
-//   char *ptr_c = reinterpret_cast<char *>(ptr);
-//   deallocate(ptr_c);
-//   ptr = nullptr;
-// }
-
-void construct(test_hashmap_t *map) {}
-
 // Helper function that initializes the gpu_hashmap.
 void initialize(test_hashmap_t *map,
                 void *table_chunk,

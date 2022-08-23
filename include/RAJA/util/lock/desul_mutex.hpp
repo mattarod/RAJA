@@ -34,7 +34,7 @@ class desul_mutex
 
   // The bool representing the mutex.
   // 1 means locked, 0 means unlocked.
-  int32_t lock;
+  lock_t lock;
 
 public:
   RAJA_HOST_DEVICE desul_mutex() : lock(UNLOCKED) {}
