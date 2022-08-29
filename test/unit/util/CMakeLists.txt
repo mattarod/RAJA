@@ -22,10 +22,6 @@ raja_add_test(
   SOURCES test-span.cpp)
 
 raja_add_test(
-    NAME test-desul-bool
-    SOURCES test-desul-bool.cpp)
-
-raja_add_test(
   NAME test-gpu-hashmap
   SOURCES test-gpu-hashmap.cpp)
 

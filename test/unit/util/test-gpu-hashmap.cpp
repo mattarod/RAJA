@@ -14,16 +14,15 @@
 #include "RAJA/RAJA.hpp"
 #include "RAJA/util/gpu_hashmap.hpp"
 #include "RAJA/util/lock/lock_manager.hpp"
+#include "RAJA/util/rng/lehmer64.hpp"
 #include "RAJA_gtest.hpp"
 #include "RAJA_test-base.hpp"
 
+constexpr size_t LARGE_PRIME = 2654435761;
+
 struct gpu_hasher {
   RAJA_HOST_DEVICE
-  size_t operator()(size_t const &s) const noexcept
-  {
-    constexpr size_t LARGE_PRIME = 2654435761;
-    return s * LARGE_PRIME;
-  }
+  size_t operator()(size_t const &s) const noexcept { return s * LARGE_PRIME; }
 };
 
 constexpr size_t KEY_OFFSET = 0x0CE1000000000000;
@@ -454,4 +453,121 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   // Clean up.
   deallocate(chunk);
   deallocate(map);
+}
+
+RAJA_HOST_DEVICE size_t work(test_hashmap_t *map,
+                             const size_t tid,
+                             const size_t num_ops,
+                             const size_t key_range)
+{
+  // Use the lehmer RNG, as C++'s standard RNG library is unusable from GPU.
+  __uint128_t g_lehmer64_state = lehmer64_seed(tid * LARGE_PRIME);
+
+  size_t i;
+
+  for (i = 0; i < num_ops; ++i) {
+    size_t probe_count = 0;
+
+    int action = lehmer64(g_lehmer64_state) % 3;
+    K k = lehmer64(g_lehmer64_state) % key_range;
+
+    if (action == 0) {
+      // Contains
+      V _;
+      map->contains(k, &_, &probe_count);
+    } else if (action == 1) {
+      // Insert
+      V v = k;
+
+      // Resizing in a multithreaded context is not gonna be straightforward...
+      // for now, just don't resize.
+
+      /* bool result = */ map->insert(k, v, &probe_count);
+
+      // if (!result && probe_count == bucket_count) {
+      //   // If insert failed and every single bucket was checked, resize.
+      //   bucket_count *= 2;
+      //   chunk = allocate_table(bucket_count * test_hashmap_t::BUCKET_SIZE);
+      //   void *old_chunk = resize(map, chunk, bucket_count);
+
+      //   // resize should not fail when increasing size.
+      //   ASSERT_NE(old_chunk, nullptr);
+      //   deallocate(old_chunk);
+
+      //   // With the table resized, reattempt the insertion.
+      //   insert(map, k, v, &probe_count);
+      // }
+
+    } else {
+      // Remove
+      V _;
+      map->remove(k, &_, &probe_count);
+    }
+  }
+
+  return i;
+}
+
+// Launch workers for a multithreaded test.
+template <size_t NUM_WORKERS>
+bool launch_multithread_test(const size_t num_ops)
+{
+  using policy = RAJA::cuda_exec<NUM_WORKERS>;
+
+  // The number of buckets to use in the hash table for this test.
+  constexpr size_t START_BUCKET_COUNT = 16384;
+  constexpr size_t LOCK_COUNT = 256;
+
+  // General hashmap guidance is that they should be about 70% full.
+  constexpr size_t ELEMENT_COUNT = (START_BUCKET_COUNT * 7) / 10;
+
+  // For this test, we want about 50% of the keys to be present in the map.
+  constexpr size_t KEY_RANGE = ELEMENT_COUNT * 2;
+
+  // Initialize map
+  test_hashmap_t *map = allocate<test_hashmap_t>(1);
+  void *chunk = allocate_table(START_BUCKET_COUNT);
+  void *lock_chunk = allocate_table(LOCK_COUNT * RAJA::lock_manager::LOCK_SIZE);
+  initialize(map, chunk, START_BUCKET_COUNT, lock_chunk, LOCK_COUNT);
+
+  // Initialize with half of the elements.
+  for (size_t k = 0; k < KEY_RANGE; k += 2) {
+    bool result = insert(map, k, reinterpret_cast<V>(k));
+    if (!result) return false;
+  }
+
+  auto range = RAJA::RangeSegment(0, NUM_WORKERS);
+  size_t *results_gpu = allocate<size_t>(NUM_WORKERS);
+
+  RAJA::forall<policy>(range, [=] RAJA_HOST_DEVICE(int id) {
+    results_gpu[id] = work(map, id, num_ops, KEY_RANGE);
+  });
+
+  size_t results[NUM_WORKERS];
+  cudaMemcpy(&results,
+             results_gpu,
+             sizeof(size_t) * NUM_WORKERS,
+             cudaMemcpyDeviceToHost);
+  deallocate(results_gpu);
+
+  bool success = true;
+  for (int i = 0; i < NUM_WORKERS; ++i) {
+    // A thread is successful only if it has completed num_ops operations.
+    success = success && (results[i] == num_ops);
+  }
+
+  // Clean up.
+  deallocate(chunk);
+  deallocate(map);
+  return success;
+}
+
+// Test of basic concurrency correctness.
+TEST(GPUHashmapUnitTest, TwoThreadTest)
+{
+  // The number of operations to perform per thread.
+  constexpr size_t OPS = 256;
+
+  // Run the test.
+  ASSERT_TRUE(launch_multithread_test<2>(OPS));
 }

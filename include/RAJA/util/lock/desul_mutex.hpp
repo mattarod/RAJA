@@ -23,28 +23,33 @@
 namespace RAJA
 {
 
-/// A mutex lock implemented using DESUL atomics.
+/// A simple mutex lock implemented using DESUL atomics.
+/// There are two possible states, locked and unlocked.
 class desul_mutex
 {
+  // The type used to implement the lock. bool doesn't work as of this writing,
+  // so a 32-bit integer is used instead.
   typedef int32_t lock_t;
 
+  // The value representing an unheld mutex.
   static constexpr lock_t UNLOCKED = 0;
 
+  // The value representing a held mutex.
   static constexpr lock_t LOCKED = 1;
 
-  // The bool representing the mutex.
-  // 1 means locked, 0 means unlocked.
+  // The value representing the mutex.
   lock_t lock;
 
 public:
   RAJA_HOST_DEVICE desul_mutex() : lock(UNLOCKED) {}
 
-  /// Acquire the mutex. If locked, wait until unlocked.
+  /// Atomically acquire the mutex. If locked, busywait until it is available.
   RAJA_HOST_DEVICE void acquire()
   {
     bool exchanged_value = LOCKED;
     do {
       // Try in a loop to exchange it from UNLOCKED to LOCKED until successful.
+      // TODO: may be cheaper to use a regular read until unlocked?
       exchanged_value = !atomic_exchange(&lock,
                                          LOCKED,
                                          desul::MemoryOrderAcquire(),
@@ -52,7 +57,7 @@ public:
     } while (exchanged_value == LOCKED);
   }
 
-  /// Release the mutex.
+  /// Atomically release the mutex.
   RAJA_HOST_DEVICE void release()
   {
     // Just write UNLOCKED.
