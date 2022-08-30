@@ -391,7 +391,7 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   }
 
   for (size_t i = 0; i < OPS; ++i) {
-    if (op == 2015) {
+    if (i == 2015) {
       std::cout << "This is the bad one" << std::endl;
     }
 

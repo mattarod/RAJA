@@ -235,11 +235,11 @@ public:
   /// If successful, returns old chunk, so that caller can free it. If failed
   /// due to new chunk not being big enough, returns nullptr.
   /// TODO: This can be made faster by parallelizing it.
-  RAJA_HOST_DEVICE void *resize(void *new_chunk, const size_t new_capacity)
+  RAJA_HOST_DEVICE void *resize(void *new_chunk, const size_t new_chunk_size)
   {
     // The table must be able to accommodate at least PROBE_LIMIT buckets.
-    if (new_capacity < BUCKET_SIZE * PROBE_LIMIT || table_chunk == nullptr) {
-      return false;
+    if (new_chunk_size < BUCKET_SIZE * PROBE_LIMIT || new_chunk == nullptr) {
+      return nullptr;
     }
 
     lock_mgr.acquire_all();
