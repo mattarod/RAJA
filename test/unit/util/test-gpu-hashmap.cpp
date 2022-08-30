@@ -246,7 +246,7 @@ bool remove(test_hashmap_t *map, const K &k, V *v)
 TEST(GPUHashmapUnitTest, ConstructionTest)
 {
   // The number of buckets to use in the hash table for this test.
-  constexpr size_t BUCKET_COUNT = 16;
+  constexpr size_t BUCKET_COUNT = 64;
   constexpr size_t LOCK_COUNT = 1;
 
   // Initialize map
@@ -264,7 +264,7 @@ TEST(GPUHashmapUnitTest, ConstructionTest)
 TEST(GPUHashmapUnitTest, OneElementTest)
 {
   // The number of buckets to use in the hash table for this test.
-  constexpr size_t BUCKET_COUNT = 16;
+  constexpr size_t BUCKET_COUNT = 64;
   constexpr size_t LOCK_COUNT = 1;
 
   // Initialize map
