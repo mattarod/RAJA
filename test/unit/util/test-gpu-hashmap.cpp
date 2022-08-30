@@ -25,13 +25,24 @@ struct gpu_hasher {
   size_t operator()(size_t const &s) const noexcept { return s * LARGE_PRIME; }
 };
 
+
 constexpr size_t KEY_OFFSET = 0x0CE1000000000000;
 constexpr size_t VAL_OFFSET = 0x07A1000000000000;
-constexpr size_t EMPTY = size_t(-1);
-constexpr size_t DELETED = size_t(-2);
+
 typedef size_t K;
 typedef size_t V;
-typedef RAJA::gpu_hashmap<K, V, gpu_hasher, EMPTY, DELETED, RAJA::lock_manager>
+
+constexpr size_t PROBE_LIMIT = 64;
+constexpr size_t EMPTY = size_t(-1);
+constexpr size_t DELETED = size_t(-2);
+
+typedef RAJA::gpu_hashmap<K,
+                          V,
+                          gpu_hasher,
+                          RAJA::lock_manager,
+                          PROBE_LIMIT,
+                          EMPTY,
+                          DELETED>
     test_hashmap_t;
 
 // Allocate [size] objects of type T in GPU memory and return a pointer to it.
@@ -380,6 +391,10 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
   }
 
   for (size_t i = 0; i < OPS; ++i) {
+    if (op == 2015) {
+      std::cout << "This is the bad one" << std::endl;
+    }
+
     size_t probe_count = 0;
     int action = action_dist(mt);
     K k = key_dist(mt);
@@ -400,30 +415,38 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
       V v = val_dist(mt);
       bool actual_result = insert(map, k, v, &probe_count);
 
-      if (!actual_result && probe_count == bucket_count) {
+      while (!actual_result && probe_count > PROBE_LIMIT) {
         std::cout << "Resizing table from " << bucket_count << " to "
                   << bucket_count * 2 << std::endl;
 
         // If insert failed and every single bucket was checked, resize.
         bucket_count *= 2;
-        chunk = allocate_table(bucket_count * test_hashmap_t::BUCKET_SIZE);
-        void *old_chunk = resize(map, chunk, bucket_count);
+        size_t new_table_size = bucket_count * test_hashmap_t::BUCKET_SIZE;
+        void *new_chunk = allocate_table(new_table_size);
+        void *old_chunk = resize(map, chunk, new_table_size);
 
-        // resize should not fail when increasing size.
-        ASSERT_NE(old_chunk, nullptr);
-        deallocate(old_chunk);
-
-        // With the table resized, reattempt the insertion.
-        actual_result = insert(map, k, v, &probe_count);
+        // If resize succeeded, free old_chunk and attempt reinsertion.
+        if (old_chunk != nullptr) {
+          chunk = new_chunk;
+          deallocate(old_chunk);
+          actual_result = insert(map, k, v, &probe_count);
+          // It is unlikely but possible for the insert
+          // to fail again even after the resize. So, we loop.
+        } else {
+          // Otherwise, free new_chunk and try again (with an even bigger
+          // resize).
+          deallocate(new_chunk);
+        }
       }
 
       auto ret = ref.insert(make_pair(k, v));
       auto it = ret.first;
       bool expected_result = ret.second;
 
-      // std::cout << "insert (" << k << ", " << v
-      //           << "), result: " << actual_result
-      //           << ", probe_count: " << probe_count << std::endl;
+      std::cout << "op " << i << ": "
+                << "insert (" << k << ", " << v
+                << "), result: " << actual_result
+                << ", probe_count: " << probe_count << std::endl;
 
       ASSERT_EQ(actual_result, expected_result)
           << " insert result mismatch occurred with key " << k << ", value "
@@ -438,8 +461,9 @@ TEST(GPUHashmapUnitTest, ConsistencyTest)
       auto it = ref.find(k);
       bool expected_result = (it != ref.end());
 
-      // std::cout << "remove (" << k << "), result: " << actual_result
-      //           << ", probe_count: " << probe_count << std::endl;
+      std::cout << "op " << i << ": "
+                << "remove (" << k << "), result: " << actual_result
+                << ", probe_count: " << probe_count << std::endl;
 
       ASSERT_EQ(actual_result, expected_result);
       if (expected_result) {
@@ -484,18 +508,27 @@ RAJA_HOST_DEVICE size_t work(test_hashmap_t *map,
 
       /* bool result = */ map->insert(k, v, &probe_count);
 
-      // if (!result && probe_count == bucket_count) {
+      // while (!actual_result && probe_count > PROBE_LIMIT) {
+      //   std::cout << "Resizing table from " << bucket_count << " to "
+      //             << bucket_count * 2 << std::endl;
+
       //   // If insert failed and every single bucket was checked, resize.
       //   bucket_count *= 2;
-      //   chunk = allocate_table(bucket_count * test_hashmap_t::BUCKET_SIZE);
-      //   void *old_chunk = resize(map, chunk, bucket_count);
+      //   size_t new_table_size = bucket_count * test_hashmap_t::BUCKET_SIZE;
+      //   void *new_chunk = allocate_table(new_table_size);
+      //   void *old_chunk = resize(map, chunk, new_table_size);
 
-      //   // resize should not fail when increasing size.
-      //   ASSERT_NE(old_chunk, nullptr);
-      //   deallocate(old_chunk);
-
-      //   // With the table resized, reattempt the insertion.
-      //   insert(map, k, v, &probe_count);
+      //   // If resize succeeded, free old_chunk and attempt reinsertion.
+      //   if (old_chunk != nullptr) {
+      //     chunk = new_chunk;
+      //     deallocate(old_chunk);
+      //     actual_result = insert(map, k, v, &probe_count);
+      //     // It is unlikely but possible for the insert
+      //     // to fail again even after the resize. So, we loop.
+      //   } else {
+      //     // Otherwise, free new_chunk and try again (with an even bigger
+      //     resize). deallocate(new_chunk);
+      //   }
       // }
 
     } else {

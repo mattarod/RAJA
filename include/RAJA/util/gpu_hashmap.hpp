@@ -30,20 +30,23 @@ namespace RAJA
 /// Uses open addressing.
 ///
 /// Template Parameters:
-/// @param K        - The type of the key for k/v pairs.
-/// @param V        - The type of the value for k/v pairs.
-/// @param HASHER   - A function that hashes K.
-/// @param EMPTY    - A value for K that is reserved by this class to represent
-///                   empty buckets. May not be inserted.
-/// @param DELETED  - A value for K that is reserved by this class to represent
-///                   deleted buckets. May not be inserted.
+/// @param K - The type of the key for k/v pairs.
+/// @param V - The type of the value for k/v pairs.
+/// @param HASHER - A function that hashes K.
 /// @param LOCK_MGR - A class that manages locks.
+/// @param PROBE_LIMIT - A limit on how many buckets will be checked before
+///                      inserting an item.
+/// @param EMPTY - A value for K that is reserved by this class to represent
+///                empty buckets. May not be inserted.
+/// @param DELETED - A value for K that is reserved by this class to represent
+///                  deleted buckets. May not be inserted.
 template <typename K,
           typename V,
           typename HASHER,
+          typename LOCK_MGR,
+          size_t PROBE_LIMIT,
           K EMPTY,
-          K DELETED,
-          typename LOCK_MGR>
+          K DELETED>
 class gpu_hashmap
 {
   // A bucket consisting of a key/value pair.
@@ -58,24 +61,16 @@ class gpu_hashmap
   // Class to handle bucket access.
   LOCK_MGR lock_mgr;
 
-  enum probe_result_t {
-    PRESENT,           // found key
-    ABSENT_AVAILABLE,  // determined key was absent, and found room for it
-    ABSENT_FULL        // determined key was absent, but found no room for it
-  };
-
   // Delegate method for insert, remove, and contains.
   // Probes the hash table for key k.
-  // If k is present, return FOUND_K, and set location to its index.
-  // If k is absent, but an EMPTY bucket was found, return ABSENT_AVAILABLE, and
+  // If k is present, return true, and set location to its index.
+  // If k is absent, but an EMPTY bucket was found, return false, and
   // set location to the first instance of EMPTY seen.
   // If k is absent, and there is not a single EMPTY bucket in the entire hash
-  // table, return ABSENT_FULL.
+  // table, return false and set probe_count to PROBE_LIMIT + 1.
   // This method will also lock the bucket containing the element, and keep it
   // locked for the caller's sake, except in the case of exhaustive search.
-  RAJA_HOST_DEVICE probe_result_t probe(const K &k,
-                                        size_t &location,
-                                        size_t *probe_count)
+  RAJA_HOST_DEVICE bool probe(const K &k, size_t &location, size_t *probe_count)
   {
     HASHER hasher;
     size_t hash_code = hasher(k);
@@ -89,7 +84,7 @@ class gpu_hashmap
     // are considered burned, so they are treated the same as any non-matching
     // key.
     i = 0;
-    while (i < capacity) {
+    while (i < PROBE_LIMIT) {
       size_t index = (hash_code + i) % capacity;
       lock_mgr.exchange(last_locked, index);
       last_locked = index;
@@ -99,19 +94,25 @@ class gpu_hashmap
       if (bucket.first == k) {
         // Found the key.
         location = index;
-        return PRESENT;
+        return true;
 
       } else if (bucket.first == EMPTY) {
         // Found EMPTY--therefore, the key cannot exist anywhere in the table.
         location = index;
-        return ABSENT_AVAILABLE;
+        return false;
       }
     }
 
-    // Fallback (pathological): Checked entire table without finding k or EMPTY.
+    // Fallback (pathological): Reached PROBE_LIMIT without finding k or EMPTY.
     // Key is absent, and there is no room to insert it.
+
+    // If we return false while probe_count == PROBE_LIMIT, that means EMPTY was
+    // found on the very last try. To make it clear that is not the case, we
+    // must increment probe_count one last time.
+    ++probe_count;
+
     lock_mgr.release(last_locked);
-    return ABSENT_FULL;
+    return false;
   }
 
 public:
@@ -127,7 +128,8 @@ public:
                                    void *lock_chunk,
                                    const size_t lock_size)
   {
-    if (table_size < BUCKET_SIZE || table_chunk == nullptr) {
+    // The table must be able to accommodate at least PROBE_LIMIT buckets.
+    if (table_size < BUCKET_SIZE * PROBE_LIMIT || table_chunk == nullptr) {
       return false;
     }
 
@@ -157,12 +159,16 @@ public:
   RAJA_HOST_DEVICE bool contains(const K &k, V *v, size_t *probe_count)
   {
     size_t index;
-    probe_result_t result = probe(k, index, probe_count);
-    if (result == PRESENT) {
+    bool found_k = probe(k, index, probe_count);
+    bool exhausted = (*probe_count) > PROBE_LIMIT;
+
+    if (found_k) {
       *v = table[index].second;
     }
-    if (result != ABSENT_FULL) lock_mgr.release(index);
-    return result == PRESENT;
+
+    if (!exhausted) lock_mgr.release(index);
+
+    return found_k;
   }
 
   RAJA_HOST_DEVICE bool contains(const K &k, V *v)
@@ -179,13 +185,18 @@ public:
   RAJA_HOST_DEVICE bool insert(const K &k, const V &v, size_t *probe_count)
   {
     size_t index;
-    probe_result_t result = probe(k, index, probe_count);
-    if (result == ABSENT_AVAILABLE) {
+    bool found_k = probe(k, index, probe_count);
+    bool exhausted = (*probe_count) > PROBE_LIMIT;
+    bool can_insert = !found_k && !exhausted;
+
+    if (can_insert) {
       table[index].first = k;
       table[index].second = v;
     }
-    if (result != ABSENT_FULL) lock_mgr.release(index);
-    return result == ABSENT_AVAILABLE;
+
+    if (!exhausted) lock_mgr.release(index);
+
+    return can_insert;
   }
 
   RAJA_HOST_DEVICE bool insert(const K &k, const V &v)
@@ -200,13 +211,17 @@ public:
   RAJA_HOST_DEVICE bool remove(const K &k, V *v, size_t *probe_count)
   {
     size_t index;
-    probe_result_t result = probe(k, index, probe_count);
-    if (result == PRESENT) {
+    bool found_k = probe(k, index, probe_count);
+    bool exhausted = (*probe_count) > PROBE_LIMIT;
+
+    if (found_k) {
       *v = table[index].second;
       table[index].first = DELETED;
     }
-    if (result != ABSENT_FULL) lock_mgr.release(index);
-    return result == PRESENT;
+
+    if (!exhausted) lock_mgr.release(index);
+
+    return found_k;
   }
 
   RAJA_HOST_DEVICE bool remove(const K &k, V *v)
@@ -222,6 +237,11 @@ public:
   /// TODO: This can be made faster by parallelizing it.
   RAJA_HOST_DEVICE void *resize(void *new_chunk, const size_t new_capacity)
   {
+    // The table must be able to accommodate at least PROBE_LIMIT buckets.
+    if (new_capacity < BUCKET_SIZE * PROBE_LIMIT || table_chunk == nullptr) {
+      return false;
+    }
+
     lock_mgr.acquire_all();
 
     size_t old_capacity = capacity;
