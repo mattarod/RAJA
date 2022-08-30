@@ -247,7 +247,7 @@ public:
     size_t old_capacity = capacity;
     bucket_t *old_table = table;
 
-    capacity = new_capacity;
+    capacity = new_chunk_size / BUCKET_SIZE;
     table = reinterpret_cast<bucket_t *>(new_chunk);
     bool any_failed = false;
 
